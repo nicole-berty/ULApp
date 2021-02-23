@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ULApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="guest_mode">Guest Mode</string>
+    <string name="university_of_limerick_logo">University of Limerick Logo</string>
+    <string name="what_type_of_user_are_you">What type of user are you?</string>
+    <string name="confirm">Confirm</string>
+    <string name="picture_of_user_type">Picture of User Type</string>
+    <string name="sign_out">Sign Out</string>
+    <string-array name="user_type_array">
+        <item>Student</item>
+        <item>Lecturer</item>
+    </string-array>
 </resources>
