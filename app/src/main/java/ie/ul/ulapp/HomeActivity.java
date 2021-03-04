@@ -5,20 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     private FirebaseAuth mAuth;
     MyRecyclerViewAdapter adapter;
@@ -27,7 +22,6 @@ public class HomeActivity extends AppCompatActivity implements MyRecyclerViewAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         mAuth = FirebaseAuth.getInstance();
 
         List<String> names = getNameList();
@@ -38,46 +32,15 @@ public class HomeActivity extends AppCompatActivity implements MyRecyclerViewAda
         recyclerView.setAdapter(adapter);
     }
 
-    public void onClick(View view) {
-        if(view.getId() == R.id.sign_out) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-        }
-    }
-
     private List<String> getNameList() {
         List<String> names = new ArrayList<>();
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
-        names.add("kevin");
+        names.add("Info");
+        names.add("Clubs and Societies");
+        names.add("Menus");
+        names.add("Carpool");
+        names.add("Timetable");
+        names.add("Parking");
+        names.add("Map");
         return names;
     }
 
@@ -85,5 +48,22 @@ public class HomeActivity extends AppCompatActivity implements MyRecyclerViewAda
     public void onItemClick(View view, int position) {
         Toast.makeText(this, " You clicked " + adapter.getItem(position) + " on the row number " + position,
                 Toast.LENGTH_SHORT).show();
+        switch (position) {
+            case 0:
+                Intent intent = new Intent(HomeActivity.this, InfoActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                Toast.makeText(this, " You clicked " + adapter.getItem(position) + " Wowwww",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            default:
+                break;
+        }
     }
 }
