@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import com.google.api.core.ApiFuture;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -96,6 +97,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void editEvent(View view, String name, String location, String color, boolean repeat, String date_time_start, String date_time_end){
+        // id_num needs to come from the database
+        String id_num = "12345678";
+        String[] id_num_dataBase = {"18219365", "12345678", "12345679"};
+
+        // Checking if database exists
+        for (String i : id_num_dataBase) {
+            // if id_num is already created then edit the event
+            if (i.equals(id_num)) {
+                CollectionReference new_timetable = db.collection("timetable_1");
+                Map<String, Object> event = new HashMap<>();
+                event.put("name", name);
+                event.put("location", location);
+                event.put("color", color);
+                event.put("repeat", repeat);
+                event.put("date_time_start", date_time_start);
+                event.put("date_time_end", date_time_end);
+                timetable.document(id_num).set(event);
+            }
+        }
+    }
+
+//    public void deleteEvent(CollectionReference collection, int batchSize){
+//        try
+//        {
+//            ApiFuture<QuerySnapshot> future = collection.limit(batchSize).get();
+//            int deleted = 0;
+//
+//            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+//            for(QueryDocumentSnapshot document : documents) {
+//                document.getReference().delete();
+//                ++deleted;
+//            }
+//            if(deleted >= batchSize) {
+//                deleteEvent(collection, batchSize);
+//            }
+//        } catch (Exception e){
+//            System.out.println("Error in deleting event : " + e.getMessage());
+//        }
+//    }
 
     public void onClickGetData(View view) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
