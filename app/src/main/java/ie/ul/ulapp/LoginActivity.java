@@ -36,6 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null) {
+            if (user.isAnonymous()) {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        } else {
+            System.out.println("user is null");
+        }
     }
 
     @Override
@@ -65,10 +75,32 @@ public class LoginActivity extends AppCompatActivity {
                             .build(), RC_SIGN_IN
             );
         } else if(i == R.id.guest) {
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+        //    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        //    startActivity(intent);
+         //   finish();
+            signInAnonymously();
         }
+    }
+
+    private void signInAnonymously() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG", "signInAnonymously:success");
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "signInAnonymously:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void signIn(String email, String password) {
@@ -116,8 +148,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String email;
         if (currentUser != null) {
-            System.out.println("user signed in");
-            System.out.println("HELLLOOOOOOOOOO");
             email = currentUser.getEmail();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             DocumentReference docRef = db.collection("userTypes").document(email);
@@ -136,7 +166,6 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                             //  }
                         } else {
-                            System.out.println("NO DATA");
                             Intent intent = new Intent(LoginActivity.this, UserType.class);
                             startActivity(intent);
                         }

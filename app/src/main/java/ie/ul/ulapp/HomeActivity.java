@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +18,14 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
 
     private FirebaseAuth mAuth;
     MyRecyclerViewAdapter adapter;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         List<String> names = getNameList();
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
@@ -37,8 +40,10 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
         names.add("Info");
         names.add("Clubs and Societies");
         names.add("Menus");
-        names.add("Carpool");
-        names.add("Timetable");
+        if(!user.isAnonymous()) {
+            names.add("Carpool");
+            names.add("Timetable");
+        }
         names.add("Parking");
         names.add("Map");
         return names;
