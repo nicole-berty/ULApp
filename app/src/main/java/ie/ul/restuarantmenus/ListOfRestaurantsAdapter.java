@@ -1,12 +1,16 @@
 package ie.ul.restuarantmenus;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -45,7 +49,12 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
         public RecyclerViewHolder(@NonNull View itemview) {
             super(itemview);
             imageView = itemview.findViewById(R.id.RestaurantImage);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Navigation.findNavController(view).navigate(R.id.action_listOfRestuarants_to_stablesClubMenu);
+                }
+            });
         }
     }
-
 }

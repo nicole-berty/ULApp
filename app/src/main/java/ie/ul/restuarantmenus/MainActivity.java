@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     Fragment fragment;
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
