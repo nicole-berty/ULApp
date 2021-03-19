@@ -72,7 +72,7 @@ public class PaddocksMenu extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_scholars_menu, container, false);
         spinner = rootView.findViewById(R.id.spinner2);
         imageview = rootView.findViewById(R.id.imageView2);
-        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+        /*//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
              //  R.array.paddocks_menu, android.R.layout.simple_spinner_item);
         String[] values = {"breakfast", "lunch", "dinner"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, values);
@@ -98,6 +98,7 @@ public class PaddocksMenu extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-        return rootView;    }
+        });*/
+        return rootView;
+    }
 }
