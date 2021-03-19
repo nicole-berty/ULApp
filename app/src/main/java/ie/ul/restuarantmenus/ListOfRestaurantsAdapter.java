@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.ListIterator;
 
 public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaurantsAdapter.RecyclerViewHolder>{
 
@@ -28,6 +29,12 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
     @Override
     public void onBindViewHolder(@NonNull ListOfRestaurantsAdapter.RecyclerViewHolder holder, int position) {
         holder.imageView.setImageResource(images.get(position));
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(actions.get(position));
+            }
+        });
     }
 
     @Override
@@ -37,10 +44,12 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
 
     private LayoutInflater myInflater;
     private List<Integer> images;
+    private List<Integer> actions;
 
-    public ListOfRestaurantsAdapter(Context context, List<Integer> images) {
+    public ListOfRestaurantsAdapter(Context context, List<Integer> images, List<Integer> actions) {
         this.myInflater = LayoutInflater.from(context);
         this.images = images;
+        this.actions = actions;
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -49,12 +58,6 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
         public RecyclerViewHolder(@NonNull View itemview) {
             super(itemview);
             imageView = itemview.findViewById(R.id.RestaurantImage);
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Navigation.findNavController(view).navigate(R.id.action_listOfRestuarants_to_stablesClubMenu);
-                }
-            });
         }
     }
 }

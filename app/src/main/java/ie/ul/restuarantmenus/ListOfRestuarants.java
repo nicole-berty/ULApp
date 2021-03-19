@@ -80,7 +80,7 @@ public class ListOfRestuarants extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerviewRestuarants);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(new ListOfRestaurantsAdapter(this.getContext(), getImageList()));
+        recyclerView.setAdapter(new ListOfRestaurantsAdapter(this.getContext(), getImageList(), getActionList()));
 
     }
 
@@ -88,6 +88,19 @@ public class ListOfRestuarants extends Fragment {
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.stablesclub);
         images.add(R.drawable.scholarsclub);
+        images.add(R.drawable.paddocks);
+        images.add(R.drawable.pavilion);
+        images.add(R.drawable.sportsbar);
         return images;
+    }
+
+    private List<Integer> getActionList() {
+        List<Integer> actions = new ArrayList<>();
+        actions.add(R.id.action_listOfRestuarants_to_stablesClubMenu);
+        actions.add(R.id.action_listOfRestuarants_to_scholarsMenu);
+        actions.add(R.id.action_listOfRestuarants_to_paddocksMenu);
+        actions.add(R.id.action_listOfRestuarants_to_pavilionsMenu);
+        actions.add(R.id.action_listOfRestuarants_to_sportsBarMenu);
+        return actions;
     }
 }

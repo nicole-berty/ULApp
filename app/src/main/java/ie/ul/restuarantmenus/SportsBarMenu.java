@@ -1,6 +1,5 @@
 package ie.ul.restuarantmenus;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,15 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StablesClubMenu#newInstance} factory method to
+ * Use the {@link SportsBarMenu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StablesClubMenu extends Fragment {
+public class SportsBarMenu extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,9 +24,7 @@ public class StablesClubMenu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private WebView webView;
-
-    public StablesClubMenu() {
+    public SportsBarMenu() {
         // Required empty public constructor
     }
 
@@ -39,11 +34,11 @@ public class StablesClubMenu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StablesClubMenu.
+     * @return A new instance of fragment SportsBarMenu.
      */
     // TODO: Rename and change types and number of parameters
-    public static StablesClubMenu newInstance(String param1, String param2) {
-        StablesClubMenu fragment = new StablesClubMenu();
+    public static SportsBarMenu newInstance(String param1, String param2) {
+        SportsBarMenu fragment = new SportsBarMenu();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -51,7 +46,6 @@ public class StablesClubMenu extends Fragment {
         return fragment;
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,26 +55,10 @@ public class StablesClubMenu extends Fragment {
         }
     }
 
-    private class MyBrowser extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl("http://www.stablesclub.com");
-            return true;
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stables_club_menu, container, false);
-        webView = rootView.findViewById(R.id.StablesView);
-        webView.setWebViewClient(new MyBrowser());
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setTextZoom(55);
-        webView.canGoForward();
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.loadUrl("http://www.stablesclub.com/daily-menu");
-        return rootView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sports_bar_menu, container, false);
     }
 }

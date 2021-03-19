@@ -13,10 +13,42 @@
         <action
             android:id="@+id/action_listOfRestuarants_to_stablesClubMenu"
             app:destination="@id/stablesClubMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_scholarsMenu"
+            app:destination="@id/scholarsMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_paddocksMenu"
+            app:destination="@id/paddocksMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_pavilionsMenu"
+            app:destination="@id/pavilionsMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_sportsBarMenu"
+            app:destination="@id/sportsBarMenu" />
     </fragment>
     <fragment
         android:id="@+id/stablesClubMenu"
         android:name="ie.ul.restuarantmenus.StablesClubMenu"
         android:label="fragment_stables_club_menu"
         tools:layout="@layout/fragment_stables_club_menu" />
+    <fragment
+        android:id="@+id/scholarsMenu"
+        android:name="ie.ul.restuarantmenus.ScholarsMenu"
+        android:label="fragment_scholars_menu"
+        tools:layout="@layout/fragment_scholars_menu" />
+    <fragment
+        android:id="@+id/paddocksMenu"
+        android:name="ie.ul.restuarantmenus.PaddocksMenu"
+        android:label="fragment_paddocks_menu"
+        tools:layout="@layout/fragment_paddocks_menu" />
+    <fragment
+        android:id="@+id/pavilionsMenu"
+        android:name="ie.ul.restuarantmenus.PavilionsMenu"
+        android:label="fragment_pavilions_menu"
+        tools:layout="@layout/fragment_pavilions_menu" />
+    <fragment
+        android:id="@+id/sportsBarMenu"
+        android:name="ie.ul.restuarantmenus.SportsBarMenu"
+        android:label="fragment_sports_bar_menu"
+        tools:layout="@layout/fragment_sports_bar_menu" />
 </navigation>
