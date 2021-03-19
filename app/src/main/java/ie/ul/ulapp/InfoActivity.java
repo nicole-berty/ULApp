@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 
 public class InfoActivity extends MenuActivity {
+
+    private ImageView contactInfoImage, GuidesImage, ParkingImage;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,7 +18,14 @@ public class InfoActivity extends MenuActivity {
         setContentView(R.layout.activity_info);
 
         Button contactInfo = findViewById(R.id.contactInfo);
+        contactInfoImage = findViewById(R.id.contactInfoImage);
+        GuidesImage = findViewById(R.id.GuidesInfoImage);
+        ParkingImage = findViewById(R.id.ParkingInfoImage);
 
+
+        contactInfoImage.setImageResource(R.drawable.carpool);
+        GuidesImage.setImageResource(R.drawable.carpool);
+        ParkingImage.setImageResource(R.drawable.carpool);
         contactInfo.setOnClickListener(new View.OnClickListener() {
 
             @Override

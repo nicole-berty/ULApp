@@ -64,7 +64,7 @@ public class DownloadData extends MenuActivity {
                 Elements divsDescendant = doc.select("header div");
                 Elements divsDirect = doc.select("header > div");
 
-                textView.setText(logo.toString());
+                textView.setText(sections.toString());
             }else{
                 textView.setText("FAILURE");
             }

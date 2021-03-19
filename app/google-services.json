@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1078406152952:android:2fbea7b15026c3441f710d",
+        "android_client_info": {
+          "package_name": "ie.ul.restuarantmenus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078406152952-4lfbc85qn3vbpavo3oipbv299boptn2v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEOrjcfZrDn2TBIrIARSIj2xuMPr2_Jdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078406152952-4lfbc85qn3vbpavo3oipbv299boptn2v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1078406152952:android:e9bf1639e4f36d8c1f710d",
         "android_client_info": {
           "package_name": "ie.ul.ulapp"
