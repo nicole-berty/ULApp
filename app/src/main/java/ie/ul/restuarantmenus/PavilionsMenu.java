@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,9 @@ public class PavilionsMenu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ImageView mondayImage, tuesdayImage, wednesdayImage,
+            thursdayImage, fridayImage, saturdayImage, sundayImage;
 
     public PavilionsMenu() {
         // Required empty public constructor
@@ -59,6 +63,21 @@ public class PavilionsMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pavilions_menu, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_pavilions_menu, container, false);
+        mondayImage = rootView.findViewById(R.id.MondayImage);
+        tuesdayImage = rootView.findViewById(R.id.TuesdayImage);
+        wednesdayImage = rootView.findViewById(R.id.WednesdayImage);
+        thursdayImage = rootView.findViewById(R.id.ThursdayImage);
+        fridayImage = rootView.findViewById(R.id.FridayImage);
+        saturdayImage = rootView.findViewById(R.id.SaturdayImage);
+        sundayImage = rootView.findViewById(R.id.SundayImage);
+        mondayImage.setImageResource(R.drawable.pavilionmenumonday);
+        tuesdayImage.setImageResource(R.drawable.pavilionmenutuesday);
+        wednesdayImage.setImageResource(R.drawable.pavilionmenuwednesday);
+        thursdayImage.setImageResource(R.drawable.pavilionmenuthursday);
+        fridayImage.setImageResource(R.drawable.pavilionmenufriday);
+        saturdayImage.setImageResource(R.drawable.pavilionmenusaturday);
+        sundayImage.setImageResource(R.drawable.pavilionmenusunday);
+        return rootView;
     }
 }
