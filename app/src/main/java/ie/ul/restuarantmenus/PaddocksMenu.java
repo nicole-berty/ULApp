@@ -31,8 +31,7 @@ public class PaddocksMenu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ImageView imageview;
-    private Spinner spinner;
+    private ImageView breakfastImage, lunchImage, dinnerImage, paddocksImage;
 
     public PaddocksMenu() {
         // Required empty public constructor
@@ -70,7 +69,14 @@ public class PaddocksMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_paddocks_menu, container, false);
-        
+        breakfastImage = rootView.findViewById(R.id.BreakfastImage);
+        lunchImage = rootView.findViewById(R.id.LunchImage);
+        dinnerImage = rootView.findViewById(R.id.DinnerImage);
+        paddocksImage = rootView.findViewById(R.id.paddocksIcon);
+        paddocksImage.setImageResource(R.drawable.paddocks);
+        breakfastImage.setImageResource(R.drawable.paddocks_breakfast);
+        lunchImage.setImageResource(R.drawable.paddocks_lunch);
+        dinnerImage.setImageResource(R.drawable.paddocks_dinner);
         return rootView;
     }
 }
