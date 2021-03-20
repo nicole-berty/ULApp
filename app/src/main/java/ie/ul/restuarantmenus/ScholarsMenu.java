@@ -1,5 +1,6 @@
 package ie.ul.restuarantmenus;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 /**
@@ -27,7 +29,7 @@ public class ScholarsMenu extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private Spinner spinner;
+    private ImageView scholarsMenu;
 
     public ScholarsMenu() {
         // Required empty public constructor
@@ -65,6 +67,8 @@ public class ScholarsMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_scholars_menu, container, false);
+        scholarsMenu = rootView.findViewById(R.id.ScholarsMenuImage);
+        scholarsMenu.setImageResource(R.drawable.scholarsmenu);
         return rootView;
     }
 }
