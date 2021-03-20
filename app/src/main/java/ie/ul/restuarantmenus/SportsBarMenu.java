@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,7 @@ public class SportsBarMenu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ImageView imageView;
 
     public SportsBarMenu() {
         // Required empty public constructor
@@ -59,6 +61,9 @@ public class SportsBarMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sports_bar_menu, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sports_bar_menu, container, false);
+        imageView = rootView.findViewById(R.id.sportsBarMenuImage);
+        imageView.setImageResource(R.drawable.sportsbar_menu);
+        return rootView;
     }
 }
