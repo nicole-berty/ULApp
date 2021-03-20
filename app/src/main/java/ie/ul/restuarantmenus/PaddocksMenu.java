@@ -69,36 +69,8 @@ public class PaddocksMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_scholars_menu, container, false);
-        spinner = rootView.findViewById(R.id.spinner2);
-        imageview = rootView.findViewById(R.id.imageView2);
-        /*//ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-             //  R.array.paddocks_menu, android.R.layout.simple_spinner_item);
-        String[] values = {"breakfast", "lunch", "dinner"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, values);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        imageview.setImageResource(R.drawable.paddocks_breakfast);
-                        break;
-                    case 1:
-                        imageview.setImageResource(R.drawable.paddocks_lunch);
-                        break;
-                    case 2:
-                        imageview.setImageResource(R.drawable.paddocks_dinner);
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
+        final View rootView = inflater.inflate(R.layout.fragment_paddocks_menu, container, false);
+        
         return rootView;
     }
 }
