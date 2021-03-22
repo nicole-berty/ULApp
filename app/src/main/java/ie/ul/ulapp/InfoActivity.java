@@ -24,6 +24,14 @@ public class InfoActivity extends MenuActivity {
 
 
         contactInfoImage.setImageResource(R.drawable.carpool);
+        contactInfoImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(InfoActivity.this, DownloadData.class);
+            startActivity(intent);
+            }
+        });
         GuidesImage.setImageResource(R.drawable.carpool);
         ParkingImage.setImageResource(R.drawable.carpool);
         contactInfo.setOnClickListener(new View.OnClickListener() {

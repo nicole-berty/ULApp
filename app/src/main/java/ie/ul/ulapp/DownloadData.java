@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -63,11 +64,45 @@ public class DownloadData extends MenuActivity {
                 Elements pagination = doc.select("#pagination_control");
                 Elements divsDescendant = doc.select("header div");
                 Elements divsDirect = doc.select("header > div");
+                Element contactInfo = doc.select("div.pagecontent").first();
 
-                textView.setText(sections.toString());
+                textView.setText(removeHTMLElements(contactInfo));
             }else{
                 textView.setText("FAILURE");
             }
+        }
+
+        private String removeHTMLElements(Element element) {
+            String text = element.toString();
+            boolean remove = false;
+            int numOfOpenElements = 0;
+            for (int i = 0; i < text.length(); i++) {
+                char temp = text.charAt(i);
+                if (text.charAt(i) == '<') {
+                    remove = true;
+                    numOfOpenElements++;
+                }
+                if (remove) {
+                    if (i+1 < text.length()) {
+                        text = text.substring(0, i) + text.substring(i + 1);
+                    } else {
+                        text = text.substring(0,i);
+                    }
+                    i--;
+                }
+                if ('>' == temp) {
+                    if (numOfOpenElements == 1) {
+                        remove = false;
+                    }
+                    numOfOpenElements--;
+                }
+            }
+            text = text.replaceAll("\n ","\n");
+            text = text.replaceAll("&nbsp;","");
+            text = text.replaceAll("&amp;","");
+
+
+            return text;
         }
     }
 }
