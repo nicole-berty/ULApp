@@ -9,7 +9,6 @@ import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -55,15 +54,7 @@ public class DownloadData extends MenuActivity {
         @Override
         protected void onPostExecute(Void result) {
             //This is where we update the UI with the acquired data
-            if (doc != null){
-                //doc.title(), doc.body()
-
-                Elements links = doc.select("a");
-                Elements sections = doc.select("section");
-                Elements logo = doc.select(".spring-logo--container");
-                Elements pagination = doc.select("#pagination_control");
-                Elements divsDescendant = doc.select("header div");
-                Elements divsDirect = doc.select("header > div");
+            if (doc != null) {
                 Element contactInfo = doc.select("div.pagecontent").first();
 
                 textView.setText(removeHTMLElements(contactInfo));
