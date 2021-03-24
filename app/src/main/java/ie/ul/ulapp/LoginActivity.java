@@ -35,8 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Gets instance of FirebaseAuth for connecting to the database
         mAuth = FirebaseAuth.getInstance();
+        //Get the currently logged in user
         FirebaseUser user = mAuth.getCurrentUser();
+        //If the user is not null, i.e. is logged in
         if(user != null) {
             if (user.isAnonymous()) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -55,14 +58,21 @@ public class LoginActivity extends AppCompatActivity {
         checkDatabase();
     }
 
+    /**
+     * Handles click events for buttons
+     * @param View UI element for event handling
+     */
     public void OnClick (View View) {
+        //get id of UI element that was clicked
         int i = View.getId();
+        //If sign in button was clicked, get email and password from EditText inputs and call signIn()
         if (i == R.id.sign_in) {
             EditText email_text = findViewById(R.id.email);
             String email = email_text.getText().toString();
             EditText pass_text = findViewById(R.id.password);
             String password = pass_text.getText().toString();
             signIn(email, password);
+        //If register button clicked, register new user with FirebaseAuth methods
         } else if (i == R.id.register) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     new AuthUI.IdpConfig.EmailBuilder().build()
@@ -74,14 +84,15 @@ public class LoginActivity extends AppCompatActivity {
                             .setAvailableProviders(providers)
                             .build(), RC_SIGN_IN
             );
+        //If guest button clicked, call signInAnonymously()
         } else if(i == R.id.guest) {
-        //    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        //    startActivity(intent);
-         //   finish();
             signInAnonymously();
         }
     }
 
+    /**
+     * Signs user in as an anonymous user in the the database
+     */
     private void signInAnonymously() {
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,8 +114,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Signs in the user using the email and password given. If the user exists in the database, sign in will be successful and
+     * checkDatabase() called to take user to correct activity, otherwise user will see a toast and stay on login activity
+     * @param email email address of the user
+     * @param password password of the user
+     */
     private void signIn(String email, String password) {
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -144,27 +160,34 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks the database to see if the current user has a user type in the DB. If they do, takes the user to the Home activity.
+     * If they don't takes the user to the user type activity to assign their user type
+     */
     protected void checkDatabase() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String email;
+
+        //User is logged in
         if (currentUser != null) {
             email = currentUser.getEmail();
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference docRef = db.collection("userTypes").document(email);
             System.out.println("Email: " + email);
+
+            //Connect to Firebase FireStore
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            //Access the userTypes collection and search for the document with the user's email
+            DocumentReference docRef = db.collection("userTypes").document(email);
+
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
+                        //If Document with user's email exists, go to the home activity
                         if (document.exists()) {
-                            // String type = document.getData().toString();
-                            //  if (type.equals("student")) {
-                            System.out.println("DATA" + document.getData().toString());
-                            //    } else {
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
-                            //  }
+                        // Otherwise, go to User type activity
                         } else {
                             Intent intent = new Intent(LoginActivity.this, UserType.class);
                             startActivity(intent);
@@ -175,6 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
+        //The current user is null/not logged in
         } else {
             System.out.println("user is null");
         }

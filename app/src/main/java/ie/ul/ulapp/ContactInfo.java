@@ -2,9 +2,9 @@ package ie.ul.ulapp;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.core.text.HtmlCompat;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,40 +12,34 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 
-public class DownloadData extends MenuActivity {
+/**
+ * Gets the contact information from the UL website using an AsyncTask. Formats and displays the information on screen.
+ */
+public class ContactInfo extends MenuActivity {
 
-    String url = "https://www.ul.ie/contact-information";
+    final String url = "https://www.ul.ie/contact-information";
     Document doc = null;
     TextView textView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_download_data);
+        setContentView(R.layout.activity_contact_info);
 
         textView = findViewById(R.id.downloadStatus);
-        Button button = findViewById(R.id.getData);
-
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                textView.setText("WORKING");
-                new DataGrabber().execute(); // execute the asynctask below
-            }
-        });
-
+        textView.setText("\nGetting info..");
+        new DataGrabber().execute(); // execute the AsyncTask below
     }
-    //New class for the Asynctask, where the data will be fetched in the background
+
+    //New class for the AsyncTask, where the data will be fetched in the background
     private class DataGrabber extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-            // NO CHANGES TO UI TO BE DONE HERE
+           //Attempt to connect to the website using JSoup
             try {
                 doc = Jsoup.connect(url).get();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return null;
@@ -53,16 +47,25 @@ public class DownloadData extends MenuActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            //This is where we update the UI with the acquired data
+            //If the retrieved doc isn't null, display the content
             if (doc != null) {
-                Element contactInfo = doc.select("div.pagecontent").first();
-
-                textView.setText(removeHTMLElements(contactInfo));
+                //Element contactInfo = doc.select("div.pagecontent").first();
+                Element contactInfo = doc.select("h3").first();
+                Element c2 = doc.select("p").first();
+                String contact = "<br><b><h3>" + removeHTMLElements(contactInfo) + "</h3></b><br><h5>Address: " + removeHTMLElements(c2) + "<br>Email: </h5>" ;
+                //textView.setText(contact);
+                textView.setText(HtmlCompat.fromHtml(contact, HtmlCompat.FROM_HTML_MODE_LEGACY));
+          //      textView.setText(removeHTMLElements(contactInfo));
             }else{
-                textView.setText("FAILURE");
+                textView.setText("Couldn't get page content");
             }
         }
 
+        /**
+         * Removes the HTML elements from the given element
+         * @param element HTML element which needs to be converted to String
+         * @return String containing the text from the HTML element provided
+         */
         private String removeHTMLElements(Element element) {
             String text = element.toString();
             boolean remove = false;
@@ -91,8 +94,6 @@ public class DownloadData extends MenuActivity {
             text = text.replaceAll("\n ","\n");
             text = text.replaceAll("&nbsp;","");
             text = text.replaceAll("&amp;","");
-
-
             return text;
         }
     }

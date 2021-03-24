@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">ULApp</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">MyUL</string>
     <string name="sign_in">Sign in</string>
     <string name="register">Register</string>
     <string name="email">Email</string>
@@ -11,6 +10,11 @@
     <string name="confirm">Confirm</string>
     <string name="picture_of_user_type">Picture of User Type</string>
     <string name="sign_out">Sign Out</string>
+    <string name="info_welcome">Welcome to the info page directory!\nBelow are the useful links to the information you need!</string>
+    <string name="ul_logo">UL Logo</string>
+    <string name="contact_info_image_button">Contact Info Image Button</string>
+    <string name="guides_info_image_button">Guides Info Image Button</string>
+    <string name="parking_info_image_button">Parking Info Image Button</string>
     <string-array name="user_type_array">
         <item>Student</item>
         <item>Lecturer</item>

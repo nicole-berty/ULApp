@@ -12,6 +12,9 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+/**
+ * Contains the logout button on the action bar. Is included on all activities so user can log out anywhere in the app
+ */
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -20,18 +23,17 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-    // create an action bar button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
-        // If you don't have res/menu, just create a directory named "menu" inside res
+        // R.menu.menu contains the log out image on the action bar
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {// User chose the "Settings" item, show the app settings UI...
+        //User clicked the logout option, sign them out using the FirebaseAuth method
+        if (item.getItemId() == R.id.action_logout) {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

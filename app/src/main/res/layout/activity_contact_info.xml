@@ -2,19 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".ContactInfo">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="329dp"
-        android:layout_height="117dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/university_of_limerick_logo"
-        android:src="@drawable/ul_logo"
+    <TextView
+        android:id="@+id/downloadStatus"
+        android:layout_width="376dp"
+        android:layout_height="683dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text=""
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

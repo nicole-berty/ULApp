@@ -32,14 +32,18 @@ public class UserType extends AppCompatActivity {
 
         final ImageView imageView = findViewById(R.id.imageView);
 
+        //Create spinner which will have the user types on it
         Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this,
                 R.array.user_type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        //Set what happens when each spinner item is selected
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                //Change the image that is shown to the user based on the item selected in the spinner
                 switch(position) {
                     case 0:
                         imageView.setImageResource(R.drawable.student);
@@ -59,19 +63,24 @@ public class UserType extends AppCompatActivity {
         });
     }
 
+    /**
+     * Takes the user to the home page of the app after pressing the button
+     * @param v UI element view
+     */
     public void goToHome(View v) {
+        //Connect to DB and get the current user's email
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
         if (user != null) {
-            //String name = user.getDisplayName();
             email = user.getEmail();
         }
 
+        //Create a HashMap with the user's email and their type as chosen from the spinner
         Map<String, Object> userType = new HashMap<>();
         userType.put(email, type);
 
+        //In the userTypes collection on the database, on the document with the user's email, set the HashMap as the field
         db.collection("userTypes").document(email)
                 .set(userType).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -86,6 +95,7 @@ public class UserType extends AppCompatActivity {
                     }
                 });
 
+        //Go to the home activity and call finish() so the user can't go back to this page - only users without user type should be here
         Intent intent = new Intent(UserType.this, HomeActivity.class);
         startActivity(intent);
         finish();
