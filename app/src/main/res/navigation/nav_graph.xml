@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listOfRestuarants">
+
+    <fragment
+        android:id="@+id/listOfRestuarants"
+        android:name="myUL.ListOfRestuarants"
+        android:label="fragment_list_of_restuarants"
+        tools:layout="@layout/fragment_list_of_restuarants" >
+        <action
+            android:id="@+id/action_listOfRestuarants_to_stablesClubMenu"
+            app:destination="@id/stablesClubMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_scholarsMenu"
+            app:destination="@id/scholarsMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_paddocksMenu"
+            app:destination="@id/paddocksMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_pavilionsMenu"
+            app:destination="@id/pavilionsMenu" />
+        <action
+            android:id="@+id/action_listOfRestuarants_to_sportsBarMenu"
+            app:destination="@id/sportsBarMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/stablesClubMenu"
+        android:name="myUL.StablesClubMenu"
+        android:label="fragment_stables_club_menu"
+        tools:layout="@layout/fragment_stables_club_menu" />
+    <fragment
+        android:id="@+id/scholarsMenu"
+        android:name="myUL.ScholarsMenu"
+        android:label="fragment_scholars_menu"
+        tools:layout="@layout/fragment_scholars_menu" />
+    <fragment
+        android:id="@+id/paddocksMenu"
+        android:name="myUL.PaddocksMenu"
+        android:label="fragment_paddocks_menu"
+        tools:layout="@layout/fragment_paddocks_menu" />
+    <fragment
+        android:id="@+id/pavilionsMenu"
+        android:name="myUL.PavilionsMenu"
+        android:label="fragment_pavilions_menu"
+        tools:layout="@layout/fragment_pavilions_menu" />
+    <fragment
+        android:id="@+id/sportsBarMenu"
+        android:name="myUL.SportsBarMenu"
+        android:label="fragment_sports_bar_menu"
+        tools:layout="@layout/fragment_sports_bar_menu" />
+</navigation>

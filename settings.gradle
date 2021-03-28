@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "ULApp"
+rootProject.name = "RestuarantMenus"
