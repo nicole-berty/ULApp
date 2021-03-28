@@ -2,10 +2,9 @@ package myUL;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class MainActivity extends AppCompatActivity {
+public class RestaurantsActivity extends MenuActivity {
 
     Fragment fragment;
 
