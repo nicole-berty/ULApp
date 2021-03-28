@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         tools:targetApi="m" >
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBTTHvSgMzTan1bnBHbdOMISEz56BvDn3g" />
 
     <activity
         android:name="ie.ul.ulapp.MainActivity"
