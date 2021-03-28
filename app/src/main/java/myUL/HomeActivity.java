@@ -95,6 +95,9 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
             case 4:
             case 5:
             case 6:
+                intent = new Intent(HomeActivity.this, MapsActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

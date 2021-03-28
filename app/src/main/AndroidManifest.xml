@@ -1,45 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="myUL">
+<?xml version="1.0" encoding="utf-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="myUL">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    android:usesCleartextTraffic="true">
 
-    <application
-        android:usesCleartextTraffic="true"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.AppCompat.Light"
-        android:supportsRtl="true"
-        tools:targetApi="m" >
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyBTTHvSgMzTan1bnBHbdOMISEz56BvDn3g" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBTTHvSgMzTan1bnBHbdOMISEz56BvDn3g" />
-
-    <activity
-        android:name="ie.ul.ulapp.MainActivity"
-        android:label="@string/title_activity_maps">
+    <activity android:name=".ContactInfo" />
+    <activity android:name=".InfoActivity" />
+    <activity android:name=".MenuActivity" />
+    <activity android:name=".UserType" />
+    <activity android:name=".HomeActivity" />
+    <activity android:name=".RestaurantsActivity" />
+    <activity android:name=".MapsActivity" />
+    <activity android:name=".LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".ContactInfo" />
-        <activity android:name=".InfoActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".UserType" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".RestaurantsActivity"/>
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
 </manifest>
