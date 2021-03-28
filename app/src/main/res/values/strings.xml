@@ -20,8 +20,6 @@
         <item>Lecturer</item>
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string-array name="pavilion_menu">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -37,4 +35,6 @@
         <item>Lunch</item>
         <item>Dinner</item>
     </string-array>
+    <string name="maps_api_key">AIzaSyC58gIn4TIJV98x6SIFOPzxEncaZTDmvG8</string>
+    <string name="title_activity_maps">map</string>
 </resources>
