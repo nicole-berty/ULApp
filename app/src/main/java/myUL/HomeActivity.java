@@ -1,6 +1,7 @@
 package myUL;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -34,6 +35,10 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        TextView welcome = findViewById(R.id.textView4);
+        welcome.setText("Welcome to the official UL App! Here you'll find all the info you need to navigate the campus and student life.");
+        welcome.setTextColor(Color.rgb(4,84,52));
+
         //Create and display RecyclerView
         List<String> names = getNameList();
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
@@ -46,8 +51,8 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
         TextView link = findViewById(R.id.textView2);
         String linkText = "Visit the <a href='https://www.ul.ie/'>University of Limerick</a> web page.\nCheck out the <a href='https://www.ul.ie/library/'>Library</a> to reserve books and access online services!";
         link.setText(HtmlCompat.fromHtml(linkText, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        link.setTextColor(Color.rgb(4,84,52));
         link.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     /**
