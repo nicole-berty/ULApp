@@ -66,7 +66,6 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
         names.add("Menus");
         //If the user is registered on the database, add extra pages to the list
         if(!user.isAnonymous()) {
-            names.add("Carpool");
             names.add("Timetable");
         }
         names.add("Map");
