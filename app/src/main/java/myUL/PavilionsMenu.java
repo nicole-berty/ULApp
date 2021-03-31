@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
@@ -62,6 +63,10 @@ public class PavilionsMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        final float scale = getResources().getDisplayMetrics().density;
+        int dpWidthInPx  = (int) (400 * scale);
+        int dpHeightInPx = (int) (500 * scale);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dpWidthInPx, dpHeightInPx);
         View rootView = inflater.inflate(R.layout.fragment_pavilions_menu, container, false);
         mondayImage = rootView.findViewById(R.id.MondayImage);
         tuesdayImage = rootView.findViewById(R.id.TuesdayImage);
@@ -77,6 +82,13 @@ public class PavilionsMenu extends Fragment {
         fridayImage.setImageResource(R.drawable.pavilionmenufriday);
         saturdayImage.setImageResource(R.drawable.pavilionmenusaturday);
         sundayImage.setImageResource(R.drawable.pavilionmenusunday);
+        mondayImage.setLayoutParams(layoutParams);
+        tuesdayImage.setLayoutParams(layoutParams);
+        wednesdayImage.setLayoutParams(layoutParams);
+        thursdayImage.setLayoutParams(layoutParams);
+        fridayImage.setLayoutParams(layoutParams);
+        saturdayImage.setLayoutParams(layoutParams);
+        sundayImage.setLayoutParams(layoutParams);
         return rootView;
     }
 }
