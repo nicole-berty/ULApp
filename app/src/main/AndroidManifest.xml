@@ -24,6 +24,7 @@ package="myUL">
     <activity android:name=".HomeActivity" />
     <activity android:name=".RestaurantsActivity" />
     <activity android:name=".MapsActivity" />
+    <activity android:name=".GuidesActivity" />
     <activity android:name=".LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

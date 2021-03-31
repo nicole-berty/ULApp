@@ -28,6 +28,14 @@ public class InfoActivity extends MenuActivity {
             }
         });
         guidesImage.setImageResource(R.drawable.guides);
+        guidesImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InfoActivity.this, GuidesActivity.class);
+                startActivity(intent);
+            }
+        });
         parkingImage.setImageResource(R.drawable.parking);
     }
 
