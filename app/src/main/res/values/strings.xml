@@ -117,8 +117,8 @@
     <string name="badminB">Type:Club\n\nFee:€3\n\nInfo:Badminton is a fun and social club, offering students a social sport during training on Mondays and Wednesdays,\n\nLink:https://facebook.com/ULBabmintonClub/</string>
     <string name="basketB">Club\n\nFee:€5\n\nInfo:Basketball club is a fun way to stay in shape! Join now help achieve your dreams of becoming a famous Basketball player. Practice is on Monday anb Thursday nights.\n\nLink:https://facebook.com/pages/UL-College-Basketball-Club/268574649858851</string>
     <string name="boxingB">Club\n\nFee:€5\n\nInfo:\n\nLink:https://facebook.com/ULBOXING/?ref=bookmarks</string>
-    <string name="jiujitB">Club\n\nFee:€5\n\nInfo:\n\nLink:</string>
-    <string name="cheerlB">Club\n\nFee:€5\n\nInfo:\n\nLink:</string>
+    <string name="jiujitB">Club\n\nFee:€10\n\nInfo:Any martial art offers valuable self defence skills that can be useful in dangerous situations. Practice on Tuesdays and Fridays\n\nLink:</string>
+    <string name="cheerlB">Club\n\nFee:€5\n\nInfo:s\n\nLink:</string>
     <string name="esportB">Club\n\nFee:€5\n\nInfo:\n\nLink:</string>
     <string name="fenceB">Club\n\nFee:€5\n\nInfo:\n\nLink: </string>
     <string name="gaaB">Club\n\nFee:€5\n\nInfo:\n\nLink:</string>
@@ -182,4 +182,6 @@
     <string name="wistemB">Society\n\nFee:€5\n\nInfo:\n\nLink:</string>
     <string name="yogaB">Society\n\nFee:€5\n\nInfo:\n\nLink:</string>
     <string name="fineGB">Society\n\nFee:€5\n\nInfo:\n\nLink:</string>
+
+    <string name="parkingB">1:Foundation Car Park     (S,P) \n2:Schuman Car Park     (S,P) \n3:Visitor Car Park A     (R)\n4:Lonsdale Car Park     (S)\n5:Milford Car Park     (S)\n6:Schrodinger Car Park A     (S)\n7:Plassey House Car Park     (SP)\n8:Schrodinger Car Park B     (S)\n9:East Gate Car Park     (SP)\n10:Arena Car Park      (SP)\n11:Pay Car Park     (PAY) \n12:Thomand Village Car Park     (Res)\n13:Western Car Park     (S, (PAY))\n14:Kemmy Business School Car Park     (S)\n15:Visitor Car Park B     (R)\n16:Sports Pavillion Car Park    (SP)\n17:Cappavilla Car Park     (RES)</string>
 </resources>
