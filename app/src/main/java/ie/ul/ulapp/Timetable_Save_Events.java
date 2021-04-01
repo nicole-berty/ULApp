@@ -147,10 +147,10 @@ public class Timetable_Save_Events {
 
     }
 
-    public static HashMap<Integer, Timetable_icons> loadIcon(String json){
+    public static HashMap<Integer, Timetable_icons> loadIcon(JsonObject json){
         HashMap<Integer, Timetable_icons> icon = new HashMap<Integer, Timetable_icons>();
         final JsonParser parser = new JsonParser();
-        JsonObject obj1 = (JsonObject)parser.parse(json);
+        JsonObject obj1 = json;
         System.out.println(json);
         //Connect to Firebase FireStore
 //        FirebaseFirestore db = FirebaseFirestore.getInstance();

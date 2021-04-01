@@ -179,17 +179,17 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     public void load(String data) {
-        removeAll();
-        // call db here
-        event_icons = Timetable_Save_Events.loadIcon(data);
-        int maxKey = 0;
-        for (int key : event_icons.keySet()) {
-            ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
-            add(schedules, key);
-            if (maxKey < key) maxKey = key;
-        }
-        iconCount = maxKey + 1;
-        setIconColor();
+//        removeAll();
+//        // call db here
+//        event_icons = Timetable_Save_Events.loadIcon(data);
+//        int maxKey = 0;
+//        for (int key : event_icons.keySet()) {
+//            ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
+//            add(schedules, key);
+//            if (maxKey < key) maxKey = key;
+//        }
+//        iconCount = maxKey + 1;
+//        setIconColor();
     }
 
     /**

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,9 +91,18 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                         //for(int i = 0; i < document.toString().length() - 1; i++ ) {
                           //  String[] parts = document.toString().split("\"");
                           //  System.out.println(i);
-                            String doc = document.toString();
-                            int index = doc.indexOf("idx");
-                            int count = 0;
+                        String doc = document.toString();
+                        int index = doc.indexOf("idx");
+                        int count = 0;
+
+                        String eventName = "";
+                        String eventLocation = "";
+                        String speakerName = "";
+                        int day = -1;
+                        int startHour = -1;
+                        int startMin = -1;
+                        int endHour = -1;
+                        int endMin = -1;
 
                         //    while (index != -1) {
                           //      count++;
@@ -102,10 +112,61 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                             //System.out.println("Count:" + count);
                            // numEvents[0] = count;
                             String[] parts = doc.split("fields");
-                            System.out.println("parts length:" + parts.length);
+                          //  System.out.println("parts length:" + parts.length);
                             for(int i = 0; i < parts.length; i++) {
-                               System.out.println("parts:" + parts[i]);
+                                String[] values = parts[i].split("string_value:");
+                                //   System.out.println("Values:" + values.length);
+                                for (int j = 0; j < values.length; j++) {
+                                    System.out.println("parts:" + parts[i]);
+                                    if (j == 1) {
+                                        //    System.out.println("Post string value: " + values[j]);
+                                        String[] splitValues = values[j].split(":");
+                                        for (int k = 0; k < splitValues.length; k++) {
+                                            String temp = splitValues[k].replaceAll("\"", "");
+                                            String[] valSplit = temp.split(",");
+
+                                            for (int l = 0; l < valSplit.length; l++) {
+                                                if (l == 0) {
+                                                    String temp2 = valSplit[l].replace("}", "");
+                                                    String temp3 = temp2.replace("\\", "");
+                                                    System.out.println("k: " + k + " vals " + temp3);
+                                                    if (k == 1) {
+                                                        eventName = temp3;
+                                                    } else if (k == 2) {
+                                                        eventLocation = temp3;
+                                                    } else if (k == 3) {
+                                                        speakerName = temp3;
+                                                    } else if (k == 4) {
+                                                        day = Integer.parseInt(temp3);
+                                                    } else if (k == 6) {
+                                                        startHour = Integer.parseInt(temp3);
+                                                    } else if (k == 7) {
+                                                        startMin = Integer.parseInt(temp3);
+                                                    } else if (k == 9) {
+                                                        endHour = Integer.parseInt(temp3);
+                                                    } else if (k == 10) {
+                                                        endMin = Integer.parseInt(temp3.trim());
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
+                                JsonObject obj3 = new JsonObject();
+                                obj3.addProperty("eventName", eventName);
+                                obj3.addProperty("eventLocation", eventLocation);
+                                obj3.addProperty("speakerName", speakerName);
+                                obj3.addProperty("day", day);
+                                JsonObject obj4 = new JsonObject();//startTime
+                                obj4.addProperty("hour", startHour);
+                                obj4.addProperty("minute", startMin);
+                                obj3.add("startTime", obj4);
+                                JsonObject obj5 = new JsonObject();//endTime
+                                obj5.addProperty("hour", endHour);
+                                obj5.addProperty("minute", endMin);
+                                obj3.add("endTime", obj5);
+                            Timetable_Save_Events.loadIcon(obj3);
                       //  }
 
                      //   for (Map.Entry<String, Object> o : document.entrySet()) {
