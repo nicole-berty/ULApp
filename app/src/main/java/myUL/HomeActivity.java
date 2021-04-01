@@ -64,11 +64,11 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
         names.add("Info");
         names.add("Clubs and Societies");
         names.add("Menus");
+        names.add("Map");
         //If the user is registered on the database, add extra pages to the list
         if(!user.isAnonymous()) {
             names.add("Timetable");
         }
-        names.add("Map");
         return names;
     }
 
@@ -83,7 +83,7 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
                 startActivity(intent);
                 break;
             case 1:
-                intent = new Intent(HomeActivity.this, ClubSocActivity.class);
+                intent = new Intent(HomeActivity.this, ClubsSocs.class);
                 startActivity(intent);
                 break;
             case 2:
@@ -91,12 +91,13 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
                 startActivity(intent);
                 break;
             case 3:
-            case 4:
-            case 5:
-            case 6:
                 intent = new Intent(HomeActivity.this, MapsActivity.class);
                 startActivity(intent);
                 break;
+            case 4:
+              //  intent = new Intent(HomeActivity.this, Timetable.class);
+               // startActivity(intent);
+             //   break;
             default:
                 break;
         }

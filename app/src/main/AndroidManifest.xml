@@ -24,8 +24,9 @@ package="myUL">
     <activity android:name=".HomeActivity" />
     <activity android:name=".RestaurantsActivity" />
     <activity android:name=".MapsActivity" />
-    <activity android:name=".ClubSocActivity"/>
-    <activity android:name=".ParkingActivity"/>
+    <activity android:name=".ParkingActivity" />
+    <activity android:name=".GuidesActivity" />
+    <activity android:name="myUL.ClubsSocs"/>
     <activity android:name=".LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

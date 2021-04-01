@@ -140,7 +140,7 @@ public class MapsActivity extends MenuActivity
         mMap.addMarker(new MarkerOptions().position(SportsArena).title("UL SportArena").icon(BitmapDescriptorFactory.fromResource(R.drawable.swimming)));
         mMap.addMarker(new MarkerOptions().position(FoundationBuilding).title("Foundation Building").icon(BitmapDescriptorFactory.fromResource(R.drawable.theater)));
         mMap.addMarker(new MarkerOptions().position(UlLibrary).title("UL Library").icon(BitmapDescriptorFactory.fromResource(R.drawable.books)));
-        mMap.addMarker(new MarkerOptions().position(CSIS).title("CSIS").icon(BitmapDescriptorFactory.fromResource(R.drawable.computer)));
+        mMap.addMarker(new MarkerOptions().position(CSIS).title("CSIS").icon(BitmapDescriptorFactory.fromResource(R.drawable.csis)));
         mMap.addMarker(new MarkerOptions().position(MainBuilding).title("Main Building").icon(BitmapDescriptorFactory.fromResource(R.drawable.building)));
 
         mMap.addMarker(new MarkerOptions().position(MusicBuilding).title("World Academy of Music").icon(BitmapDescriptorFactory.fromResource(R.drawable.musicnote)));

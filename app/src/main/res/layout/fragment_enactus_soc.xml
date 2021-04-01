@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CFEDAC"
-    tools:context=".enactusSoc">
+    tools:context=".clubs_socs.enactusSoc">
 
     <TextView
         android:id="@+id/textView"

@@ -37,6 +37,14 @@ public class InfoActivity extends MenuActivity {
             }
         });
         parkingImage.setImageResource(R.drawable.parking);
+        parkingImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InfoActivity.this, ParkingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
