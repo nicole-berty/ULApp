@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class   TimetableActivity extends AppCompatActivity implements View.OnClickListener {
     private Context context;
@@ -37,9 +38,9 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         addBtn = findViewById(R.id.add_btn);
         clearBtn = findViewById(R.id.clear_btn);
         loadBtn = findViewById(R.id.load_btn);
-
-        timetable = findViewById(R.id.timetable);
-        timetable.setHeaderHighlight(2);
+        Calendar calendar = Calendar.getInstance();
+        timetable = findViewById(R.id.current_day);
+        timetable.setHeaderHighlight(calendar.get(Calendar.DAY_OF_WEEK) - 1);
         initView();
     }
 

@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <ie.ul.ulapp.Timetable_viewer
-        android:id="@+id/timetable"
+        android:id="@+id/current_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:header_highlight_color="@color/colorAccent"
