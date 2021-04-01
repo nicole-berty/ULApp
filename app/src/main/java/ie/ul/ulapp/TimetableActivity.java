@@ -9,8 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,6 +66,54 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 i.putExtra("idx", idx);
                 i.putExtra("schedules", calendars);
                 startActivityForResult(i,REQUEST_EDIT);
+            }
+        });
+        loadFromDatabase();
+    }
+
+    public void loadFromDatabase() {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
+        }
+        final int[] numEvents = new int[1];
+        DocumentReference docIdRef = db.collection("timetable").document("18246702");
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        System.out.println("****************START DOC: " + document.toString() + "*******END DOC******");
+                        //for(int i = 0; i < document.toString().length() - 1; i++ ) {
+                          //  String[] parts = document.toString().split("\"");
+                          //  System.out.println(i);
+                            String doc = document.toString();
+                            int index = doc.indexOf("idx");
+                            int count = 0;
+
+                        //    while (index != -1) {
+                          //      count++;
+                            //    doc = doc.substring(index + 1);
+                              //  index = doc.indexOf("idx");
+                           // }
+                            //System.out.println("Count:" + count);
+                           // numEvents[0] = count;
+                            String[] parts = doc.split("fields");
+                            System.out.println("parts length:" + parts.length);
+                            for(int i = 0; i < parts.length; i++) {
+                               System.out.println("parts:" + parts[i]);
+                            }
+                      //  }
+
+                     //   for (Map.Entry<String, Object> o : document.entrySet()) {
+                       //     String key = o.getKey();
+                         //   Object value = o.getValue();
+                       // }
+                    }
+                }
             }
         });
     }

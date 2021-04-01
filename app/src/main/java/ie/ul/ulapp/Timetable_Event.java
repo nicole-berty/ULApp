@@ -4,17 +4,6 @@ import java.io.Serializable;
 
 public class Timetable_Event implements Serializable {
 
-    /**
-     * Setting variables
-     */
-    static final int MON = 0;
-    static final int TUE = 1;
-    static final int WED = 2;
-    static final int THU = 3;
-    static final int FRI = 4;
-    static final int SAT = 5;
-    static final int SUN = 6;
-
     String eventName="";
     String eventLocation="";
     String speakerName = "";

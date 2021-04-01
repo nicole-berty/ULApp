@@ -98,7 +98,7 @@ public class Timetable_Save_Events {
             arr1.add(obj2);
         }
         obj1.add("icon",arr1);
-      //  System.out.println("Obj1: " + obj1.toString());
+        System.out.println("Obj1: " + obj1.toString());
        // CollectionReference db2 = db.collection("timetable");
         //Create a HashMap with the user's email and their type as chosen from the spinner
        // Map<String, Object> calendar_activity = new HashMap<>();
