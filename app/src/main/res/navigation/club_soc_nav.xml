@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/club_soc_nav"
+    app:startDestination="@id/startPointClubSocs">
+
+    <fragment
+        android:id="@+id/startPointClubSocs"
+        android:name="myUL.StartPointClubSocs"
+        android:label="fragment_start_point_club_socs"
+        tools:layout="@layout/fragment_start_point_club_socs" >
+        <action
+            android:id="@+id/action_startPointClubSocs_to_americanFootball"
+            app:destination="@id/americanFootball" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_archery"
+            app:destination="@id/archery" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_athletics"
+            app:destination="@id/athletics" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_badminton"
+            app:destination="@id/badminton" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_basketball"
+            app:destination="@id/basketball" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_boxing"
+            app:destination="@id/boxing" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_brazJiuJit"
+            app:destination="@id/brazJiuJit" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_boxing2"
+            app:destination="@id/boxing" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_cheerlead"
+            app:destination="@id/cheerlead" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_esport"
+            app:destination="@id/esport" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_fencing"
+            app:destination="@id/fencing" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_GAA"
+            app:destination="@id/GAA" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_handball"
+            app:destination="@id/handball" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_kayak"
+            app:destination="@id/kayak" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ladiesRug"
+            app:destination="@id/ladiesRug" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ladiesSoc"
+            app:destination="@id/ladiesSoc" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_mensRug"
+            app:destination="@id/mensRug" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_mensSoc"
+            app:destination="@id/mensSoc" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_mountainBike"
+            app:destination="@id/mountainBike" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_outdoor"
+            app:destination="@id/outdoor" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_parkour"
+            app:destination="@id/parkour" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_rowing"
+            app:destination="@id/rowing" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_skydiving"
+            app:destination="@id/skydiving" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_socialSoc"
+            app:destination="@id/socialSoc" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_subAq"
+            app:destination="@id/subAq" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_surf"
+            app:destination="@id/surf" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_swim"
+            app:destination="@id/swim" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_tableTennis"
+            app:destination="@id/tableTennis" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_taeKwon"
+            app:destination="@id/taeKwon" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_tagRug"
+            app:destination="@id/tagRug" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_trampo"
+            app:destination="@id/trampo" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ultFriz"
+            app:destination="@id/ultFriz" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_windsports"
+            app:destination="@id/windsports" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_africa"
+            app:destination="@id/africa" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_AMSI"
+            app:destination="@id/AMSI" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_anime"
+            app:destination="@id/anime" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_archite"
+            app:destination="@id/archite" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_astro"
+            app:destination="@id/astro" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_christUn"
+            app:destination="@id/christUn" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_comedy"
+            app:destination="@id/comedy" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_computer"
+            app:destination="@id/computer" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_crafts"
+            app:destination="@id/crafts" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_cumannGael"
+            app:destination="@id/cumannGael" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_dance"
+            app:destination="@id/dance" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_drama"
+            app:destination="@id/drama" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_wiSTEM"
+            app:destination="@id/wiSTEM" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ecAndInv"
+            app:destination="@id/ecAndInv" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_enactusSoc"
+            app:destination="@id/enactusSoc" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_entrepr"
+            app:destination="@id/entrepr" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_environ"
+            app:destination="@id/environ" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_fem"
+            app:destination="@id/fem" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_film"
+            app:destination="@id/film" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_friends"
+            app:destination="@id/friends" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_games"
+            app:destination="@id/games" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_gameDev"
+            app:destination="@id/gameDev" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_horseRace"
+            app:destination="@id/horseRace" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_international"
+            app:destination="@id/international" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_islamic"
+            app:destination="@id/islamic" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_fineG"
+            app:destination="@id/fineG" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_law"
+            app:destination="@id/law" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_medicine"
+            app:destination="@id/medicine" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_music"
+            app:destination="@id/music" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_musicTheatre"
+            app:destination="@id/musicTheatre" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ograFianna"
+            app:destination="@id/ograFianna" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_outInUl"
+            app:destination="@id/outInUl" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_photo"
+            app:destination="@id/photo" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_racing_motor"
+            app:destination="@id/racing_motor" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_strength_cond"
+            app:destination="@id/strength_cond" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_surgical"
+            app:destination="@id/surgical" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ulGive"
+            app:destination="@id/ulGive" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_ULFM"
+            app:destination="@id/ULFM" />
+        <action
+            android:id="@+id/action_startPointClubSocs_to_yoga"
+            app:destination="@id/yoga" />
+    </fragment>
+    <fragment
+        android:id="@+id/americanFootball"
+        android:name="myUL.AmericanFootball"
+        android:label="fragment_american_football"
+        tools:layout="@layout/fragment_american_football" />
+    <fragment
+        android:id="@+id/archery"
+        android:name="myUL.archery"
+        android:label="fragment_archery"
+        tools:layout="@layout/fragment_archery" />
+    <fragment
+        android:id="@+id/athletics"
+        android:name="myUL.athletics"
+        android:label="fragment_athletics"
+        tools:layout="@layout/fragment_athletics" />
+    <fragment
+        android:id="@+id/badminton"
+        android:name="myUL.badminton"
+        android:label="fragment_badminton"
+        tools:layout="@layout/fragment_badminton" />
+    <fragment
+        android:id="@+id/basketball"
+        android:name="myUL.basketball"
+        android:label="fragment_basketball"
+        tools:layout="@layout/fragment_basketball" />
+    <fragment
+        android:id="@+id/boxing"
+        android:name="myUL.boxing"
+        android:label="fragment_boxing"
+        tools:layout="@layout/fragment_boxing" />
+    <fragment
+        android:id="@+id/brazJiuJit"
+        android:name="myUL.brazJiuJit"
+        android:label="fragment_braz_jiu_jit"
+        tools:layout="@layout/fragment_braz_jiu_jit" />
+    <fragment
+        android:id="@+id/cheerlead"
+        android:name="myUL.cheerlead"
+        android:label="fragment_cheerlead"
+        tools:layout="@layout/fragment_cheerlead" />
+    <fragment
+        android:id="@+id/esport"
+        android:name="myUL.esport"
+        android:label="fragment_esport"
+        tools:layout="@layout/fragment_esport" />
+    <fragment
+        android:id="@+id/fencing"
+        android:name="myUL.fencing"
+        android:label="fragment_fencing"
+        tools:layout="@layout/fragment_fencing" />
+    <fragment
+        android:id="@+id/GAA"
+        android:name="myUL.GAA"
+        android:label="fragment_g_a_a"
+        tools:layout="@layout/fragment_g_a_a" />
+    <fragment
+        android:id="@+id/handball"
+        android:name="myUL.handball"
+        android:label="fragment_handball"
+        tools:layout="@layout/fragment_handball" />
+    <fragment
+        android:id="@+id/kayak"
+        android:name="myUL.kayak"
+        android:label="fragment_kayak"
+        tools:layout="@layout/fragment_kayak" />
+    <fragment
+        android:id="@+id/ladiesRug"
+        android:name="myUL.ladiesRug"
+        android:label="fragment_ladies_rug"
+        tools:layout="@layout/fragment_ladies_rug" />
+    <fragment
+        android:id="@+id/ladiesSoc"
+        android:name="myUL.ladiesSoc"
+        android:label="fragment_ladies_soc"
+        tools:layout="@layout/fragment_ladies_soc" />
+    <fragment
+        android:id="@+id/mensRug"
+        android:name="myUL.mensRug"
+        android:label="fragment_mens_rug"
+        tools:layout="@layout/fragment_mens_rug" />
+    <fragment
+        android:id="@+id/mensSoc"
+        android:name="myUL.mensSoc"
+        android:label="fragment_mens_soc"
+        tools:layout="@layout/fragment_mens_soc" />
+    <fragment
+        android:id="@+id/mountainBike"
+        android:name="myUL.mountainBike"
+        android:label="fragment_mountain_bike"
+        tools:layout="@layout/fragment_mountain_bike" />
+    <fragment
+        android:id="@+id/outdoor"
+        android:name="myUL.outdoor"
+        android:label="fragment_outdoor"
+        tools:layout="@layout/fragment_outdoor" />
+    <fragment
+        android:id="@+id/parkour"
+        android:name="myUL.parkour"
+        android:label="fragment_parkour"
+        tools:layout="@layout/fragment_parkour" />
+    <fragment
+        android:id="@+id/rowing"
+        android:name="myUL.rowing"
+        android:label="fragment_rowing"
+        tools:layout="@layout/fragment_rowing" />
+    <fragment
+        android:id="@+id/skydiving"
+        android:name="myUL.skydiving"
+        android:label="fragment_skydiving"
+        tools:layout="@layout/fragment_skydiving" />
+    <fragment
+        android:id="@+id/socialSoc"
+        android:name="myUL.socialSoc"
+        android:label="fragment_social_soc"
+        tools:layout="@layout/fragment_social_soc" />
+    <fragment
+        android:id="@+id/subAq"
+        android:name="myUL.subAq"
+        android:label="fragment_sub_aq"
+        tools:layout="@layout/fragment_sub_aq" />
+    <fragment
+        android:id="@+id/surf"
+        android:name="myUL.surf"
+        android:label="fragment_surf"
+        tools:layout="@layout/fragment_surf" />
+    <fragment
+        android:id="@+id/swim"
+        android:name="myUL.swim"
+        android:label="fragment_swim"
+        tools:layout="@layout/fragment_swim" />
+    <fragment
+        android:id="@+id/tableTennis"
+        android:name="myUL.tableTennis"
+        android:label="fragment_table_tennis"
+        tools:layout="@layout/fragment_table_tennis" />
+    <fragment
+        android:id="@+id/taeKwon"
+        android:name="myUL.taeKwon"
+        android:label="fragment_tae_kwon"
+        tools:layout="@layout/fragment_tae_kwon" />
+    <fragment
+        android:id="@+id/tagRug"
+        android:name="myUL.TagRug"
+        android:label="fragment_tag_rug"
+        tools:layout="@layout/fragment_tag_rug" />
+    <fragment
+        android:id="@+id/trampo"
+        android:name="myUL.trampo"
+        android:label="fragment_trampo"
+        tools:layout="@layout/fragment_trampo" />
+    <fragment
+        android:id="@+id/ultFriz"
+        android:name="myUL.ultFriz"
+        android:label="fragment_ult_friz"
+        tools:layout="@layout/fragment_ult_friz" />
+    <fragment
+        android:id="@+id/windsports"
+        android:name="myUL.windsports"
+        android:label="fragment_windsports"
+        tools:layout="@layout/fragment_windsports" />
+    <fragment
+        android:id="@+id/africa"
+        android:name="myUL.africa"
+        android:label="fragment_africa"
+        tools:layout="@layout/fragment_africa" />
+    <fragment
+        android:id="@+id/AMSI"
+        android:name="myUL.AMSI"
+        android:label="fragment_a_m_s_i"
+        tools:layout="@layout/fragment_a_m_s_i" />
+    <fragment
+        android:id="@+id/anime"
+        android:name="myUL.anime"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" />
+    <fragment
+        android:id="@+id/archite"
+        android:name="myUL.archite"
+        android:label="fragment_archite"
+        tools:layout="@layout/fragment_archite" />
+    <fragment
+        android:id="@+id/astro"
+        android:name="myUL.astro"
+        android:label="fragment_astro"
+        tools:layout="@layout/fragment_astro" />
+    <fragment
+        android:id="@+id/christUn"
+        android:name="myUL.ChristUn"
+        android:label="fragment_christ_un"
+        tools:layout="@layout/fragment_christ_un" />
+    <fragment
+        android:id="@+id/comedy"
+        android:name="myUL.comedy"
+        android:label="fragment_comedy"
+        tools:layout="@layout/fragment_comedy" />
+    <fragment
+        android:id="@+id/computer"
+        android:name="myUL.computer"
+        android:label="fragment_computer"
+        tools:layout="@layout/fragment_computer" />
+    <fragment
+        android:id="@+id/crafts"
+        android:name="myUL.crafts"
+        android:label="fragment_crafts"
+        tools:layout="@layout/fragment_crafts" />
+    <fragment
+        android:id="@+id/cumannGael"
+        android:name="myUL.cumannGael"
+        android:label="fragment_cumann_gael"
+        tools:layout="@layout/fragment_cumann_gael" />
+    <fragment
+        android:id="@+id/dance"
+        android:name="myUL.dance"
+        android:label="fragment_dance"
+        tools:layout="@layout/fragment_dance" />
+    <fragment
+        android:id="@+id/drama"
+        android:name="myUL.drama"
+        android:label="fragment_drama"
+        tools:layout="@layout/fragment_drama" />
+    <fragment
+        android:id="@+id/ecAndInv"
+        android:name="myUL.ecAndInv"
+        android:label="fragment_ec_and_inv"
+        tools:layout="@layout/fragment_ec_and_inv" />
+    <fragment
+        android:id="@+id/enactusSoc"
+        android:name="myUL.enactusSoc"
+        android:label="fragment_enactus_soc"
+        tools:layout="@layout/fragment_enactus_soc" />
+    <fragment
+        android:id="@+id/environ"
+        android:name="myUL.environ"
+        android:label="fragment_environ"
+        tools:layout="@layout/fragment_environ" />
+    <fragment
+        android:id="@+id/entrepr"
+        android:name="myUL.entrepr"
+        android:label="fragment_entrepr"
+        tools:layout="@layout/fragment_entrepr" />
+    <fragment
+        android:id="@+id/fem"
+        android:name="myUL.fem"
+        android:label="fragment_fem"
+        tools:layout="@layout/fragment_fem" />
+    <fragment
+        android:id="@+id/film"
+        android:name="myUL.film"
+        android:label="fragment_film"
+        tools:layout="@layout/fragment_film" />
+    <fragment
+        android:id="@+id/friends"
+        android:name="myUL.friends"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" />
+    <fragment
+        android:id="@+id/games"
+        android:name="myUL.games"
+        android:label="fragment_games"
+        tools:layout="@layout/fragment_games" />
+    <fragment
+        android:id="@+id/gameDev"
+        android:name="myUL.gameDev"
+        android:label="fragment_game_dev"
+        tools:layout="@layout/fragment_game_dev" />
+    <fragment
+        android:id="@+id/horseRace"
+        android:name="myUL.horseRace"
+        android:label="fragment_horse_race"
+        tools:layout="@layout/fragment_horse_race" />
+    <fragment
+        android:id="@+id/international"
+        android:name="myUL.international"
+        android:label="fragment_international"
+        tools:layout="@layout/fragment_international" />
+    <fragment
+        android:id="@+id/islamic"
+        android:name="myUL.islamic"
+        android:label="fragment_islamic"
+        tools:layout="@layout/fragment_islamic" />
+    <fragment
+        android:id="@+id/law"
+        android:name="myUL.law"
+        android:label="fragment_law"
+        tools:layout="@layout/fragment_law" />
+    <fragment
+        android:id="@+id/medicine"
+        android:name="myUL.medicine"
+        android:label="fragment_medicine"
+        tools:layout="@layout/fragment_medicine" />
+    <fragment
+        android:id="@+id/music"
+        android:name="myUL.music"
+        android:label="fragment_music"
+        tools:layout="@layout/fragment_music" />
+    <fragment
+        android:id="@+id/musicTheatre"
+        android:name="myUL.musicTheatre"
+        android:label="fragment_music_theatre"
+        tools:layout="@layout/fragment_music_theatre" />
+    <fragment
+        android:id="@+id/ograFianna"
+        android:name="myUL.OgraFianna"
+        android:label="fragment_ogra_fianna"
+        tools:layout="@layout/fragment_ogra_fianna" />
+    <fragment
+        android:id="@+id/outInUl"
+        android:name="myUL.outInUl"
+        android:label="fragment_out_in_ul"
+        tools:layout="@layout/fragment_out_in_ul" />
+    <fragment
+        android:id="@+id/photo"
+        android:name="myUL.photo"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo" />
+    <fragment
+        android:id="@+id/racing_motor"
+        android:name="myUL.racing_motor"
+        android:label="fragment_racing_motor"
+        tools:layout="@layout/fragment_racing_motor" />
+    <fragment
+        android:id="@+id/strength_cond"
+        android:name="myUL.strength_cond"
+        android:label="fragment_strength_cond"
+        tools:layout="@layout/fragment_strength_cond" />
+    <fragment
+        android:id="@+id/surgical"
+        android:name="myUL.Surgical"
+        android:label="fragment_surgical"
+        tools:layout="@layout/fragment_surgical" />
+    <fragment
+        android:id="@+id/ulGive"
+        android:name="myUL.UlGive"
+        android:label="fragment_ul_give"
+        tools:layout="@layout/fragment_ul_give" />
+    <fragment
+        android:id="@+id/ULFM"
+        android:name="myUL.ULFM"
+        android:label="fragment_u_l_f_m"
+        tools:layout="@layout/fragment_u_l_f_m" />
+    <fragment
+        android:id="@+id/wiSTEM"
+        android:name="myUL.WiSTEM"
+        android:label="fragment_wi_s_t_e_m"
+        tools:layout="@layout/fragment_wi_s_t_e_m" />
+    <fragment
+        android:id="@+id/yoga"
+        android:name="myUL.yoga"
+        android:label="fragment_yoga"
+        tools:layout="@layout/fragment_yoga" />
+    <fragment
+        android:id="@+id/fineG"
+        android:name="myUL.fineG"
+        android:label="fragment_fine_g"
+        tools:layout="@layout/fragment_fine_g" />
+</navigation>

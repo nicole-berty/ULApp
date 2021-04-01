@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CFEDAC"
+    tools:context=".StartPointClubSocs">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="669dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/American_Football"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/footb" />
+
+            <Button
+                android:id="@+id/archery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/arch" />
+
+            <Button
+                android:id="@+id/athletics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/athl" />
+
+            <Button
+                android:id="@+id/badminton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/badmin" />
+
+            <Button
+                android:id="@+id/basketball"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/basket" />
+
+            <Button
+                android:id="@+id/boxing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/boxing" />
+
+            <Button
+                android:id="@+id/brazJiuJit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jiujit" />
+
+            <Button
+                android:id="@+id/cheerlead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cheerl" />
+
+            <Button
+                android:id="@+id/esport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/esport" />
+
+            <Button
+                android:id="@+id/fencing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fence" />
+
+            <Button
+                android:id="@+id/GAA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gaa" />
+
+            <Button
+                android:id="@+id/handball"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/handball" />
+
+            <Button
+                android:id="@+id/kayak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kayak" />
+
+            <Button
+                android:id="@+id/ladiesRug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ladRug" />
+
+            <Button
+                android:id="@+id/ladiesSoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ladSoc" />
+
+            <Button
+                android:id="@+id/mensSoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mensSoc" />
+
+            <Button
+                android:id="@+id/mensRug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mensRug" />
+
+            <Button
+                android:id="@+id/mountainBike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mountainB" />
+
+            <Button
+                android:id="@+id/outdoor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/outdoor" />
+
+            <Button
+                android:id="@+id/parkour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parkour" />
+
+            <Button
+                android:id="@+id/rowing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/row" />
+
+            <Button
+                android:id="@+id/skydiving"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/skyD" />
+
+            <Button
+                android:id="@+id/socialSoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/socSoc" />
+
+            <Button
+                android:id="@+id/subAq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/subAq" />
+
+            <Button
+                android:id="@+id/surf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surf" />
+
+            <Button
+                android:id="@+id/swim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/swim" />
+
+            <Button
+                android:id="@+id/tableTennis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tten" />
+
+            <Button
+                android:id="@+id/taeKwon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/taeKwon" />
+
+            <Button
+                android:id="@+id/tagRug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tagRug" />
+
+            <Button
+                android:id="@+id/trampo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Trampo" />
+
+            <Button
+                android:id="@+id/ultFriz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ultFris" />
+
+            <Button
+                android:id="@+id/windsports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/windspo" />
+
+            <Button
+                android:id="@+id/africa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Afri" />
+
+            <Button
+                android:id="@+id/AMSI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/AMSI" />
+
+            <Button
+                android:id="@+id/anime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/anime" />
+
+
+            <Button
+                android:id="@+id/archite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/arch" />
+
+            <Button
+                android:id="@+id/astro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/astro" />
+
+            <Button
+                android:id="@+id/christUn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/christ" />
+
+            <Button
+                android:id="@+id/comedy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comedy" />
+
+            <Button
+                android:id="@+id/computer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comp" />
+
+            <Button
+                android:id="@+id/crafts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/craft" />
+
+            <Button
+                android:id="@+id/cumannGael"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cumannG" />
+
+            <Button
+                android:id="@+id/dance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dance" />
+
+            <Button
+                android:id="@+id/drama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/drama" />
+
+            <Button
+                android:id="@+id/ecAndInv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ec_inv" />
+
+            <Button
+                android:id="@+id/enactusSoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enact" />
+
+            <Button
+                android:id="@+id/entrepr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/entre" />
+
+            <Button
+                android:id="@+id/environ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enviro" />
+
+            <Button
+                android:id="@+id/fem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fem" />
+
+            <Button
+                android:id="@+id/film"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/film" />
+
+            <Button
+                android:id="@+id/friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/friends" />
+
+            <Button
+                android:id="@+id/games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/gameDev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gameD" />
+
+            <Button
+                android:id="@+id/horseRace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/horse" />
+
+            <Button
+                android:id="@+id/international"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/intern" />
+
+            <Button
+                android:id="@+id/islamic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/islam" />
+
+            <Button
+                android:id="@+id/law"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="law" />
+
+            <Button
+                android:id="@+id/medicine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/medical" />
+
+            <Button
+                android:id="@+id/music"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/music" />
+
+            <Button
+                android:id="@+id/musicTheatre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/musThea" />
+
+            <Button
+                android:id="@+id/ograFianna"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ograFia" />
+
+            <Button
+                android:id="@+id/outInUl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Out" />
+
+            <Button
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/photo" />
+
+            <Button
+                android:id="@+id/racing_motor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/racing" />
+
+            <Button
+                android:id="@+id/strength_cond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/strength" />
+
+            <Button
+                android:id="@+id/surgical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surge" />
+
+            <Button
+                android:id="@+id/ulGive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/give" />
+
+            <Button
+                android:id="@+id/ULFM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ULFM" />
+
+            <Button
+                android:id="@+id/wiSTEM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wistem" />
+
+            <Button
+                android:id="@+id/yoga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/yoga" />
+
+            <Button
+                android:id="@+id/fineG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fineG" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
