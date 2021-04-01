@@ -86,15 +86,15 @@ public class Timetable_viewer extends LinearLayout {
      */
     private void getAttrs(AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Timetable_viewer);
-        rowCount = a.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) - 1;
-        columnCount = a.getInt(R.styleable.Timetable_viewer_column_count, DEFAULT_COLUMN_COUNT);
+        rowCount = a.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) + 12;
+        columnCount = a.getInt(R.styleable.Timetable_viewer_column_count, DEFAULT_COLUMN_COUNT) + 2;
         cellHeight = a.getDimensionPixelSize(R.styleable.Timetable_viewer_cell_height, dp2Px(DEFAULT_CELL_HEIGHT_DP));
         sideCellWidth = a.getDimensionPixelSize(R.styleable.Timetable_viewer_side_cell_width, dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP));
         int titlesId = a.getResourceId(R.styleable.Timetable_viewer_header_title, R.array.default_header_title);
         headerTitle = a.getResources().getStringArray(titlesId);
         int colorsId = a.getResourceId(R.styleable.Timetable_viewer_Icon_colors, R.array.default_Icon_color);
         iconColor = a.getResources().getStringArray(colorsId);
-        startTime = a.getInt(R.styleable.Timetable_viewer_start_time, DEFAULT_START_TIME);
+        startTime = a.getInt(R.styleable.Timetable_viewer_start_time, DEFAULT_START_TIME) - 9;
         headerHighlightColor = a.getColor(R.styleable.Timetable_viewer_header_highlight_color, getResources().getColor(R.color.default_header_highlight_color));
         int highlightTypeValue = a.getInteger(R.styleable.Timetable_viewer_header_highlight_type,0);
         if(highlightTypeValue == 0) highlightMode = Timetable_highlight_icon.COLOR;

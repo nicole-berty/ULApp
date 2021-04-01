@@ -6,6 +6,8 @@
         <item>Wed</item>
         <item>Thu</item>
         <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
     </string-array>
 
     <string-array name="days">
@@ -14,5 +16,7 @@
         <item >Wed</item>
         <item >Thu</item>
         <item >Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
     </string-array>
 </resources>
