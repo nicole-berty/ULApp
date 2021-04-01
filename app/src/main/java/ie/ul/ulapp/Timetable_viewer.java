@@ -80,6 +80,10 @@ public class Timetable_viewer extends LinearLayout {
         init();
     }
 
+    /**
+     * Gets all attributes to display the event
+     * @param attrs
+     */
     private void getAttrs(AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Timetable_viewer);
         rowCount = a.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) - 1;
@@ -117,7 +121,7 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     /**
-     * get all schedules TimetableView has.
+     * get all schedules from TimetableView
      */
     public ArrayList<Timetable_Event> getAllSchedulesInIcons() {
         ArrayList<Timetable_Event> allSchedules = new ArrayList<Timetable_Event>();
@@ -188,6 +192,9 @@ public class Timetable_viewer extends LinearLayout {
         setIconColor();
     }
 
+    /**
+     *  Removes all events from calendar view
+     */
     public void removeAll() {
         for (int key : event_icons.keySet()) {
             Timetable_icons Icon = event_icons.get(key);
