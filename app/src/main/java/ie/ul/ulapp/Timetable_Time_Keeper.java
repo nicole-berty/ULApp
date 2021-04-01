@@ -1,17 +1,17 @@
-package ie.ul.timetable_viewer;
+package ie.ul.ulapp;
 
 import java.io.Serializable;
 
-public class time_keep implements Serializable {
+public class Timetable_Time_Keeper implements Serializable {
     private int hour = 0;
     private int minute = 0;
 
-    public time_keep(int hour, int minute) {
+    public Timetable_Time_Keeper(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
-    public time_keep() { }
+    public Timetable_Time_Keeper() { }
 
     public int getHour() {
         return hour;

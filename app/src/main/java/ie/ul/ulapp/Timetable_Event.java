@@ -1,8 +1,8 @@
-package ie.ul.timetable_viewer;
+package ie.ul.ulapp;
 
 import java.io.Serializable;
 
-public class calendar implements Serializable {
+public class Timetable_Event implements Serializable {
     static final int MON = 0;
     static final int TUE = 1;
     static final int WED = 2;
@@ -15,36 +15,36 @@ public class calendar implements Serializable {
     String eventLocation="";
     String speakerName = "";
     private int day = 0;
-    private time_keep startTime;
-    private time_keep endTime;
+    private Timetable_Time_Keeper startTime;
+    private Timetable_Time_Keeper endTime;
 
-    public calendar() {
-        this.startTime = new time_keep();
-        this.endTime = new time_keep();
+    public Timetable_Event() {
+        this.startTime = new Timetable_Time_Keeper();
+        this.endTime = new Timetable_Time_Keeper();
     }
 
     public String getSpeakerName() {
         return speakerName;
     }
 
-    public void setSpeakerName(String professorName) {
-        this.eventName = professorName;
+    public void setSpeakerName(String speakerName) {
+        this.speakerName = speakerName;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public void setEventName(String classTitle) {
-        this.eventName = classTitle;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getEventLocation() {
         return eventLocation;
     }
 
-    public void setEventLocation(String classPlace) {
-        this.eventLocation = classPlace;
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
     }
 
     public int getDay() {
@@ -55,19 +55,19 @@ public class calendar implements Serializable {
         this.day = day;
     }
 
-    public time_keep getStartTime() {
+    public Timetable_Time_Keeper getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(time_keep startTime) {
+    public void setStartTime(Timetable_Time_Keeper startTime) {
         this.startTime = startTime;
     }
 
-    public time_keep getEndTime() {
+    public Timetable_Time_Keeper getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(time_keep endTime) {
+    public void setEndTime(Timetable_Time_Keeper endTime) {
         this.endTime = endTime;
     }
 }

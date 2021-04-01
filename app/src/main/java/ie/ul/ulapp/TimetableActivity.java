@@ -1,60 +1,124 @@
 package ie.ul.ulapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.CalendarView;
-import android.widget.TextView;
+import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class TimetableActivity extends AppCompatActivity {
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-    // Define the variable of CalendarView type
-    // and TextView type;
-    CalendarView calender;
-    TextView date_view;
+import java.util.ArrayList;
+
+public class   TimetableActivity extends AppCompatActivity implements View.OnClickListener {
+    private Context context;
+    public static final int REQUEST_ADD = 1;
+    public static final int REQUEST_EDIT = 2;
+
+    private Button addBtn;
+    private Button clearBtn;
+    private Button loadBtn;
+
+    public static Timetable_viewer timetable;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timetable);
+        setContentView(R.layout.timetable_activity);
 
-        // By ID we can use each component
-        // which id is assign in xml file
-        // use findViewById() to get the
-        // CalendarView and TextView
-        calender = (CalendarView)
-                findViewById(R.id.calender);
-        date_view = (TextView)
-                findViewById(R.id.date_view);
+        init();
+    }
 
-        // Add Listener in calendar
-        calender
-                .setOnDateChangeListener(
-                        new CalendarView
-                                .OnDateChangeListener() {
-                            @Override
+    private void init(){
+        this.context = this;
+        addBtn = findViewById(R.id.add_btn);
+        clearBtn = findViewById(R.id.clear_btn);
+        loadBtn = findViewById(R.id.load_btn);
 
-                            // In this Listener have one method
-                            // and in this method we will
-                            // get the value of DAYS, MONTH, YEARS
-                            public void onSelectedDayChange(
-                                    @NonNull CalendarView view,
-                                    int year,
-                                    int month,
-                                    int dayOfMonth)
-                            {
+        timetable = findViewById(R.id.timetable);
+        timetable.setHeaderHighlight(2);
+        initView();
+    }
 
-                                // Store the value of date with
-                                // format in String type Variable
-                                // Add 1 in month because month
-                                // index is start with 0
-                                String Date
-                                        = dayOfMonth + "-"
-                                        + (month + 1) + "-" + year;
+    private void initView(){
+        addBtn.setOnClickListener(this);
+        clearBtn.setOnClickListener(this);
+        loadBtn.setOnClickListener(this);
 
-                                // set this date in TextView for Display
-                                date_view.setText(Date);
-                            }
-                        });
+        timetable.setOnIconSelectEventListener(new Timetable_viewer.OnIconSelectedListener() {
+            @Override
+            public void OnIconSelected(int idx, ArrayList<Timetable_Event> calendars) {
+                Intent i = new Intent(context, TimetableEdit.class);
+                i.putExtra("mode",REQUEST_EDIT);
+                i.putExtra("idx", idx);
+                i.putExtra("schedules", calendars);
+                startActivityForResult(i,REQUEST_EDIT);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.add_btn:
+                Intent i = new Intent(this,TimetableEdit.class);
+                i.putExtra("mode",REQUEST_ADD);
+                startActivityForResult(i,REQUEST_ADD);
+                break;
+            case R.id.clear_btn:
+                timetable.removeAll();
+                break;
+            case R.id.load_btn:
+                loadSavedData();
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_ADD:
+                if (resultCode == TimetableEdit.RESULT_OK_ADD) {
+                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+                    timetable.add(item);
+                }
+                break;
+            case REQUEST_EDIT:
+                /** Edit -> Submit */
+                if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
+                    int idx = data.getIntExtra("idx", -1);
+                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+                    timetable.edit(idx, item);
+                }
+                /** Edit -> Delete */
+                else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
+                    int idx = data.getIntExtra("idx", -1);
+                    timetable.remove(idx);
+                }
+                break;
+        }
+    }
+
+//    /** save timetableView's data to SharedPreferences in json format */
+//    protected static void saveByPreference(String data){
+////        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
+////        SharedPreferences.Editor editor = mPref.edit();
+////        editor.putString("timetable_demo",data);
+////        editor.commit();
+//          Toast.makeText(this,"saved!",Toast.LENGTH_SHORT).show();
+//    }
+
+    /** get json data from SharedPreferences and then restore the timetable */
+    private void loadSavedData(){
+        timetable.removeAll();
+        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String savedData = mPref.getString("timetable_demo","");
+        if(savedData == null && savedData.equals("")) return;
+        timetable.load(savedData);
+        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
     }
 }
