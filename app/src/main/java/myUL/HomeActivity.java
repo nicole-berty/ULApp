@@ -84,8 +84,8 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
                 startActivity(intent);
                 break;
             case 1:
-                Toast.makeText(this, " You clicked " + adapter.getItem(position),
-                        Toast.LENGTH_SHORT).show();
+                intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
             case 2:
                intent = new Intent(HomeActivity.this, RestaurantsActivity.class);
