@@ -15,18 +15,34 @@ public class Timetable_icons implements Serializable {
         this.calendars = new ArrayList<Timetable_Event>();
     }
 
+    /**
+     * Adds a text view
+     * @param v
+     */
     public void addTextView(TextView v){
         view.add(v);
     }
 
+    /**
+     * Adds new Icon
+     * @param calendar
+     */
     public void addIcon(Timetable_Event calendar){
         calendars.add(calendar);
     }
 
+    /**
+     * Returns an ArrayList of text views
+     * @return view
+     */
     public ArrayList<TextView> getView() {
         return view;
     }
 
+    /**
+     * Returns an ArrayList of calendars
+     * @return calendars
+     */
     public ArrayList<Timetable_Event> getCalendars() {
         return calendars;
     }

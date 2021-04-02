@@ -2,12 +2,9 @@ package ie.ul.ulapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,6 +69,9 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         loadFromDatabase();
     }
 
+    /**
+     * Loads events from the database to display them.
+     */
     public void loadFromDatabase() {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -179,6 +179,10 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    /**
+     * Sets the activity after one of the buttons are clicked.
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -224,11 +228,11 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
 
     /** get json data from SharedPreferences and then restore the timetable */
     private void loadSavedData(){
-        timetable.removeAll();
-        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String savedData = mPref.getString("timetable_demo","");
-        if(savedData == null && savedData.equals("")) return;
-        timetable.load(savedData);
-        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
+//        timetable.removeAll();
+//        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
+//        String savedData = mPref.getString("timetable_demo","");
+//        if(savedData == null && savedData.equals("")) return;
+//        timetable.load(savedData);
+//        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
     }
 }

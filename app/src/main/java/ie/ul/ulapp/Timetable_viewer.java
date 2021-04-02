@@ -81,7 +81,7 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     /**
-     * Gets all attributes to display the event
+     * Gets all attributes to display events.
      * @param attrs
      */
     private void getAttrs(AttributeSet attrs) {
