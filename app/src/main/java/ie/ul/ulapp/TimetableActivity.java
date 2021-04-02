@@ -78,7 +78,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
             email = user.getEmail();
         }
         final int[] numEvents = new int[1];
-        DocumentReference docIdRef = db.collection("timetable").document("18246702");
+        DocumentReference docIdRef = db.collection("timetable").document("18245137");
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

@@ -47,82 +47,25 @@ public class Timetable_Save_Events {
       //  JsonObject obj3 = new JsonObject();
         System.out.println("Length of arr: " + event_index.length);
       //  final
-        final int[] idx = new int[1];
-        DocumentReference docIdRef = db.collection("timetable").document("18246702");
+       // final
+        DocumentReference docIdRef = db.collection("timetable").document("18245137");
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
+                        int[] idx = new int[1];
                         if (document.exists()) {
-                            CollectionReference db2 = db.collection("timetable");
                             if (document.get("index") != null) {
-                                for (final int index : event_index) {
-                                    System.out.println(index);
-                                    //  obj2.addProperty("idx", index);
-                                    JsonObject obj2 = new JsonObject();
-                                    obj2.addProperty("idx", index);
-                                    JsonArray arr2 = new JsonArray();//5
-                                    ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(index)).getCalendars();
+                                addToDatabase(idx[0], final_event_icon, event_index, document);
 
-                                    Log.d("TAG", "your field exist");
-                                    Map<String, Object> calendar_index = new HashMap<>();
-                                    idx[0] = Integer.parseInt(document.get("index").toString()) + 1;
-                                    calendar_index.put("index", idx[0]);
-                                    db2.document("18246702").update(calendar_index);
-                                    System.out.println(document.get("index"));
-                                    //    addToDatabase(idx[0]);
-                                    JsonObject obj6 = new JsonObject();
-                                    obj6.addProperty("idx", index);
-
-
-                                    for (Timetable_Event calendar : calendars) {
-                                        // Timetable_Event calendar = new Timetable_Event();
-                                        JsonObject obj3 = new JsonObject();
-                                        obj3.addProperty("eventName", calendar.eventName);
-                                        obj3.addProperty("eventLocation", calendar.eventLocation);
-                                        obj3.addProperty("speakerName", calendar.speakerName);
-                                        obj3.addProperty("day", calendar.getDay());
-                                        JsonObject obj4 = new JsonObject();//startTime
-                                        obj4.addProperty("hour", calendar.getStartTime().getHour());
-                                        obj4.addProperty("minute", calendar.getStartTime().getMinute());
-                                        obj3.add("startTime", obj4);
-                                        JsonObject obj5 = new JsonObject();//endTime
-                                        obj5.addProperty("hour", calendar.getEndTime().getHour());
-                                        obj5.addProperty("minute", calendar.getEndTime().getMinute());
-                                        obj3.add("endTime", obj5);
-                                        arr2.add(obj3);
-
-
-                                        System.out.println("Obj3: " + obj3.toString());
-                                        System.out.println("Obj2: " + obj2.toString());
-                                        System.out.println("Obj5: " + obj5.toString());
-
-                                        Map<String, Object> calendar_activity = new HashMap<>();
-                                        calendar_activity.put(obj6.toString(), obj3.toString());
-
-                                        db2.document("18246702").update(calendar_activity);
-
-                                    }
-
-                                    obj2.add("schedule", arr2);
-                                    arr1.add(obj2);
-                                }
-                                obj1.add("icon",arr1);
-                                System.out.println("In DB call Obj1: " + obj1.toString());
                             } else {
-                                Log.d("TAG", "your field does not exist");
-                                Map<String, Object> calendar_index = new HashMap<>();
-                                calendar_index.put("index", 1);
-                                idx[0] = 1;
-                                db2.document("18246702").update(calendar_index);
-                                addToDatabase(1);
+                                addToDatabase(1, final_event_icon, event_index, document);
                             }
                         } else {
                             Map<String, Object> calendar_index = new HashMap<>();
                             calendar_index.put("index", 1);
-                            idx[0] = 1;
-                            db.collection("timetable").document("18246702")
+                            db.collection("timetable").document("18245137")
                                     .set(calendar_index).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -135,7 +78,7 @@ public class Timetable_Save_Events {
                                             Log.w("TAG", "Error writing document", e);
                                         }
                                     });
-                            addToDatabase(1);
+                            addToDatabase(1, final_event_icon, event_index, document);
                         }
                     }
                 }
@@ -148,46 +91,61 @@ public class Timetable_Save_Events {
        // Map<String, Object> calendar_activity = new HashMap<>();
         //calendar_activity.put(String.valueOf(idx), obj1.toString());
      //   event_icon.putAll(final_event_icon);
-    System.out.println("After DB call: " + obj1.toString());
+   // System.out.println("After DB call: " + obj1.toString());
     }
 
-    public static void addToDatabase(int index) {
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static void addToDatabase(int index, HashMap<Integer, Timetable_icons> final_event_icon, int[] event_index, DocumentSnapshot document) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        final CollectionReference db2 = db.collection("timetable");
-//        JsonArray arr2 = new JsonArray();//5
-//        ArrayList<Timetable_Event> calendars = Objects.requireNonNull(event_icon.get(index)).getCalendars();
-//        JsonObject obj2 = new JsonObject();
-//        obj2.addProperty("idx", index);
-//        for (Timetable_Event calendar : calendars) {
-//       // Timetable_Event calendar = new Timetable_Event();
-//            JsonObject obj3 = new JsonObject();
-//            obj3.addProperty("eventName", calendar.eventName);
-//            obj3.addProperty("eventLocation", calendar.eventLocation);
-//            obj3.addProperty("speakerName", calendar.speakerName);
-//            obj3.addProperty("day", calendar.getDay());
-//            JsonObject obj4 = new JsonObject();//startTime
-//            obj4.addProperty("hour", calendar.getStartTime().getHour());
-//            obj4.addProperty("minute", calendar.getStartTime().getMinute());
-//            obj3.add("startTime", obj4);
-//            JsonObject obj5 = new JsonObject();//endTime
-//            obj5.addProperty("hour", calendar.getEndTime().getHour());
-//            obj5.addProperty("minute", calendar.getEndTime().getMinute());
-//            obj3.add("endTime", obj5);
-//            arr2.add(obj3);
-//
-//
-//            System.out.println("Obj3: " + obj3.toString());
-//       //     System.out.println("Obj2: " + obj2.toString());
-//            System.out.println("Obj5: " + obj5.toString());
-//
-//            Map<String, Object> calendar_activity = new HashMap<>();
-//            calendar_activity.put(obj2.toString(), obj3.toString());
-//            db2.document("18246702").update(calendar_activity);
-//
-//        }
-//            obj2.add("schedule", arr2);
-        //     arr1.add(obj2);
+        CollectionReference db2 = db.collection("timetable");
+        for (int i : event_index) {
+            System.out.println(index);
+            //  obj2.addProperty("idx", index);
+            JsonObject obj2 = new JsonObject();
+            obj2.addProperty("idx", index);
+            JsonArray arr2 = new JsonArray();//5
+            ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
+
+            Log.d("TAG", "your field exist");
+            Map<String, Object> calendar_index = new HashMap<>();
+            index = Integer.parseInt(document.get("index").toString()) + 1;
+            calendar_index.put("index", index);
+            db2.document("18245137").update(calendar_index);
+            System.out.println(document.get("index"));
+            //    addToDatabase(idx[0]);
+            JsonObject obj6 = new JsonObject();
+            obj6.addProperty("idx", index);
+
+
+            for (Timetable_Event calendar : calendars) {
+                // Timetable_Event calendar = new Timetable_Event();
+                JsonObject obj3 = new JsonObject();
+                obj3.addProperty("eventName", calendar.eventName);
+                obj3.addProperty("eventLocation", calendar.eventLocation);
+                obj3.addProperty("speakerName", calendar.speakerName);
+                obj3.addProperty("day", calendar.getDay());
+                JsonObject obj4 = new JsonObject();//startTime
+                obj4.addProperty("hour", calendar.getStartTime().getHour());
+                obj4.addProperty("minute", calendar.getStartTime().getMinute());
+                obj3.add("startTime", obj4);
+                JsonObject obj5 = new JsonObject();//endTime
+                obj5.addProperty("hour", calendar.getEndTime().getHour());
+                obj5.addProperty("minute", calendar.getEndTime().getMinute());
+                obj3.add("endTime", obj5);
+                arr2.add(obj3);
+
+
+                System.out.println("Obj3: " + obj3.toString());
+                System.out.println("Obj2: " + obj2.toString());
+                System.out.println("Obj5: " + obj5.toString());
+
+                Map<String, Object> calendar_activity = new HashMap<>();
+                calendar_activity.put(obj6.toString(), obj3.toString());
+
+                db2.document("18245137").update(calendar_activity);
+
+            }
+        }
 
     }
 
