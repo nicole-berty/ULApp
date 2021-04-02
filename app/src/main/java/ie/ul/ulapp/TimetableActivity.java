@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
 
     private Button addBtn;
     private Button clearBtn;
-    private Button loadBtn;
 
     public static Timetable_viewer timetable;
     @Override
@@ -44,7 +44,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         this.context = this;
         addBtn = findViewById(R.id.add_btn);
         clearBtn = findViewById(R.id.clear_btn);
-        loadBtn = findViewById(R.id.load_btn);
         Calendar calendar = Calendar.getInstance();
         timetable = findViewById(R.id.current_day);
         timetable.setHeaderHighlight(calendar.get(Calendar.DAY_OF_WEEK) - 1);
@@ -54,7 +53,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
     private void initView(){
         addBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
-        loadBtn.setOnClickListener(this);
 
         timetable.setOnIconSelectEventListener(new Timetable_viewer.OnIconSelectedListener() {
             @Override
@@ -87,12 +85,14 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        System.out.println("****************START DOC: " + document.toString() + "*******END DOC******");
+                  //
+                        //
+                        //    System.out.println("****************START DOC: " + document.toString() + "*******END DOC******");
                         //for(int i = 0; i < document.toString().length() - 1; i++ ) {
                           //  String[] parts = document.toString().split("\"");
                           //  System.out.println(i);
                         String doc = document.toString();
-                        int index = doc.indexOf("idx");
+                        int index = -1;
                         int count = 0;
 
                         String eventName = "";
@@ -113,11 +113,27 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                            // numEvents[0] = count;
                             String[] parts = doc.split("fields");
                           //  System.out.println("parts length:" + parts.length);
-                            for(int i = 0; i < parts.length; i++) {
+                            for(int i = 1; i < parts.length; i++) {
                                 String[] values = parts[i].split("string_value:");
                                 //   System.out.println("Values:" + values.length);
                                 for (int j = 0; j < values.length; j++) {
-                                    System.out.println("parts:" + parts[i]);
+                                //    System.out.println("parts:" + parts[i]);
+                                    if(j == 0) {
+                                 //       System.out.println("Pre string value: " + values[j]);
+                                        String[] splitValues = values[j].split("value");
+                                        for (int k = 0; k < splitValues.length; k++) {
+                                            String temp = splitValues[k].replace("\\", "");
+                                            String[] valSplit = temp.split(":");
+                                            for (int l = 0; l < valSplit.length; l++) {
+                                                String temp2 = valSplit[l].replaceAll("\"", "");
+                                                String temp3 = temp2.replace("}", "");
+                                                if(l == 2) {
+                                                    index = Integer.parseInt(temp3.trim());
+                                                    System.out.println("pre string val: " + l + ":" + temp3);
+                                                }
+                                            }
+                                        }
+                                    }
                                     if (j == 1) {
                                         //    System.out.println("Post string value: " + values[j]);
                                         String[] splitValues = values[j].split(":");
@@ -129,7 +145,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                                 if (l == 0) {
                                                     String temp2 = valSplit[l].replace("}", "");
                                                     String temp3 = temp2.replace("\\", "");
-                                                    System.out.println("k: " + k + " vals " + temp3);
+                                                 //   System.out.println("k: " + k + " vals " + temp3);
                                                     if (k == 1) {
                                                         eventName = temp3;
                                                     } else if (k == 2) {
@@ -152,8 +168,13 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                         }
                                     }
                                 }
-                            }
+                                JsonObject obj1 = new JsonObject();
+                                JsonObject obj2 = new JsonObject();
                                 JsonObject obj3 = new JsonObject();
+                                obj2.addProperty("idx", index);
+                                JsonArray arr1 = new JsonArray();
+                                JsonArray arr2 = new JsonArray();
+
                                 obj3.addProperty("eventName", eventName);
                                 obj3.addProperty("eventLocation", eventLocation);
                                 obj3.addProperty("speakerName", speakerName);
@@ -166,7 +187,18 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                 obj5.addProperty("hour", endHour);
                                 obj5.addProperty("minute", endMin);
                                 obj3.add("endTime", obj5);
-                            Timetable_Save_Events.loadIcon(obj3);
+                                arr2.add(obj3);
+
+                                //We need to send {"icon":[{"idx":0,"schedule":[obj3.toString()]}]}
+                                obj2.add("schedule", arr2);
+                                arr1.add(obj2);
+                                obj1.add("icon", arr1);
+                                //        System.out.println("What we send to loadIcon: " + obj1.toString());
+                                timetable.load(obj1.toString());
+                            }
+
+
+                      //  Timetable_Save_Events.loadIcon(obj1.toString());
                       //  }
 
                      //   for (Map.Entry<String, Object> o : document.entrySet()) {
@@ -193,9 +225,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.clear_btn:
                 timetable.removeAll();
-                break;
-            case R.id.load_btn:
-                loadSavedData();
                 break;
         }
     }
@@ -226,13 +255,4 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    /** get json data from SharedPreferences and then restore the timetable */
-    private void loadSavedData(){
-//        timetable.removeAll();
-//        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
-//        String savedData = mPref.getString("timetable_demo","");
-//        if(savedData == null && savedData.equals("")) return;
-//        timetable.load(savedData);
-//        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
-    }
 }
