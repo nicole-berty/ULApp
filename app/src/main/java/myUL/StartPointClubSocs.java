@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+    //this is the initial fragment with a list view
 public class StartPointClubSocs extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +49,7 @@ public class StartPointClubSocs extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_start_point_club_socs, container, false);
     }
+    //this is where navigation between fragments is set up
     @Override
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){
         super.onViewCreated(view, SavedInstanceState);
