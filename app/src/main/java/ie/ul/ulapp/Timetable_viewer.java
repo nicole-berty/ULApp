@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -21,6 +22,14 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -196,14 +205,26 @@ public class Timetable_viewer extends LinearLayout {
      *  Removes all events from calendar view
      */
     public void removeAll() {
-        for (int key : event_icons.keySet()) {
-            Timetable_icons Icon = event_icons.get(key);
-            assert Icon != null;
-            for (TextView tv : Icon.getView()) {
-                iconBox.removeView(tv);
-            }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
         }
-        event_icons.clear();
+        db.collection("timetable").document("18245137")
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
     }
 
     public void edit(int idx, ArrayList<Timetable_Event> schedules) {
@@ -364,9 +385,8 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     private String getHeaderTime(int i) {
-        int p = (startTime + i) % 24;
-        int res = p <= 12 ? p : p - 12;
-        return res + "";
+        int hour_of_day = (startTime + i) % 24;
+        return hour_of_day + "";
     }
 
     static private int dp2Px(int dp) {
