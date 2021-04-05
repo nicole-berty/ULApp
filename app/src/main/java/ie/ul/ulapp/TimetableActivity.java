@@ -85,12 +85,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                  //
-                        //
-                        //    System.out.println("****************START DOC: " + document.toString() + "*******END DOC******");
-                        //for(int i = 0; i < document.toString().length() - 1; i++ ) {
-                          //  String[] parts = document.toString().split("\"");
-                          //  System.out.println(i);
                         String doc = document.toString();
                         int index = -1;
                         int count = 0;
@@ -103,23 +97,11 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                         int startMin = -1;
                         int endHour = -1;
                         int endMin = -1;
-
-                        //    while (index != -1) {
-                          //      count++;
-                            //    doc = doc.substring(index + 1);
-                              //  index = doc.indexOf("idx");
-                           // }
-                            //System.out.println("Count:" + count);
-                           // numEvents[0] = count;
                             String[] parts = doc.split("fields");
-                          //  System.out.println("parts length:" + parts.length);
                             for(int i = 1; i < parts.length; i++) {
                                 String[] values = parts[i].split("string_value:");
-                                //   System.out.println("Values:" + values.length);
                                 for (int j = 0; j < values.length; j++) {
-                                //    System.out.println("parts:" + parts[i]);
                                     if(j == 0) {
-                                 //       System.out.println("Pre string value: " + values[j]);
                                         String[] splitValues = values[j].split("value");
                                         for (int k = 0; k < splitValues.length; k++) {
                                             String temp = splitValues[k].replace("\\", "");
@@ -135,7 +117,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                         }
                                     }
                                     if (j == 1) {
-                                        //    System.out.println("Post string value: " + values[j]);
                                         String[] splitValues = values[j].split(":");
                                         for (int k = 0; k < splitValues.length; k++) {
                                             String temp = splitValues[k].replaceAll("\"", "");
@@ -145,7 +126,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                                 if (l == 0) {
                                                     String temp2 = valSplit[l].replace("}", "");
                                                     String temp3 = temp2.replace("\\", "");
-                                                 //   System.out.println("k: " + k + " vals " + temp3);
                                                     if (k == 1) {
                                                         eventName = temp3;
                                                     } else if (k == 2) {
@@ -188,23 +168,11 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                 obj5.addProperty("minute", endMin);
                                 obj3.add("endTime", obj5);
                                 arr2.add(obj3);
-
-                                //We need to send {"icon":[{"idx":0,"schedule":[obj3.toString()]}]}
                                 obj2.add("schedule", arr2);
                                 arr1.add(obj2);
                                 obj1.add("icon", arr1);
-                                //        System.out.println("What we send to loadIcon: " + obj1.toString());
                                 timetable.load(obj1.toString());
                             }
-
-
-                      //  Timetable_Save_Events.loadIcon(obj1.toString());
-                      //  }
-
-                     //   for (Map.Entry<String, Object> o : document.entrySet()) {
-                       //     String key = o.getKey();
-                         //   Object value = o.getValue();
-                       // }
                     } else {
                         System.out.println("Doc doesn`t exist");
                     }
@@ -240,8 +208,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
             case REQUEST_ADD:
                 if (resultCode == TimetableEdit.RESULT_OK_ADD) {
                     System.out.println("In REQUEST_ADD");
-//                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
-//                    timetable.add(item);
                 }
                 break;
             case REQUEST_EDIT:

@@ -134,28 +134,6 @@ public class Timetable_viewer extends LinearLayout {
         IconSelectedListener = listener;
     }
 
-    /**
-     * get all schedules from TimetableView
-     */
-    public ArrayList<Timetable_Event> getAllSchedulesInIcons() {
-        ArrayList<Timetable_Event> allSchedules = new ArrayList<Timetable_Event>();
-        for (int key : event_icons.keySet()) {
-       }
-        return allSchedules;
-    }
-
-    /**
-     * Used in Edit mode, To check a invalidate schedule.
-     */
-    public ArrayList<Timetable_Event> getAllSchedulesInIconsExceptIdx(int idx) {
-        ArrayList<Timetable_Event> allSchedules = new ArrayList<Timetable_Event>();
-        for (int key : event_icons.keySet()) {
-            if (idx == key) continue;
-            allSchedules.addAll(Objects.requireNonNull(event_icons.get(key)).getCalendars());
-        }
-        return allSchedules;
-    }
-
     public void add(ArrayList<Timetable_Event> schedules) {
         add(schedules, -1);
     }
@@ -253,8 +231,6 @@ public class Timetable_viewer extends LinearLayout {
         if (user != null) {
             email = user.getEmail();
         }
-
-
 
         String index = "{\"idx\":"+ idx + "}";
         //db.collection("timetable").document("18245137").update();

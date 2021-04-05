@@ -35,29 +35,17 @@ public class Timetable_Save_Events {
         if (user != null) {
             email = user.getEmail();
         }
-
-        final JsonObject obj1 = new JsonObject();
-        final JsonArray arr1 = new JsonArray();
-        // This is empty when calendar is empty.
-
-        final HashMap<Integer, Timetable_icons> final_event_icon = new HashMap<>();
-        final_event_icon.putAll(event_icon);
-        final int[] event_index = getSortedKeySet(event_icon);
-
-      //  JsonObject obj3 = new JsonObject();
-        System.out.println("Length of arr: " + event_index.length);
-      //  final
-       // final
         DocumentReference docIdRef = db.collection("timetable").document("18245137");
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    final int[] event_index = getSortedKeySet(event_icon);
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
+                        final DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             if (document.get("index") != null) {
                                 System.out.println("I am in first if");
-                                addToDatabase(final_event_icon, event_index);
+                                addToDatabase(event_icon, event_index);
 
                             } else {
                                 Map<String, Object> calendar_index = new HashMap<>();
@@ -76,7 +64,7 @@ public class Timetable_Save_Events {
                                             }
                                         });
                                 System.out.println("I am in first else");
-                                addToDatabase( final_event_icon, event_index);
+                                addToDatabase(event_icon, event_index);
 
                             }
                         } else {
@@ -89,7 +77,7 @@ public class Timetable_Save_Events {
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG", "DocumentSnapshot successfully written!");
 
-                                    addToDatabase(final_event_icon, event_index);
+                                    addToDatabase(event_icon, event_index);
                                 }
                             })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -103,27 +91,16 @@ public class Timetable_Save_Events {
                     }
                 }
             });
-
-
-
-       // CollectionReference db2 = db.collection("timetable");
-        //Create a HashMap with the user's email and their type as chosen from the spinner
-       // Map<String, Object> calendar_activity = new HashMap<>();
-        //calendar_activity.put(String.valueOf(idx), obj1.toString());
-     //   event_icon.putAll(final_event_icon);
-   // System.out.println("After DB call: " + obj1.toString());
     }
 
     public static void addToDatabase(final HashMap<Integer, Timetable_icons> final_event_icon, final int[] event_index ) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
+        }
         final CollectionReference db2 = db.collection("timetable");
-
-
-          //  System.out.println(index);
-            //  obj2.addProperty("idx", index);
-
-
             Log.d("TAG", "your field exist");
             final DocumentReference docIdRef = db.collection("timetable").document("18245137");
             docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -144,13 +121,10 @@ public class Timetable_Save_Events {
                             calendar_index.put("index", index);
                             docIdRef.update(calendar_index);
 
-                            //    addToDatabase(idx[0]);
                             JsonObject obj6 = new JsonObject();
                             obj6.addProperty("idx", index);
 
-
                             for (Timetable_Event calendar : calendars) {
-                                // Timetable_Event calendar = new Timetable_Event();
                                 JsonObject obj3 = new JsonObject();
                                 obj3.addProperty("eventName", calendar.eventName);
                                 obj3.addProperty("eventLocation", calendar.eventLocation);
@@ -166,15 +140,13 @@ public class Timetable_Save_Events {
                                 obj3.add("endTime", obj5);
                                 arr2.add(obj3);
 
-
-                                System.out.println("Obj3: " + obj3.toString());
-                                System.out.println("Obj2: " + obj2.toString());
-                                System.out.println("Obj5: " + obj5.toString());
+//
+//                                System.out.println("Obj3: " + obj3.toString());
+//                                System.out.println("Obj2: " + obj2.toString());
+//                                System.out.println("Obj5: " + obj5.toString());
 
                                 Map<String, Object> calendar_activity = new HashMap<>();
                                 calendar_activity.put(obj6.toString(), obj3.toString());
-
-
                                 docIdRef.update(calendar_activity);
                             }
                         }
@@ -186,31 +158,6 @@ public class Timetable_Save_Events {
     public static HashMap<Integer, Timetable_icons> loadIcon(String json){
         HashMap<Integer, Timetable_icons> icon = new HashMap<Integer, Timetable_icons>();
         JsonParser parser = new JsonParser();
-
-        System.out.println("String arg for load icon" + json);
-        //Connect to Firebase FireStore
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        //Access the userTypes collection and search for the document with the user's email
-//        DocumentReference docRef = db.collection("timetable").document("18246702");
-//
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    //If Document with user's email exists, go to the home activity
-//                    if (document.exists()) {
-//                        JsonObject obj1 = (JsonObject)parser.parse(document.get("18246702"));
-//                    } else {
-//                        Intent intent = new Intent(LoginActivity.this, UserType.class);
-//                        startActivity(intent);
-//                    }
-//                    finish();
-//                } else {
-//                    Log.w("tag", "Error getting info", task.getException());
-//                }
-//            }
-//        });
         JsonObject obj1 = (JsonObject)parser.parse(json);
         JsonArray arr1 = obj1.getAsJsonArray("icon");
         for(int i = 0 ; i < arr1.size(); i++){
@@ -239,7 +186,6 @@ public class Timetable_Save_Events {
             }
             icon.put(idx,icon1);
         }
-      //  System.out.println(icon);
         return icon;
     }
 
