@@ -53,15 +53,15 @@ public class Timetable_Save_Events {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
-                        final DocumentSnapshot document = task.getResult();
+                        DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             if (document.get("index") != null) {
                                 System.out.println("I am in first if");
-                                addToDatabase(final_event_icon, event_index, document);
+                                addToDatabase(final_event_icon, event_index);
 
                             } else {
                                 Map<String, Object> calendar_index = new HashMap<>();
-                                calendar_index.put("index", 1);
+                                calendar_index.put("index", 0);
                                 db.collection("timetable").document("18245137")
                                         .set(calendar_index).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -76,19 +76,20 @@ public class Timetable_Save_Events {
                                             }
                                         });
                                 System.out.println("I am in first else");
-                                addToDatabase( final_event_icon, event_index, document);
+                                addToDatabase( final_event_icon, event_index);
 
                             }
                         } else {
                             System.out.println("I am in second if");
                             Map<String, Object> calendar_index = new HashMap<>();
-                            calendar_index.put("index", 1);
+                            calendar_index.put("index", 0);
                             db.collection("timetable").document("18245137")
                                     .set(calendar_index).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    addToDatabase(final_event_icon, event_index, document);
+
+                                    addToDatabase(final_event_icon, event_index);
                                 }
                             })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -113,60 +114,73 @@ public class Timetable_Save_Events {
    // System.out.println("After DB call: " + obj1.toString());
     }
 
-    public static void addToDatabase(HashMap<Integer, Timetable_icons> final_event_icon, int[] event_index, DocumentSnapshot document) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static void addToDatabase(final HashMap<Integer, Timetable_icons> final_event_icon, final int[] event_index ) {
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference db2 = db.collection("timetable");
-        int index = -1;
-        for (int i : event_index) {
-            System.out.println(index);
+        final CollectionReference db2 = db.collection("timetable");
+
+
+          //  System.out.println(index);
             //  obj2.addProperty("idx", index);
-            JsonObject obj2 = new JsonObject();
-            JsonArray arr2 = new JsonArray();//5
-            ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
+
 
             Log.d("TAG", "your field exist");
-            Map<String, Object> calendar_index = new HashMap<>();
-            index = Integer.parseInt(document.get("index").toString()) + 1;
-            obj2.addProperty("idx", index);
-            calendar_index.put("index", index);
-            db2.document("18245137").update(calendar_index);
-            System.out.println(document.get("index"));
-            //    addToDatabase(idx[0]);
-            JsonObject obj6 = new JsonObject();
-            obj6.addProperty("idx", index);
+            final DocumentReference docIdRef = db.collection("timetable").document("18245137");
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (int i : event_index) {
+                            JsonObject obj2 = new JsonObject();
+                            JsonArray arr2 = new JsonArray();//5
+                            ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
+                            int index = -1;
+                            DocumentSnapshot document = task.getResult();
+                            Map<String, Object> calendar_index = new HashMap<>();
+
+                            index = Integer.parseInt(document.get("index").toString()) + 1;
+                            System.out.println(document.get("index"));
+                            obj2.addProperty("idx", index);
+                            calendar_index.put("index", index);
+                            docIdRef.update(calendar_index);
+
+                            //    addToDatabase(idx[0]);
+                            JsonObject obj6 = new JsonObject();
+                            obj6.addProperty("idx", index);
 
 
-            for (Timetable_Event calendar : calendars) {
-                // Timetable_Event calendar = new Timetable_Event();
-                JsonObject obj3 = new JsonObject();
-                obj3.addProperty("eventName", calendar.eventName);
-                obj3.addProperty("eventLocation", calendar.eventLocation);
-                obj3.addProperty("speakerName", calendar.speakerName);
-                obj3.addProperty("day", calendar.getDay());
-                JsonObject obj4 = new JsonObject();//startTime
-                obj4.addProperty("hour", calendar.getStartTime().getHour());
-                obj4.addProperty("minute", calendar.getStartTime().getMinute());
-                obj3.add("startTime", obj4);
-                JsonObject obj5 = new JsonObject();//endTime
-                obj5.addProperty("hour", calendar.getEndTime().getHour());
-                obj5.addProperty("minute", calendar.getEndTime().getMinute());
-                obj3.add("endTime", obj5);
-                arr2.add(obj3);
+                            for (Timetable_Event calendar : calendars) {
+                                // Timetable_Event calendar = new Timetable_Event();
+                                JsonObject obj3 = new JsonObject();
+                                obj3.addProperty("eventName", calendar.eventName);
+                                obj3.addProperty("eventLocation", calendar.eventLocation);
+                                obj3.addProperty("speakerName", calendar.speakerName);
+                                obj3.addProperty("day", calendar.getDay());
+                                JsonObject obj4 = new JsonObject();//startTime
+                                obj4.addProperty("hour", calendar.getStartTime().getHour());
+                                obj4.addProperty("minute", calendar.getStartTime().getMinute());
+                                obj3.add("startTime", obj4);
+                                JsonObject obj5 = new JsonObject();//endTime
+                                obj5.addProperty("hour", calendar.getEndTime().getHour());
+                                obj5.addProperty("minute", calendar.getEndTime().getMinute());
+                                obj3.add("endTime", obj5);
+                                arr2.add(obj3);
 
 
-                System.out.println("Obj3: " + obj3.toString());
-                System.out.println("Obj2: " + obj2.toString());
-                System.out.println("Obj5: " + obj5.toString());
+                                System.out.println("Obj3: " + obj3.toString());
+                                System.out.println("Obj2: " + obj2.toString());
+                                System.out.println("Obj5: " + obj5.toString());
 
-                Map<String, Object> calendar_activity = new HashMap<>();
-                calendar_activity.put(obj6.toString(), obj3.toString());
+                                Map<String, Object> calendar_activity = new HashMap<>();
+                                calendar_activity.put(obj6.toString(), obj3.toString());
 
-                db2.document("18245137").update(calendar_activity);
 
+                                docIdRef.update(calendar_activity);
+                            }
+                        }
+                    }
             }
-        }
-
+        });
     }
 
     public static HashMap<Integer, Timetable_icons> loadIcon(String json){

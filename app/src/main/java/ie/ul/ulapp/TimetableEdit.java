@@ -146,6 +146,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                     timetable.add(item);
                     // call to save the icon
                     System.out.println("in submit btn");
+                    //Gonna pass an index to saveIcon to represent add new event or edit current event. -1 = add new, index = edit current
                     Timetable_Save_Events.saveicon(Timetable_viewer.event_icons);
                     finish();
                 }
@@ -155,6 +156,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                     events.add(event);
                     i.putExtra("idx",editIdx);
                     i.putExtra("schedules",events);
+
                     setResult(RESULT_OK_EDIT,i);
                     finish();
                 }

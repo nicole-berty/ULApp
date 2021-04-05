@@ -70,7 +70,7 @@ public class Timetable_viewer extends LinearLayout {
     private Context context;
 
     static HashMap<Integer, Timetable_icons> event_icons = new HashMap<Integer, Timetable_icons>();
-    private int iconCount = 0;
+    private int iconCount = -1;
 
     private OnIconSelectedListener IconSelectedListener = null;
 

@@ -255,11 +255,10 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 /** Edit -> Delete */
                 else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
                     int idx = data.getIntExtra("idx", -1);
-                    System.out.println(idx);
+                    System.out.println("I am remove index " + idx);
                     timetable.remove(idx);
                 }
                 break;
         }
     }
-
 }
