@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+import static ie.ul.ulapp.TimetableActivity.timetable;
+
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
     public static final int RESULT_OK_ADD = 1;
     public static final int RESULT_OK_EDIT = 2;
@@ -140,7 +142,10 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                     events.add(event);
                     i.putExtra("schedules",events);
                     setResult(RESULT_OK_ADD,i);
+                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
+                    timetable.add(item);
                     // call to save the icon
+                    System.out.println("in submit btn");
                     Timetable_Save_Events.saveicon(Timetable_viewer.event_icons);
                     finish();
                 }

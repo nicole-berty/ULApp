@@ -40,7 +40,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         init();
     }
 
-    private void init(){
+    void init(){
         this.context = this;
         addBtn = findViewById(R.id.add_btn);
         clearBtn = findViewById(R.id.clear_btn);
@@ -50,7 +50,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         initView();
     }
 
-    private void initView(){
+    void initView(){
         addBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
 
@@ -70,7 +70,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
     /**
      * Loads events from the database to display them.
      */
-    public void loadFromDatabase() {
+    public static void loadFromDatabase() {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -205,6 +205,8 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                        //     String key = o.getKey();
                          //   Object value = o.getValue();
                        // }
+                    } else {
+                        System.out.println("Doc doesn`t exist");
                     }
                 }
             }
@@ -221,10 +223,12 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
             case R.id.add_btn:
                 Intent i = new Intent(this,TimetableEdit.class);
                 i.putExtra("mode",REQUEST_ADD);
+
                 startActivityForResult(i,REQUEST_ADD);
                 break;
             case R.id.clear_btn:
                 timetable.removeAll();
+
                 break;
         }
     }
@@ -235,8 +239,9 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         switch (requestCode) {
             case REQUEST_ADD:
                 if (resultCode == TimetableEdit.RESULT_OK_ADD) {
-                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
-                    timetable.add(item);
+                    System.out.println("In REQUEST_ADD");
+//                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+//                    timetable.add(item);
                 }
                 break;
             case REQUEST_EDIT:
@@ -244,11 +249,13 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
                     int idx = data.getIntExtra("idx", -1);
                     ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+                    System.out.println(idx);
                     timetable.edit(idx, item);
                 }
                 /** Edit -> Delete */
                 else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
                     int idx = data.getIntExtra("idx", -1);
+                    System.out.println(idx);
                     timetable.remove(idx);
                 }
                 break;

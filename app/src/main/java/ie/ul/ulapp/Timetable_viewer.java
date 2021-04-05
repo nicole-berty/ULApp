@@ -25,15 +25,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Timetable_viewer extends LinearLayout {
@@ -65,7 +70,7 @@ public class Timetable_viewer extends LinearLayout {
     private Context context;
 
     static HashMap<Integer, Timetable_icons> event_icons = new HashMap<Integer, Timetable_icons>();
-    private int iconCount = -1;
+    private int iconCount = 0;
 
     private OnIconSelectedListener IconSelectedListener = null;
 
@@ -135,8 +140,7 @@ public class Timetable_viewer extends LinearLayout {
     public ArrayList<Timetable_Event> getAllSchedulesInIcons() {
         ArrayList<Timetable_Event> allSchedules = new ArrayList<Timetable_Event>();
         for (int key : event_icons.keySet()) {
-            allSchedules.addAll(Objects.requireNonNull(event_icons.get(key)).getCalendars());
-        }
+       }
         return allSchedules;
     }
 
@@ -159,6 +163,7 @@ public class Timetable_viewer extends LinearLayout {
     private void add(final ArrayList<Timetable_Event> schedules, int specIdx) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
         Timetable_icons icon1 = new Timetable_icons();
+
         for (Timetable_Event schedule : schedules) {
             TextView tv = new TextView(context);
 
@@ -174,13 +179,14 @@ public class Timetable_viewer extends LinearLayout {
             tv.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(IconSelectedListener != null)
+                    if (IconSelectedListener != null)
                         IconSelectedListener.OnIconSelected(count, schedules);
                 }
             });
 
             icon1.addTextView(tv);
             icon1.addIcon(schedule);
+            System.out.println("Count from add: " + count);
             event_icons.put(count, icon1);
             iconBox.addView(tv);
         }
@@ -188,11 +194,10 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     public void load(String data) {
-
-        // call db here
         event_icons = Timetable_Save_Events.loadIcon(data);
         int maxKey = 0;
         for (int key : event_icons.keySet()) {
+            System.out.println("Key from load " + key);
             ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
             add(schedules, key);
             if (maxKey < key) maxKey = key;
@@ -205,6 +210,16 @@ public class Timetable_viewer extends LinearLayout {
      *  Removes all events from calendar view
      */
     public void removeAll() {
+
+        for (int key : event_icons.keySet()) {
+            Timetable_icons Icon = event_icons.get(key);
+            assert Icon != null;
+            for (TextView tv : Icon.getView()) {
+                iconBox.removeView(tv);
+            }
+        }
+        event_icons.clear();
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -217,6 +232,7 @@ public class Timetable_viewer extends LinearLayout {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                        TimetableActivity.loadFromDatabase();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -225,14 +241,45 @@ public class Timetable_viewer extends LinearLayout {
                         Log.w("TAG", "Error deleting document", e);
                     }
                 });
+
     }
 
     public void edit(int idx, ArrayList<Timetable_Event> schedules) {
-        remove(idx);
-        add(schedules, idx);
+//        remove(idx);
+//        add(schedules, idx);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
+        }
+
+
+
+        String index = "{\"idx\":"+ idx + "}";
+        //db.collection("timetable").document("18245137").update();
+
     }
 
     public void remove(int idx) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
+        }
+        DocumentReference docRef = db.collection("timetable").document("18245137");
+        String index = "{\"idx\":"+ idx + "}";
+        Map<String,Object> delete_event = new HashMap<>();
+        delete_event.put(index, FieldValue.delete());
+
+        docRef.update(delete_event).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                System.out.println("Successfully Deleted");
+            }
+        });
+
         Timetable_icons Icon = event_icons.get(idx);
         assert Icon != null;
         for (TextView tv : Icon.getView()) {
