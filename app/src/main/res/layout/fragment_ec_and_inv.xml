@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="403dp"
-        android:layout_height="0dp"
+        android:layout_width="393dp"
+        android:layout_height="140dp"
         android:layout_marginBottom="456dp"
         android:gravity="center"
         android:text="@string/ec_inv"
@@ -26,6 +26,7 @@
         android:layout_width="213dp"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
+        android:contentDescription="Economics and Investing Image"
         android:src="@drawable/econ"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"

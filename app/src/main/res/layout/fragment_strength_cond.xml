@@ -8,12 +8,10 @@
     tools:context=".clubs_socs.strength_cond">
 
 
-
-
     <TextView
         android:id="@+id/textView"
-        android:layout_width="403dp"
-        android:layout_height="0dp"
+        android:layout_width="380dp"
+        android:layout_height="128dp"
         android:layout_marginBottom="456dp"
         android:gravity="center"
         android:text="@string/strength"
@@ -29,6 +27,7 @@
         android:layout_width="213dp"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
+        android:contentDescription="Strength and Conditioning Image"
         android:src="@drawable/strength"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
