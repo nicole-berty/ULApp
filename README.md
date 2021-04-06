@@ -1,6 +1,6 @@
 # ULApp
 
-Timetabale for app
+Android app for University of Limerick.
 
 https://github.com/googleapis/java-firestore
 
