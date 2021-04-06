@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 import android.content.Context;
 import android.content.Intent;

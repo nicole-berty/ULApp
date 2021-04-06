@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import static ie.ul.ulapp.TimetableActivity.timetable;
+import static myUL.TimetableActivity.timetable;
 
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
     public static final int RESULT_OK_ADD = 1;

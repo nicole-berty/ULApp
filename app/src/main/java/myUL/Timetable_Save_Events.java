@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 import android.util.Log;
 

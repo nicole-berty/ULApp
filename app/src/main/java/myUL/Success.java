@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 import android.content.Intent;
 import android.os.Bundle;

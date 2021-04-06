@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 public enum Timetable_highlight_icon {
     COLOR,

@@ -74,8 +74,6 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, " You clicked " + adapter.getItem(position) + " on the row number " + position,
-                Toast.LENGTH_SHORT).show();
         Intent intent;
         switch (position) {
             case 0:
@@ -95,9 +93,9 @@ public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.
                 startActivity(intent);
                 break;
             case 4:
-              //  intent = new Intent(HomeActivity.this, Timetable.class);
-               // startActivity(intent);
-             //   break;
+                intent = new Intent(HomeActivity.this, TimetableActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

@@ -1,4 +1,4 @@
-package ie.ul.ulapp;
+package myUL;
 
 import java.io.Serializable;
 
