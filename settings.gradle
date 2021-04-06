@@ -1,2 +1,3 @@
+include ':1'
 include ':app'
 rootProject.name = "RestuarantMenus"
