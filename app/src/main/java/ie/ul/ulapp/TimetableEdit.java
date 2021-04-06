@@ -137,34 +137,58 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
             case R.id.submit_btn:
                 if(mode == TimetableActivity.REQUEST_ADD){
                     inputDataProcessing();
-                    Intent i = new Intent();
+                    Intent i = new Intent(this, Success.class);
                     // add more calendars
                     events.add(event);
                     i.putExtra("schedules",events);
                     setResult(RESULT_OK_ADD,i);
                     ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
-                    timetable.add(item);
+                    timetable.add(item, false);
                     // call to save the icon
                     System.out.println("in submit btn");
                     //Gonna pass an index to saveIcon to represent add new event or edit current event. -1 = add new, index = edit current
-                    Timetable_Save_Events.saveicon(Timetable_viewer.event_icons);
+                    Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, true, -1);
+                    i.putExtra("ACTION", "ADD");
+                    startActivity(i);
                     finish();
                 }
                 else if(mode == TimetableActivity.REQUEST_EDIT){
                     inputDataProcessing();
-                    Intent i = new Intent();
-                    events.add(event);
+                    Intent i = new Intent(this, Success.class);
+                 //   events.add(event);
                     i.putExtra("idx",editIdx);
+                    events.add(event);
+                    System.out.println("events length " + events.size());
                     i.putExtra("schedules",events);
+                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
+                    for(Timetable_Event it : item) {
+                        System.out.println("data in edit: " + it.getEventName());
+                    }
+                    timetable.add(item, true);
+                    //     ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
+               //     timetable.remove(editIdx);
 
-                    setResult(RESULT_OK_EDIT,i);
-                    finish();
+                    // call to save the icon
+                    System.out.println("in edit btn");
+
+                    //Gonna pass an index to saveIcon to represent add new event or edit current event. -1 = add new, index = edit current
+                    Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, false, editIdx);
+
+//everything works, YOU`RE WELCOME
+
+                //    setResult(RESULT_OK_EDIT,i);
+                    i.putExtra("ACTION", "EDIT");
+                    startActivity(i);
+               //     finish();
                 }
                 break;
             case R.id.delete_btn:
-                Intent i = new Intent();
+                Intent i = new Intent(this, Success.class);
                 i.putExtra("idx",editIdx);
-                setResult(RESULT_OK_DELETE, i);
+                timetable.remove(editIdx);
+            //     setResult(RESULT_OK_DELETE, i);
+                i.putExtra("ACTION", "DELETE");
+                startActivity(i);
                 finish();
                 break;
         }
@@ -185,5 +209,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         event.setEventName(eventName.getText().toString());
         event.setEventLocation(eventLocation.getText().toString());
         event.setSpeakerName(eventSpeaker.getText().toString());
+        System.out.println("name " + eventName.getText().toString());
+        System.out.println("event name " + event.getEventName());
     }
 }

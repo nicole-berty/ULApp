@@ -31,6 +31,10 @@ public class Timetable_icons implements Serializable {
         calendars.add(calendar);
     }
 
+    public void removeIcon(Timetable_Event calendar){
+        calendars.remove(calendar);
+    }
+
     /**
      * Returns an ArrayList of text views
      * @return view

@@ -47,6 +47,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         Calendar calendar = Calendar.getInstance();
         timetable = findViewById(R.id.current_day);
         timetable.setHeaderHighlight(calendar.get(Calendar.DAY_OF_WEEK) - 1);
+
         initView();
     }
 
@@ -61,6 +62,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 i.putExtra("mode",REQUEST_EDIT);
                 i.putExtra("idx", idx);
                 i.putExtra("schedules", calendars);
+                System.out.println("idx on icon selected: " + idx);
                 startActivityForResult(i,REQUEST_EDIT);
             }
         });
@@ -111,7 +113,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                                 String temp3 = temp2.replace("}", "");
                                                 if(l == 2) {
                                                     index = Integer.parseInt(temp3.trim());
-                                                    System.out.println("pre string val: " + l + ":" + temp3);
                                                 }
                                             }
                                         }
@@ -193,10 +194,14 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 i.putExtra("mode",REQUEST_ADD);
 
                 startActivityForResult(i,REQUEST_ADD);
+              //  finish();
                 break;
             case R.id.clear_btn:
                 timetable.removeAll();
-
+                Intent intent = new Intent(this, Success.class);
+                intent.putExtra("ACTION", "CLEAR");
+                startActivity(intent);
+             //   finish();
                 break;
         }
     }
@@ -212,18 +217,18 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 break;
             case REQUEST_EDIT:
                 /** Edit -> Submit */
-                if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
-                    int idx = data.getIntExtra("idx", -1);
-                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
-                    System.out.println(idx);
-                    timetable.edit(idx, item);
-                }
-                /** Edit -> Delete */
-                else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
-                    int idx = data.getIntExtra("idx", -1);
-                    System.out.println("I am remove index " + idx);
-                    timetable.remove(idx);
-                }
+//                if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
+//                    int idx = data.getIntExtra("idx", -1);
+//                 //   ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+//                    System.out.println("REQUEST EDIT IDX: " + idx);
+//                   // timetable.edit(idx, item);
+//                }
+//                /** Edit -> Delete */
+//                else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
+//                    int idx = data.getIntExtra("idx", -1);
+//                    System.out.println("I am remove index " + idx);
+//
+//                }
                 break;
         }
     }

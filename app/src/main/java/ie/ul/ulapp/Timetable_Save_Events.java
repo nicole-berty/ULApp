@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class Timetable_Save_Events {
 
-    public static void saveicon(final HashMap<Integer, Timetable_icons> event_icon){
+    public static void saveicon(final HashMap<Integer, Timetable_icons> event_icon, final boolean add, final int editIdx){
 
         //Connect to DB and get the current user's email
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,8 +44,8 @@ public class Timetable_Save_Events {
                         final DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             if (document.get("index") != null) {
-                                System.out.println("I am in first if");
-                                addToDatabase(event_icon, event_index);
+                                System.out.println("I am in first if - add " + add + " editIDX " + editIdx);
+                                addToDatabase(event_icon, event_index, add, editIdx);
 
                             } else {
                                 Map<String, Object> calendar_index = new HashMap<>();
@@ -64,7 +64,7 @@ public class Timetable_Save_Events {
                                             }
                                         });
                                 System.out.println("I am in first else");
-                                addToDatabase(event_icon, event_index);
+                                addToDatabase(event_icon, event_index, add, -1);
 
                             }
                         } else {
@@ -77,7 +77,7 @@ public class Timetable_Save_Events {
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG", "DocumentSnapshot successfully written!");
 
-                                    addToDatabase(event_icon, event_index);
+                                    addToDatabase(event_icon, event_index, add, -1);
                                 }
                             })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -93,7 +93,7 @@ public class Timetable_Save_Events {
             });
     }
 
-    public static void addToDatabase(final HashMap<Integer, Timetable_icons> final_event_icon, final int[] event_index ) {
+    public static void addToDatabase(final HashMap<Integer, Timetable_icons> final_event_icon, final int[] event_index, final boolean add, final int editIdx ) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -101,9 +101,9 @@ public class Timetable_Save_Events {
             email = user.getEmail();
         }
         final CollectionReference db2 = db.collection("timetable");
-            Log.d("TAG", "your field exist");
-            final DocumentReference docIdRef = db.collection("timetable").document("18245137");
-            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Log.d("TAG", "your field exist");
+        final DocumentReference docIdRef = db.collection("timetable").document("18245137");
+        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
@@ -113,13 +113,21 @@ public class Timetable_Save_Events {
                             ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
                             int index = -1;
                             DocumentSnapshot document = task.getResult();
-                            Map<String, Object> calendar_index = new HashMap<>();
 
-                            index = Integer.parseInt(document.get("index").toString()) + 1;
-                            System.out.println(document.get("index"));
+
+
+                            if(add) {
+                                index = Integer.parseInt(document.get("index").toString()) + 1;
+                                Map<String, Object> calendar_index = new HashMap<>();
+                                calendar_index.put("index", index);
+                                docIdRef.update(calendar_index);
+                            } else {
+                                index = editIdx;
+                            }
                             obj2.addProperty("idx", index);
-                            calendar_index.put("index", index);
-                            docIdRef.update(calendar_index);
+
+                            System.out.println("index from db: " + index);
+
 
                             JsonObject obj6 = new JsonObject();
                             obj6.addProperty("idx", index);
@@ -141,9 +149,9 @@ public class Timetable_Save_Events {
                                 arr2.add(obj3);
 
 //
-//                                System.out.println("Obj3: " + obj3.toString());
-//                                System.out.println("Obj2: " + obj2.toString());
-//                                System.out.println("Obj5: " + obj5.toString());
+                               System.out.println("Obj3: " + obj3.toString());
+                               System.out.println("Obj2: " + obj2.toString());
+                                System.out.println("Obj5: " + obj5.toString());
 
                                 Map<String, Object> calendar_activity = new HashMap<>();
                                 calendar_activity.put(obj6.toString(), obj3.toString());

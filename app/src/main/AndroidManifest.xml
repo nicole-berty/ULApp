@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ie.ul.ulapp.TimetableEdit" />
-        <activity android:name="ie.ul.ulapp.TimetableActivity">
+        <activity android:name=".Success"></activity>
+        <activity android:name=".TimetableEdit" />
+        <activity android:name=".TimetableActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

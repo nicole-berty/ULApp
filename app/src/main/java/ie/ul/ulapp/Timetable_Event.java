@@ -7,6 +7,7 @@ public class Timetable_Event implements Serializable {
     String eventName="";
     String eventLocation="";
     String speakerName = "";
+
     private int day = 0;
     private Timetable_Time_Keeper startTime;
     private Timetable_Time_Keeper endTime;

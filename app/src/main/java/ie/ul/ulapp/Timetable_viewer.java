@@ -70,7 +70,7 @@ public class Timetable_viewer extends LinearLayout {
     private Context context;
 
     static HashMap<Integer, Timetable_icons> event_icons = new HashMap<Integer, Timetable_icons>();
-    private int iconCount = -1;
+    private int iconCount = 1;
 
     private OnIconSelectedListener IconSelectedListener = null;
 
@@ -103,7 +103,7 @@ public class Timetable_viewer extends LinearLayout {
         rowCount = a.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) + 12;
         columnCount = a.getInt(R.styleable.Timetable_viewer_column_count, DEFAULT_COLUMN_COUNT) + 2;
         cellHeight = a.getDimensionPixelSize(R.styleable.Timetable_viewer_cell_height, dp2Px(DEFAULT_CELL_HEIGHT_DP));
-        sideCellWidth = a.getDimensionPixelSize(R.styleable.Timetable_viewer_side_cell_width, dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP));
+        sideCellWidth = a.getDimensionPixelSize(R.styleable.Timetable_viewer_side_cell_width, dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP + 3));
         int titlesId = a.getResourceId(R.styleable.Timetable_viewer_header_title, R.array.default_header_title);
         headerTitle = a.getResources().getStringArray(titlesId);
         int colorsId = a.getResourceId(R.styleable.Timetable_viewer_Icon_colors, R.array.default_Icon_color);
@@ -134,16 +134,23 @@ public class Timetable_viewer extends LinearLayout {
         IconSelectedListener = listener;
     }
 
-    public void add(ArrayList<Timetable_Event> schedules) {
-        add(schedules, -1);
+    public void add(ArrayList<Timetable_Event> schedules, boolean editing) {
+        add(schedules, -1, editing);
     }
 
-    private void add(final ArrayList<Timetable_Event> schedules, int specIdx) {
+    private void add(final ArrayList<Timetable_Event> schedules, int specIdx, boolean editing) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
         Timetable_icons icon1 = new Timetable_icons();
 
         for (Timetable_Event schedule : schedules) {
             TextView tv = new TextView(context);
+
+            if(editing) {
+                System.out.println("data in add editing: " + schedule.getEventName());
+            //    icon1.removeIcon(schedule);
+                //SET EDITED DATA
+
+            }
 
             RelativeLayout.LayoutParams param = createIconParam(schedule);
             tv.setLayoutParams(param);
@@ -169,6 +176,66 @@ public class Timetable_viewer extends LinearLayout {
             iconBox.addView(tv);
         }
         setIconColor();
+      //  final int count = specIdx < 0 ? ++iconCount : specIdx;
+//
+//            final FirebaseFirestore db = FirebaseFirestore.getInstance();
+//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//            String email = "";
+//            if (user != null) {
+//                email = user.getEmail();
+//            }
+//            DocumentReference docIdRef = db.collection("timetable").document("18245137");
+//            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    if (task.isSuccessful()) {
+//                        int index = 0;
+//                        final DocumentSnapshot document = task.getResult();
+//                        Timetable_icons icon1 = new Timetable_icons();
+//                        for (Timetable_Event schedule : schedules) {
+//                            TextView tv = new TextView(context);
+//                        if (document.exists()) {
+//                            if (document.get("index") != null) {
+//                                index = Integer.parseInt(document.get("index").toString());
+//                            } else {
+//                                index  = 1;
+//                            }
+//                        } else {
+//                            index = 1;
+//
+//                        }
+//
+//            RelativeLayout.LayoutParams param = createIconParam(schedule);
+//            tv.setLayoutParams(param);
+//            tv.setPadding(10, 0, 10, 0);
+//            String iconText = schedule.getEventName() + "\n" + schedule.getEventLocation() + "\n" + schedule.getSpeakerName();
+//            tv.setText(iconText);
+//            tv.setTextColor(Color.parseColor("#FFFFFF"));
+//            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_Icon_FONT_SIZE_DP);
+//            tv.setTypeface(null, Typeface.BOLD);
+//
+//                            final int finalIndex = index;
+//                            System.out.println("final Ind " + finalIndex + " non final " + index);
+//                            tv.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (IconSelectedListener != null)
+//                        System.out.println("am here? finalIndex " + finalIndex);
+//                        IconSelectedListener.OnIconSelected(finalIndex, schedules);
+//                }
+//            });
+//
+//            icon1.addTextView(tv);
+//            icon1.addIcon(schedule);
+//            System.out.println("Count from add: " + index);
+//            event_icons.put(index, icon1);
+//            iconBox.addView(tv);
+//        }
+//        setIconColor();
+//                    }
+//                }
+//            });
+
     }
 
     public void load(String data) {
@@ -177,10 +244,11 @@ public class Timetable_viewer extends LinearLayout {
         for (int key : event_icons.keySet()) {
             System.out.println("Key from load " + key);
             ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
-            add(schedules, key);
+            add(schedules, key, false);
             if (maxKey < key) maxKey = key;
         }
-        iconCount = maxKey + 1;
+        iconCount = maxKey;// + 1;
+        System.out.println("maxkey: " + maxKey);
         setIconColor();
     }
 
@@ -223,17 +291,18 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     public void edit(int idx, ArrayList<Timetable_Event> schedules) {
-//        remove(idx);
-//        add(schedules, idx);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String email = "";
-        if (user != null) {
-            email = user.getEmail();
-        }
-
-        String index = "{\"idx\":"+ idx + "}";
-        //db.collection("timetable").document("18245137").update();
+        System.out.println("I am IDX IN EDIT: " + idx);
+     //   remove(idx);
+      //  add(schedules, idx);
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String email = "";
+//        if (user != null) {
+//            email = user.getEmail();
+//        }
+//
+//        String index = "{\"idx\":"+ idx + "}";
+//        //db.collection("timetable").document("18245137").update();
 
     }
 
@@ -363,13 +432,13 @@ public class Timetable_viewer extends LinearLayout {
         tableHeader.addView(tableRow);
     }
 
-    private RelativeLayout.LayoutParams createIconParam(Timetable_Event schedule) {
+    private RelativeLayout.LayoutParams createIconParam(Timetable_Event event) {
         int cell_w = calCellWidth();
 
-        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(cell_w, calIconHeightPx(schedule));
+        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(cell_w, calIconHeightPx(event));
         param.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         param.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        param.setMargins(sideCellWidth + cell_w * schedule.getDay(), calIconTopPxByTime(schedule.getStartTime()), 0, 0);
+        param.setMargins(sideCellWidth + cell_w * event.getDay(), calIconTopPxByTime(event.getStartTime()), 0, 0);
 
         return param;
     }
