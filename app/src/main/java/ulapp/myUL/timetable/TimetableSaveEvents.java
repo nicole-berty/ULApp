@@ -25,9 +25,17 @@ import java.util.Objects;
 
 public class TimetableSaveEvents {
 
+    /**
+     * Save events and add to the database
+     * @param event_icon
+     * @param add
+     * @param editIdx
+     */
     public static void saveEvent(final HashMap<Integer, TimetableIcons> event_icon, final boolean add, final int editIdx){
-
-        //Connect to DB and get the current user's email
+        /**
+         * Connect to database
+         * Finds the current user
+         */
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -89,7 +97,18 @@ public class TimetableSaveEvents {
             });
     }
 
+    /**
+     * Save's event to the database
+     * @param final_event_icon
+     * @param icon_index
+     * @param add
+     * @param editIdx
+     */
     public static void addToDatabase(final HashMap<Integer, TimetableIcons> final_event_icon, final int[] icon_index, final boolean add, final int editIdx ) {
+        /**
+         * Connect to database
+         * Finds the current user
+         */
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -143,8 +162,13 @@ public class TimetableSaveEvents {
         });
     }
 
+    /**
+     * Loads events from the database
+     * @param json
+     * @return event
+     */
     public static HashMap<Integer, TimetableIcons> loadEvent(String json){
-        HashMap<Integer, TimetableIcons> icon = new HashMap<>();
+        HashMap<Integer, TimetableIcons> load_event = new HashMap<>();
         JsonParser parser = new JsonParser();
         JsonObject event = (JsonObject)parser.parse(json);
         JsonArray eventIDDetails = event.getAsJsonArray("icon");
@@ -172,12 +196,15 @@ public class TimetableSaveEvents {
                 event1.setEndTime(endTime);
                 icon1.addIcon(event1);
             }
-            icon.put(idx,icon1);
+            load_event.put(idx,icon1);
         }
-        return icon;
+        return load_event;
     }
 
-
+    /**
+     * @param icon
+     * @return integer array 'orders'
+     */
     static private int[] getSortedKeySet(HashMap<Integer, TimetableIcons> icon){
         int[] orders = new int[icon.size()];
         int i = 0;

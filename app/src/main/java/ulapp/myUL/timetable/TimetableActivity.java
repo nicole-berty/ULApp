@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,6 +25,10 @@ import ulapp.myUL.ActionBar;
 import ulapp.myUL.R;
 import ulapp.myUL.Success;
 
+/**
+ * Main Activity class for timetable
+ */
+
 public class   TimetableActivity extends ActionBar implements View.OnClickListener {
     private Context context;
     public static final int REQUEST_ADD = 1;
@@ -39,10 +42,12 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_activity);
-
         init();
     }
 
+    /**
+     * Timetable activity initializer
+     */
     void init(){
         this.context = this;
         addBtn = findViewById(R.id.add_btn);
@@ -50,10 +55,12 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
         Calendar calendar = Calendar.getInstance();
         timetable = findViewById(R.id.current_day);
         timetable.setHeaderHighlight(calendar.get(Calendar.DAY_OF_WEEK) - 1);
-
         initView();
     }
 
+    /**
+     * Timetable viewer initializer
+     */
     void initView(){
         addBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
@@ -90,7 +97,6 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
                     if (document.exists()) {
                         String doc = document.toString();
                         int index = -1;
-
                         String eventName = "";
                         String eventLocation = "";
                         String speakerName = "";
@@ -122,7 +128,6 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
                                         for (int k = 0; k < splitValues.length; k++) {
                                             String temp = splitValues[k].replaceAll("\"", "");
                                             String[] valSplit = temp.split(",");
-
                                             for (int l = 0; l < valSplit.length; l++) {
                                                 if (l == 0) {
                                                     String temp2 = valSplit[l].replace("}", "");
@@ -193,41 +198,12 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
                 Intent i = new Intent(this,TimetableEdit.class);
                 i.putExtra("mode",REQUEST_ADD);
                 startActivityForResult(i,REQUEST_ADD);
-              //  finish();
                 break;
             case R.id.clear_btn:
                 timetable.removeAll();
                 Intent intent = new Intent(this, Success.class);
                 intent.putExtra("ACTION", "CLEAR");
                 startActivity(intent);
-             //   finish();
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_ADD:
-                if (resultCode == TimetableEdit.RESULT_OK_ADD) {
-                    System.out.println("In REQUEST_ADD");
-                }
-                break;
-            case REQUEST_EDIT:
-                /** Edit -> Submit */
-//                if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
-//                    int idx = data.getIntExtra("idx", -1);
-//                 //   ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) data.getSerializableExtra("schedules");
-//                    System.out.println("REQUEST EDIT IDX: " + idx);
-//                   // timetable.edit(idx, item);
-//                }
-//                /** Edit -> Delete */
-//                else if (resultCode == TimetableEdit.RESULT_OK_DELETE) {
-//                    int idx = data.getIntExtra("idx", -1);
-//                    System.out.println("I am remove index " + idx);
-//
-//                }
                 break;
         }
     }
