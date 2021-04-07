@@ -148,10 +148,17 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    /**
+     * Listener for when buttons are clicked
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         ArrayList<TimetableEvent> events = new ArrayList<>();
         switch (v.getId()){
+            /**
+             * Submit button to submit new events or edited events.
+             */
             case R.id.submit_btn:
                 SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
                 if(mode == TimetableActivity.REQUEST_ADD){
@@ -214,7 +221,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         Intent i = new Intent(this, Success.class);
                         i.putExtra("idx", editIdx);
                         events.add(event);
-                        System.out.println("events length " + events.size());
+                        //System.out.println("events length " + events.size());
                         i.putExtra("schedules", events);
                         ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
                         for (TimetableEvent it : item) {
@@ -224,14 +231,15 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         TimetableSaveEvents.saveEvent(TimetableDisplay.event_icons, false, editIdx);
                         i.putExtra("ACTION", "EDIT");
                         startActivity(i);
-                        //     finish();
                     }
                 }
                 break;
+            /**
+             * Delete Button for deleting one event
+             */
             case R.id.delete_btn:
                 Intent i = new Intent(this, Success.class);
                 i.putExtra("idx",editIdx);
-                System.out.print("***************************IDX**********************  " + editIdx);
                 timetable.remove(editIdx);
                 i.putExtra("ACTION", "DELETE");
                 startActivity(i);
@@ -240,6 +248,10 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
+    /**
+     * Loading events from the database.
+     */
     private void loadScheduleData(){
         Intent i = getIntent();
         editIdx = i.getIntExtra("idx",-1);
@@ -264,6 +276,9 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         endTime.setText(endHr + ":" + endMin);
     }
 
+    /**
+     * Listeners to take inputted information for events. 
+     */
     private void inputDataProcessing(){
         event.setEventName(eventName.getText().toString());
         event.setEventLocation(eventLocation.getText().toString());
