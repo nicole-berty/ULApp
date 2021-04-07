@@ -71,7 +71,7 @@ public class TimetableDisplay extends LinearLayout {
 
     private Context context;
 
-    static HashMap<Integer, TimetableIcons> event_icons = new HashMap<Integer, TimetableIcons>();
+    static HashMap<Integer, TimetableIcons> event_icons = new HashMap<>();
     private int iconCount = 1;
 
     private OnIconSelectedListener IconSelectedListener = null;
@@ -98,7 +98,7 @@ public class TimetableDisplay extends LinearLayout {
 
     /**
      * Gets all attributes to display events.
-     * @param attrs
+     * @param attrs Attributes for the timetable
      */
     private void getAttrs(AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Timetable_viewer);
@@ -203,55 +203,42 @@ public class TimetableDisplay extends LinearLayout {
         String email = "";
         if (user != null) {
             email = user.getEmail();
+            db.collection("timetable").document(email)
+                    .delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                            TimetableActivity.loadFromDatabase();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("TAG", "Error deleting document", e);
+                        }
+                    });
         }
-        db.collection("timetable").document(email)
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
-                        TimetableActivity.loadFromDatabase();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error deleting document", e);
-                    }
-                });
-
     }
 
     public void remove(int idx) {
-
-        //still crashes here sometimes - seems sporadic. If you create events, close the app, open it again and then try delete them
-        //it seems to definitely crash once or twice but works perfectly other times?
-        //Also, when it does work, the very next event created has -1 for all fields?? After that it's fine again
-        TimetableIcons Icon = event_icons.get(idx);
-//        assert Icon != null;
-        for (TextView tv : Icon.getView()) {
-            iconBox.removeView(tv);
-        }
-        event_icons.remove(idx);
-        setIconColor();
-        //if you put the below code first, it will execute and remove the event from the DB even with the crash
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
         if (user != null) {
             email = user.getEmail();
-        }
-        DocumentReference docRef = db.collection("timetable").document(email);
-        String index = "{\"idx\":"+ idx + "}";
-        Map<String,Object> delete_event = new HashMap<>();
-        delete_event.put(index, FieldValue.delete());
+            DocumentReference docRef = db.collection("timetable").document(email);
+            String index = "{\"idx\":"+ idx + "}";
+            Map<String,Object> delete_event = new HashMap<>();
+            delete_event.put(index, FieldValue.delete());
 
-        docRef.update(delete_event).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                System.out.println("Successfully Deleted");
-            }
-        });
+            docRef.update(delete_event).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    System.out.println("Successfully Deleted");
+                }
+            });
+        }
     }
 
     public void setHeaderHighlight(int idx) {

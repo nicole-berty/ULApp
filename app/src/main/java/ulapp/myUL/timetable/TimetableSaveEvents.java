@@ -33,10 +33,9 @@ public class TimetableSaveEvents {
         String email = "";
         if (user != null) {
             email = user.getEmail();
-        }
-        DocumentReference docIdRef = db.collection("timetable").document(email);
-        final String finalEmail = email;
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            DocumentReference docIdRef = db.collection("timetable").document(email);
+            final String finalEmail = email;
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     final int[] event_index = getSortedKeySet(event_icon);
@@ -87,6 +86,7 @@ public class TimetableSaveEvents {
                     }
                 }
             });
+        }
     }
 
     public static void addToDatabase(final HashMap<Integer, TimetableIcons> final_event_icon, final int[] icon_index, final boolean add, final int editIdx ) {
@@ -95,10 +95,8 @@ public class TimetableSaveEvents {
         String email = "";
         if (user != null) {
             email = user.getEmail();
-        }
-        Log.d("TAG", "your field exist");
-        final DocumentReference docIdRef = db.collection("timetable").document(email);
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            final DocumentReference docIdRef = db.collection("timetable").document(email);
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
@@ -139,8 +137,9 @@ public class TimetableSaveEvents {
                             }
                         }
                     }
-            }
-        });
+                }
+            });
+        }
     }
 
     public static HashMap<Integer, TimetableIcons> loadEvent(String json){
