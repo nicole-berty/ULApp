@@ -163,13 +163,9 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                 SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
                 if(mode == TimetableActivity.REQUEST_ADD){
                     Date start = null;
-                    try {
-                        start = parser.parse( event.getStartTime().getHour() + ":" + event.getStartTime().getMinute());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                     Date end = null;
                     try {
+                        start = parser.parse( event.getStartTime().getHour() + ":" + event.getStartTime().getMinute());
                         end = parser.parse( event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
                     } catch (ParseException e) {
                         e.printStackTrace();
