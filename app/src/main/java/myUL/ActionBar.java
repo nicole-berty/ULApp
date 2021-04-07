@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task;
 /**
  * Contains the logout button on the action bar. Is included on all activities so user can log out anywhere in the app
  */
-public class MenuActivity extends AppCompatActivity {
+public class ActionBar extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // R.menu.menu contains the log out image on the action bar
-        getMenuInflater().inflate(R.menu.menu, menu);
+        // R.menu.action_bar contains the log out image on the action bar
+        getMenuInflater().inflate(R.menu.action_bar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
-                            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(ActionBar.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }

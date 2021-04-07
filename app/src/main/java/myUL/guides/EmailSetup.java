@@ -1,32 +1,29 @@
-package myUL;
+package myUL.guides;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import myUL.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ScholarsMenu#newInstance} factory method to
+ * Use the {@link EmailSetup#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScholarsMenu extends Fragment {
+public class EmailSetup extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private ImageView scholarsMenu;
-
-    public ScholarsMenu() {
+    public EmailSetup() {
         // Required empty public constructor
     }
 
@@ -36,11 +33,10 @@ public class ScholarsMenu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ScholarsMenu.
+     * @return A new instance of fragment EmailSetup.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ScholarsMenu newInstance(String param1, String param2) {
-        ScholarsMenu fragment = new ScholarsMenu();
+    public static EmailSetup newInstance(String param1, String param2) {
+        EmailSetup fragment = new EmailSetup();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,9 +57,6 @@ public class ScholarsMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_scholars_menu, container, false);
-        scholarsMenu = rootView.findViewById(R.id.ScholarsMenuImage);
-        scholarsMenu.setImageResource(R.drawable.scholarsmenu);
-        return rootView;
+        return inflater.inflate(R.layout.fragment__email, container, false);
     }
 }

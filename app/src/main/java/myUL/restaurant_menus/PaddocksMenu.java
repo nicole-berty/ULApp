@@ -1,27 +1,34 @@
-package myUL;
+package myUL.restaurant_menus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
+import myUL.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EmailSetup#newInstance} factory method to
+ * Use the {@link PaddocksMenu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EmailSetup extends Fragment {
+public class PaddocksMenu extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public EmailSetup() {
+    private ImageView breakfastImage, lunchImage, dinnerImage, paddocksImage;
+
+    public PaddocksMenu() {
         // Required empty public constructor
     }
 
@@ -31,10 +38,11 @@ public class EmailSetup extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EmailSetup.
+     * @return A new instance of fragment PaddocksMenu.
      */
-    public static EmailSetup newInstance(String param1, String param2) {
-        EmailSetup fragment = new EmailSetup();
+    // TODO: Rename and change types and number of parameters
+    public static PaddocksMenu newInstance(String param1, String param2) {
+        PaddocksMenu fragment = new PaddocksMenu();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,6 +63,15 @@ public class EmailSetup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__email, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_paddocks_menu, container, false);
+        breakfastImage = rootView.findViewById(R.id.BreakfastImage);
+        lunchImage = rootView.findViewById(R.id.LunchImage);
+        dinnerImage = rootView.findViewById(R.id.DinnerImage);
+        paddocksImage = rootView.findViewById(R.id.paddocksIcon);
+        paddocksImage.setImageResource(R.drawable.paddocks);
+        breakfastImage.setImageResource(R.drawable.paddocks_breakfast);
+        lunchImage.setImageResource(R.drawable.paddocks_lunch);
+        dinnerImage.setImageResource(R.drawable.paddocks_dinner);
+        return rootView;
     }
 }

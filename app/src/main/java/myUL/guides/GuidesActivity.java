@@ -1,8 +1,11 @@
-package myUL;
+package myUL.guides;
 
 import android.os.Bundle;
 
-public class GuidesActivity extends MenuActivity {
+import myUL.ActionBar;
+import myUL.R;
+
+public class GuidesActivity extends ActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

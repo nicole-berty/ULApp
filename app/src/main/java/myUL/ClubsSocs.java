@@ -2,9 +2,7 @@ package myUL;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class ClubsSocs extends AppCompatActivity {
+public class ClubsSocs extends ActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

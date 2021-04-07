@@ -3,7 +3,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-public class RestaurantsActivity extends MenuActivity {
+public class RestaurantsActivity extends ActionBar {
 
     Fragment fragment;
 

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import myUL.timetable.TimetableActivity;
+
 //dummy class which allows DB to update behind it
-public class Success extends MenuActivity {
+public class Success extends ActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

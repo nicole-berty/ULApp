@@ -7,7 +7,6 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +18,9 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends MenuActivity implements MyRecyclerViewAdapter.ItemClickListener {
+import myUL.timetable.TimetableActivity;
+
+public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.ItemClickListener {
 
     MyRecyclerViewAdapter adapter;
     FirebaseUser user;

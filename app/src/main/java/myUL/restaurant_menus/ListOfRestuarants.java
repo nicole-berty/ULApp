@@ -1,4 +1,4 @@
-package myUL;
+package myUL.restaurant_menus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import myUL.R;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,31 +1,32 @@
-package myUL;
+package myUL.guides;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import myUL.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SportsBarMenu#newInstance} factory method to
+ * Use the {@link GuidesOther#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SportsBarMenu extends Fragment {
+public class GuidesOther extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView imageView;
 
-    public SportsBarMenu() {
+    public GuidesOther() {
         // Required empty public constructor
     }
 
@@ -35,11 +36,10 @@ public class SportsBarMenu extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SportsBarMenu.
+     * @return A new instance of fragment GuidesOther.
      */
-    // TODO: Rename and change types and number of parameters
-    public static SportsBarMenu newInstance(String param1, String param2) {
-        SportsBarMenu fragment = new SportsBarMenu();
+    public static GuidesOther newInstance(String param1, String param2) {
+        GuidesOther fragment = new GuidesOther();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,9 +60,11 @@ public class SportsBarMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_sports_bar_menu, container, false);
-        imageView = rootView.findViewById(R.id.sportsBarMenuImage);
-        imageView.setImageResource(R.drawable.sportsbar_menu);
+        View rootView = inflater.inflate(R.layout.fragment_guides_other, container, false);
+
+        TextView t2 = (TextView) rootView.findViewById(R.id.textView9);
+        t2.setMovementMethod(LinkMovementMethod.getInstance());
+        t2.setText(Html.fromHtml("More Information and Guidance for life at UL can be found on the <a href=\"https://ulsites.ul.ie/access/student-support-services\">Student Support Services page.</a><br>For additional assistance, use the contact information below:<br>"));
         return rootView;
     }
 }

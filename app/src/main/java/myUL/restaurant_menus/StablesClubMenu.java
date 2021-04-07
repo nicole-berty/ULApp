@@ -1,4 +1,4 @@
-package myUL;
+package myUL.restaurant_menus;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+
+import myUL.R;
 
 /**
  * A simple {@link Fragment} subclass.

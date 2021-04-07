@@ -1,4 +1,4 @@
-package myUL;
+package myUL.timetable;
 
 
 import android.app.Activity;
@@ -41,7 +41,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Timetable_viewer extends LinearLayout {
+import myUL.R;
+
+public class TimetableDisplay extends LinearLayout {
     private static final int DEFAULT_ROW_COUNT = 12;
     private static final int DEFAULT_COLUMN_COUNT = 6;
     private static final int DEFAULT_CELL_HEIGHT_DP = 50;
@@ -69,25 +71,25 @@ public class Timetable_viewer extends LinearLayout {
 
     private Context context;
 
-    static HashMap<Integer, Timetable_icons> event_icons = new HashMap<Integer, Timetable_icons>();
+    static HashMap<Integer, TimetableIcons> event_icons = new HashMap<Integer, TimetableIcons>();
     private int iconCount = 1;
 
     private OnIconSelectedListener IconSelectedListener = null;
 
-    private Timetable_highlight_icon highlightMode = Timetable_highlight_icon.COLOR;
+    private TimetableHighlightIcon highlightMode = TimetableHighlightIcon.COLOR;
     private int headerHighlightImageSize;
     private Drawable headerHighlightImage = null;
 
-    public Timetable_viewer(Context context) {
+    public TimetableDisplay(Context context) {
         super(context, null);
         this.context = context;
     }
 
-    public Timetable_viewer(Context context, AttributeSet attrs) {
+    public TimetableDisplay(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public Timetable_viewer(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TimetableDisplay(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         getAttrs(attrs);
@@ -111,8 +113,8 @@ public class Timetable_viewer extends LinearLayout {
         startTime = a.getInt(R.styleable.Timetable_viewer_start_time, DEFAULT_START_TIME) - 9;
         headerHighlightColor = a.getColor(R.styleable.Timetable_viewer_header_highlight_color, getResources().getColor(R.color.default_header_highlight_color));
         int highlightTypeValue = a.getInteger(R.styleable.Timetable_viewer_header_highlight_type,0);
-        if(highlightTypeValue == 0) highlightMode = Timetable_highlight_icon.COLOR;
-        else if(highlightTypeValue == 1) highlightMode = Timetable_highlight_icon.IMAGE;
+        if(highlightTypeValue == 0) highlightMode = TimetableHighlightIcon.COLOR;
+        else if(highlightTypeValue == 1) highlightMode = TimetableHighlightIcon.IMAGE;
         headerHighlightImageSize = a.getDimensionPixelSize(R.styleable.Timetable_viewer_header_highlight_image_size, dp2Px(24));
         headerHighlightImage = a.getDrawable(R.styleable.Timetable_viewer_header_highlight_image);
         a.recycle();
@@ -134,15 +136,15 @@ public class Timetable_viewer extends LinearLayout {
         IconSelectedListener = listener;
     }
 
-    public void add(ArrayList<Timetable_Event> schedules ) {
+    public void add(ArrayList<TimetableEvent> schedules ) {
         add(schedules, -1);
     }
 
-    private void add(final ArrayList<Timetable_Event> schedules, int specIdx) {
+    private void add(final ArrayList<TimetableEvent> schedules, int specIdx) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
-        Timetable_icons icon1 = new Timetable_icons();
+        TimetableIcons icon1 = new TimetableIcons();
 
-        for (Timetable_Event schedule : schedules) {
+        for (TimetableEvent schedule : schedules) {
             TextView tv = new TextView(context);
 
             RelativeLayout.LayoutParams param = createIconParam(schedule);
@@ -171,10 +173,10 @@ public class Timetable_viewer extends LinearLayout {
     }
 
     public void load(String data) {
-        event_icons = Timetable_Save_Events.loadIcon(data);
+        event_icons = TimetableSaveEvents.loadEvent(data);
         int maxKey = 0;
         for (int key : event_icons.keySet()) {
-            ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
+            ArrayList<TimetableEvent> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
             add(schedules, key);
             if (maxKey < key) maxKey = key;
         }
@@ -188,7 +190,7 @@ public class Timetable_viewer extends LinearLayout {
     public void removeAll() {
 
         for (int key : event_icons.keySet()) {
-            Timetable_icons Icon = event_icons.get(key);
+            TimetableIcons Icon = event_icons.get(key);
             assert Icon != null;
             for (TextView tv : Icon.getView()) {
                 iconBox.removeView(tv);
@@ -225,7 +227,7 @@ public class Timetable_viewer extends LinearLayout {
         //still crashes here sometimes - seems sporadic. If you create events, close the app, open it again and then try delete them
         //it seems to definitely crash once or twice but works perfectly other times?
         //Also, when it does work, the very next event created has -1 for all fields?? After that it's fine again
-        Timetable_icons Icon = event_icons.get(idx);
+        TimetableIcons Icon = event_icons.get(idx);
 //        assert Icon != null;
         for (TextView tv : Icon.getView()) {
             iconBox.removeView(tv);
@@ -256,14 +258,14 @@ public class Timetable_viewer extends LinearLayout {
         if(idx < 0)return;
         TableRow row = (TableRow) tableHeader.getChildAt(0);
         View element = row.getChildAt(idx);
-        if(highlightMode == Timetable_highlight_icon.COLOR) {
+        if(highlightMode == TimetableHighlightIcon.COLOR) {
             TextView tx = (TextView)element;
             tx.setTextColor(Color.parseColor("#FFFFFF"));
             tx.setBackgroundColor(headerHighlightColor);
             tx.setTypeface(null, Typeface.BOLD);
             tx.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_HEADER_HIGHLIGHT_FONT_SIZE_DP);
         }
-        else if(highlightMode == Timetable_highlight_icon.IMAGE){
+        else if(highlightMode == TimetableHighlightIcon.IMAGE){
             RelativeLayout outer = new RelativeLayout(context);
             outer.setLayoutParams(createTableRowParam(cellHeight));
             ImageView iv = new ImageView(context);
@@ -350,7 +352,7 @@ public class Timetable_viewer extends LinearLayout {
         tableHeader.addView(tableRow);
     }
 
-    private RelativeLayout.LayoutParams createIconParam(Timetable_Event event) {
+    private RelativeLayout.LayoutParams createIconParam(TimetableEvent event) {
         int cell_w = calCellWidth();
 
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(cell_w, calIconHeightPx(event));
@@ -369,14 +371,14 @@ public class Timetable_viewer extends LinearLayout {
         return cell_w;
     }
 
-    private int calIconHeightPx(Timetable_Event schedule) {
+    private int calIconHeightPx(TimetableEvent schedule) {
         int startTopPx = calIconTopPxByTime(schedule.getStartTime());
         int endTopPx = calIconTopPxByTime(schedule.getEndTime());
 
         return endTopPx - startTopPx;
     }
 
-    private int calIconTopPxByTime(Timetable_Time_Keeper time) {
+    private int calIconTopPxByTime(TimetableTimeKeeper time) {
         return (time.getHour() - startTime) * cellHeight + (int) ((time.getMinute() / 60.0f) * cellHeight);
     }
 
@@ -416,7 +418,7 @@ public class Timetable_viewer extends LinearLayout {
 
 
     public interface OnIconSelectedListener {
-        void OnIconSelected(int idx, ArrayList<Timetable_Event> calendars);
+        void OnIconSelected(int idx, ArrayList<TimetableEvent> calendars);
     }
 
     static class Builder {
@@ -482,8 +484,8 @@ public class Timetable_viewer extends LinearLayout {
             return this;
         }
 
-        public Timetable_viewer build() {
-            Timetable_viewer timetableViewer = new Timetable_viewer(context);
+        public TimetableDisplay build() {
+            TimetableDisplay timetableViewer = new TimetableDisplay(context);
             timetableViewer.onCreateByBuilder(this);
             return timetableViewer;
         }

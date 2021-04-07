@@ -1,4 +1,4 @@
-package myUL;
+package myUL.timetable;
 
 
 import android.widget.TextView;
@@ -6,13 +6,13 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Timetable_icons implements Serializable {
+public class TimetableIcons implements Serializable {
     private ArrayList<TextView> view;
-    private ArrayList<Timetable_Event> calendars;
+    private ArrayList<TimetableEvent> calendars;
 
-    public Timetable_icons() {
+    public TimetableIcons() {
         this.view = new ArrayList<TextView>();
-        this.calendars = new ArrayList<Timetable_Event>();
+        this.calendars = new ArrayList<TimetableEvent>();
     }
 
     /**
@@ -27,11 +27,11 @@ public class Timetable_icons implements Serializable {
      * Adds new Icon
      * @param calendar
      */
-    public void addIcon(Timetable_Event calendar){
+    public void addIcon(TimetableEvent calendar){
         calendars.add(calendar);
     }
 
-    public void removeIcon(Timetable_Event calendar){
+    public void removeIcon(TimetableEvent calendar){
         calendars.remove(calendar);
     }
 
@@ -47,7 +47,7 @@ public class Timetable_icons implements Serializable {
      * Returns an ArrayList of calendars
      * @return calendars
      */
-    public ArrayList<Timetable_Event> getCalendars() {
+    public ArrayList<TimetableEvent> getCalendars() {
         return calendars;
     }
 

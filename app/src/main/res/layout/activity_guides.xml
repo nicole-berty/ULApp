@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuidesActivity">
+    tools:context=".guides.GuidesActivity">
 
 
     <fragment
@@ -17,5 +17,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_hostguide" />
+        app:navGraph="@navigation/guides_nav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

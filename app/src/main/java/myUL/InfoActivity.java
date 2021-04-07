@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class InfoActivity extends MenuActivity {
+import myUL.guides.GuidesActivity;
+
+public class InfoActivity extends ActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class InfoActivity extends MenuActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InfoActivity.this, ParkingActivity.class);
+                Intent intent = new Intent(InfoActivity.this, ParkingInfo.class);
                 startActivity(intent);
             }
         });

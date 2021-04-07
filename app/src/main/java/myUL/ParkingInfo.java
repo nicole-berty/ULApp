@@ -1,10 +1,8 @@
 package myUL;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class ParkingActivity extends AppCompatActivity {
+public class ParkingInfo extends ActionBar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

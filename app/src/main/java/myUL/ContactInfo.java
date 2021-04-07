@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Gets the contact information from the UL website using an AsyncTask to run it on a background thread and JSoup to scrape the data. Formats and displays the information on screen in a TextView within a ScrollView.
  */
-public class ContactInfo extends MenuActivity {
+public class ContactInfo extends ActionBar {
 
     final String url = "https://www.ul.ie/contact-information";
     Document doc = null;

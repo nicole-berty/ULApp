@@ -1,4 +1,4 @@
-package myUL;
+package myUL.restaurant_menus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+
+import myUL.R;
 
 /**
  * A simple {@link Fragment} subclass.

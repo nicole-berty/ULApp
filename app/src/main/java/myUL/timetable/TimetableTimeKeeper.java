@@ -1,17 +1,17 @@
-package myUL;
+package myUL.timetable;
 
 import java.io.Serializable;
 
-public class Timetable_Time_Keeper implements Serializable {
+public class TimetableTimeKeeper implements Serializable {
     private int hour = 0;
     private int minute = 0;
 
-    public Timetable_Time_Keeper(int hour, int minute) {
+    public TimetableTimeKeeper(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
-    public Timetable_Time_Keeper() { }
+    public TimetableTimeKeeper() { }
 
     /**
      * Returns the event hour

@@ -19,13 +19,13 @@ package="myUL">
 
     <activity android:name=".ContactInfo" />
     <activity android:name=".InfoActivity" />
-    <activity android:name=".MenuActivity" />
+    <activity android:name=".ActionBar" />
     <activity android:name=".UserType" />
     <activity android:name=".HomeActivity" />
     <activity android:name=".RestaurantsActivity" />
     <activity android:name=".MapsActivity" />
-    <activity android:name=".ParkingActivity" />
-    <activity android:name=".GuidesActivity" />
+    <activity android:name=".ParkingInfo" />
+    <activity android:name=".guides.GuidesActivity" />
     <activity android:name="myUL.ClubsSocs"/>
     <activity android:name=".LoginActivity">
         <intent-filter>
@@ -35,8 +35,8 @@ package="myUL">
         </intent-filter>
     </activity>
         <activity android:name=".Success"/>
-        <activity android:name=".TimetableEdit" />
-        <activity android:name=".TimetableActivity"/>
+        <activity android:name=".timetable.TimetableEdit" />
+        <activity android:name=".timetable.TimetableActivity"/>
     </application>
 
 </manifest>

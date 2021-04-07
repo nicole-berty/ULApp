@@ -1,4 +1,4 @@
-package myUL;
+package myUL.timetable;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -22,7 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static myUL.TimetableActivity.timetable;
+import myUL.R;
+import myUL.Success;
+
+import static myUL.timetable.TimetableActivity.timetable;
 
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
     public static final int RESULT_OK_ADD = 1;
@@ -41,7 +44,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
     //request mode
     private int mode;
 
-    private Timetable_Event event;
+    private TimetableEvent event;
     private int editIdx;
 
     @Override
@@ -67,9 +70,9 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         endTime = findViewById(R.id.end_time);
 
         //set the default time
-        event = new Timetable_Event();
-        event.setStartTime(new Timetable_Time_Keeper(10,0));
-        event.setEndTime(new Timetable_Time_Keeper(12,0));
+        event = new TimetableEvent();
+        event.setStartTime(new TimetableTimeKeeper(10,0));
+        event.setEndTime(new TimetableTimeKeeper(12,0));
 
         checkMode();
         initView();
@@ -147,7 +150,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        ArrayList<Timetable_Event> events = new ArrayList<Timetable_Event>();
+        ArrayList<TimetableEvent> events = new ArrayList<>();
         switch (v.getId()){
             case R.id.submit_btn:
                 SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
@@ -178,9 +181,9 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         events.add(event);
                         i.putExtra("schedules", events);
                         setResult(RESULT_OK_ADD, i);
-                        ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) i.getSerializableExtra("schedules");
+                        ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
                         timetable.add(item);
-                        Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, true, -1);
+                        TimetableSaveEvents.saveEvent(TimetableDisplay.event_icons, true, -1);
                         i.putExtra("ACTION", "ADD");
                         startActivity(i);
                         finish();
@@ -213,12 +216,12 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         events.add(event);
                         System.out.println("events length " + events.size());
                         i.putExtra("schedules", events);
-                        ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) i.getSerializableExtra("schedules");
-                        for (Timetable_Event it : item) {
+                        ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
+                        for (TimetableEvent it : item) {
                             System.out.println("data in edit: " + it.getEventName());
                         }
                         timetable.add(item);
-                        Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, false, editIdx);
+                        TimetableSaveEvents.saveEvent(TimetableDisplay.event_icons, false, editIdx);
                         i.putExtra("ACTION", "EDIT");
                         startActivity(i);
                         //     finish();
@@ -240,7 +243,7 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
     private void loadScheduleData(){
         Intent i = getIntent();
         editIdx = i.getIntExtra("idx",-1);
-        ArrayList<Timetable_Event> events = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
+        ArrayList<TimetableEvent> events = (ArrayList<TimetableEvent>)i.getSerializableExtra("schedules");
         event = events.get(0);
         eventName.setText(event.getEventName());
         eventLocation.setText(event.getEventLocation());

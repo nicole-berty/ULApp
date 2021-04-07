@@ -1,4 +1,4 @@
-package myUL;
+package myUL.timetable;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,11 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class   TimetableActivity extends MenuActivity implements View.OnClickListener {
+import myUL.ActionBar;
+import myUL.R;
+import myUL.Success;
+
+public class   TimetableActivity extends ActionBar implements View.OnClickListener {
     private Context context;
     public static final int REQUEST_ADD = 1;
     public static final int REQUEST_EDIT = 2;
@@ -30,7 +34,7 @@ public class   TimetableActivity extends MenuActivity implements View.OnClickLis
     private Button addBtn;
     private Button clearBtn;
 
-    public static Timetable_viewer timetable;
+    public static TimetableDisplay timetable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +58,9 @@ public class   TimetableActivity extends MenuActivity implements View.OnClickLis
         addBtn.setOnClickListener(this);
         clearBtn.setOnClickListener(this);
 
-        timetable.setOnIconSelectEventListener(new Timetable_viewer.OnIconSelectedListener() {
+        timetable.setOnIconSelectEventListener(new TimetableDisplay.OnIconSelectedListener() {
             @Override
-            public void OnIconSelected(int idx, ArrayList<Timetable_Event> calendars) {
+            public void OnIconSelected(int idx, ArrayList<TimetableEvent> calendars) {
                 Intent i = new Intent(context, TimetableEdit.class);
                 i.putExtra("mode",REQUEST_EDIT);
                 i.putExtra("idx", idx);
@@ -156,14 +160,14 @@ public class   TimetableActivity extends MenuActivity implements View.OnClickLis
                                 obj3.addProperty("eventLocation", eventLocation);
                                 obj3.addProperty("speakerName", speakerName);
                                 obj3.addProperty("day", day);
-                                JsonObject obj4 = new JsonObject();//startTime
-                                obj4.addProperty("hour", startHour);
-                                obj4.addProperty("minute", startMin);
-                                obj3.add("startTime", obj4);
-                                JsonObject obj5 = new JsonObject();//endTime
-                                obj5.addProperty("hour", endHour);
-                                obj5.addProperty("minute", endMin);
-                                obj3.add("endTime", obj5);
+                                JsonObject startTime = new JsonObject();//startTime
+                                startTime.addProperty("hour", startHour);
+                                startTime.addProperty("minute", startMin);
+                                obj3.add("startTime", startTime);
+                                JsonObject endTime = new JsonObject();//endTime
+                                endTime.addProperty("hour", endHour);
+                                endTime.addProperty("minute", endMin);
+                                obj3.add("endTime", endTime);
                                 arr2.add(obj3);
                                 obj2.add("schedule", arr2);
                                 arr1.add(obj2);
@@ -214,7 +218,7 @@ public class   TimetableActivity extends MenuActivity implements View.OnClickLis
                 /** Edit -> Submit */
 //                if (resultCode == TimetableEdit.RESULT_OK_EDIT) {
 //                    int idx = data.getIntExtra("idx", -1);
-//                 //   ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) data.getSerializableExtra("schedules");
+//                 //   ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) data.getSerializableExtra("schedules");
 //                    System.out.println("REQUEST EDIT IDX: " + idx);
 //                   // timetable.edit(idx, item);
 //                }

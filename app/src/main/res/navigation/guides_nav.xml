@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/fees_info"
-        android:name="myUL.Fees_info"
+        android:name="myUL.guides.FeesInfo"
         android:label="fragment_fees_info"
         tools:layout="@layout/fragment_fees_info" />
     <fragment
         android:id="@+id/fragment_Email"
-        android:name="myUL.EmailSetup"
+        android:name="myUL.guides.EmailSetup"
         android:label="fragment__email"
         tools:layout="@layout/fragment__email" />
     <fragment
         android:id="@+id/blank_Start"
-        android:name="myUL.GuidesFragment"
+        android:name="myUL.guides.GuidesFragment"
         android:label="fragment_blank__start"
         tools:layout="@layout/fragment_guides" >
         <action
@@ -38,17 +38,17 @@
     </fragment>
     <fragment
         android:id="@+id/wifi_Setup"
-        android:name="myUL.WifiSetup"
+        android:name="myUL.guides.WifiSetup"
         android:label="fragment_wifi__setup"
         tools:layout="@layout/fragment_wifi__setup" />
     <fragment
         android:id="@+id/frag_VPNsetup"
-        android:name="myUL.VPNSetup"
+        android:name="myUL.guides.VPNSetup"
         android:label="fragment_frag__v_p_nsetup"
         tools:layout="@layout/fragment_frag__vpn_setup" />
     <fragment
         android:id="@+id/other"
-        android:name="myUL.GuidesOther"
+        android:name="myUL.guides.GuidesOther"
         android:label="fragment_other"
         tools:layout="@layout/fragment_guides_other" />
 </navigation>

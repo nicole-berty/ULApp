@@ -1,20 +1,20 @@
-package myUL;
+package myUL.timetable;
 
 import java.io.Serializable;
 
-public class Timetable_Event implements Serializable {
+public class TimetableEvent implements Serializable {
 
     String eventName="";
     String eventLocation="";
     String speakerName = "";
 
     private int day = 0;
-    private Timetable_Time_Keeper startTime;
-    private Timetable_Time_Keeper endTime;
+    private TimetableTimeKeeper startTime;
+    private TimetableTimeKeeper endTime;
 
-    public Timetable_Event() {
-        this.startTime = new Timetable_Time_Keeper();
-        this.endTime = new Timetable_Time_Keeper();
+    public TimetableEvent() {
+        this.startTime = new TimetableTimeKeeper();
+        this.endTime = new TimetableTimeKeeper();
     }
 
     /**
@@ -86,7 +86,7 @@ public class Timetable_Event implements Serializable {
      * Returns the start time of the event
      * @return startTime
      */
-    public Timetable_Time_Keeper getStartTime() {
+    public TimetableTimeKeeper getStartTime() {
         return startTime;
     }
 
@@ -94,7 +94,7 @@ public class Timetable_Event implements Serializable {
      * Sets the start time of the event
      * @param startTime
      */
-    public void setStartTime(Timetable_Time_Keeper startTime) {
+    public void setStartTime(TimetableTimeKeeper startTime) {
         this.startTime = startTime;
     }
 
@@ -102,7 +102,7 @@ public class Timetable_Event implements Serializable {
      * Returns the end time of the event
      * @return endTime
      */
-    public Timetable_Time_Keeper getEndTime() {
+    public TimetableTimeKeeper getEndTime() {
         return endTime;
     }
 
@@ -110,7 +110,7 @@ public class Timetable_Event implements Serializable {
      * Sets the end time of the event
      * @param endTime
      */
-    public void setEndTime(Timetable_Time_Keeper endTime) {
+    public void setEndTime(TimetableTimeKeeper endTime) {
         this.endTime = endTime;
     }
 }

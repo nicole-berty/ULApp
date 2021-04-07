@@ -1,4 +1,4 @@
-package myUL;
+package myUL.timetable;
 
 import android.util.Log;
 
@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Timetable_Save_Events {
+public class TimetableSaveEvents {
 
-    public static void saveicon(final HashMap<Integer, Timetable_icons> event_icon, final boolean add, final int editIdx){
+    public static void saveEvent(final HashMap<Integer, TimetableIcons> event_icon, final boolean add, final int editIdx){
 
         //Connect to DB and get the current user's email
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -89,7 +89,7 @@ public class Timetable_Save_Events {
             });
     }
 
-    public static void addToDatabase(final HashMap<Integer, Timetable_icons> final_event_icon, final int[] event_index, final boolean add, final int editIdx ) {
+    public static void addToDatabase(final HashMap<Integer, TimetableIcons> final_event_icon, final int[] icon_index, final boolean add, final int editIdx ) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
@@ -102,10 +102,8 @@ public class Timetable_Save_Events {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
-                        for (int i : event_index) {
-                            JsonObject obj2 = new JsonObject();
-                            JsonArray arr2 = new JsonArray();//5
-                            ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
+                        for (int i : icon_index) {
+                            ArrayList<TimetableEvent> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
                             int index;
                             DocumentSnapshot document = task.getResult();
 
@@ -117,28 +115,26 @@ public class Timetable_Save_Events {
                             } else {
                                 index = editIdx;
                             }
-                            obj2.addProperty("idx", index);
-                            JsonObject obj6 = new JsonObject();
-                            obj6.addProperty("idx", index);
+                            JsonObject eventIndex = new JsonObject();
+                            eventIndex.addProperty("idx", index);
 
-                            for (Timetable_Event calendar : calendars) {
-                                JsonObject obj3 = new JsonObject();
-                                obj3.addProperty("eventName", calendar.eventName);
-                                obj3.addProperty("eventLocation", calendar.eventLocation);
-                                obj3.addProperty("speakerName", calendar.speakerName);
-                                obj3.addProperty("day", calendar.getDay());
-                                JsonObject obj4 = new JsonObject();//startTime
-                                obj4.addProperty("hour", calendar.getStartTime().getHour());
-                                obj4.addProperty("minute", calendar.getStartTime().getMinute());
-                                obj3.add("startTime", obj4);
-                                JsonObject obj5 = new JsonObject();//endTime
-                                obj5.addProperty("hour", calendar.getEndTime().getHour());
-                                obj5.addProperty("minute", calendar.getEndTime().getMinute());
-                                obj3.add("endTime", obj5);
-                                arr2.add(obj3);
+                            for (TimetableEvent calendar : calendars) {
+                                JsonObject eventDetails = new JsonObject();
+                                eventDetails.addProperty("eventName", calendar.eventName);
+                                eventDetails.addProperty("eventLocation", calendar.eventLocation);
+                                eventDetails.addProperty("speakerName", calendar.speakerName);
+                                eventDetails.addProperty("day", calendar.getDay());
+                                JsonObject startTime = new JsonObject();//startTime
+                                startTime.addProperty("hour", calendar.getStartTime().getHour());
+                                startTime.addProperty("minute", calendar.getStartTime().getMinute());
+                                eventDetails.add("startTime", startTime);
+                                JsonObject endTime = new JsonObject();//endTime
+                                endTime.addProperty("hour", calendar.getEndTime().getHour());
+                                endTime.addProperty("minute", calendar.getEndTime().getMinute());
+                                eventDetails.add("endTime", endTime);
 
                                 Map<String, Object> calendar_activity = new HashMap<>();
-                                calendar_activity.put(obj6.toString(), obj3.toString());
+                                calendar_activity.put(eventIndex.toString(), eventDetails.toString());
                                 docIdRef.update(calendar_activity);
                             }
                         }
@@ -147,34 +143,34 @@ public class Timetable_Save_Events {
         });
     }
 
-    public static HashMap<Integer, Timetable_icons> loadIcon(String json){
-        HashMap<Integer, Timetable_icons> icon = new HashMap<Integer, Timetable_icons>();
+    public static HashMap<Integer, TimetableIcons> loadEvent(String json){
+        HashMap<Integer, TimetableIcons> icon = new HashMap<>();
         JsonParser parser = new JsonParser();
-        JsonObject obj1 = (JsonObject)parser.parse(json);
-        JsonArray arr1 = obj1.getAsJsonArray("icon");
-        for(int i = 0 ; i < arr1.size(); i++){
-            Timetable_icons icon1 = new Timetable_icons();
-            JsonObject obj2 = (JsonObject)arr1.get(i);
-            int idx = obj2.get("idx").getAsInt();
-            JsonArray arr2 = (JsonArray)obj2.get("schedule");
-            for(int k = 0 ; k < arr2.size(); k++){
-                Timetable_Event schedule = new Timetable_Event();
-                JsonObject obj3 = (JsonObject)arr2.get(k);
-                schedule.setEventName(obj3.get("eventName").getAsString());
-                schedule.setEventLocation(obj3.get("eventLocation").getAsString());
-                schedule.setSpeakerName(obj3.get("speakerName").getAsString());
-                schedule.setDay(obj3.get("day").getAsInt());
-                Timetable_Time_Keeper startTime = new Timetable_Time_Keeper();
-                JsonObject obj4 = (JsonObject)obj3.get("startTime");
-                startTime.setHour(obj4.get("hour").getAsInt());
-                startTime.setMinute(obj4.get("minute").getAsInt());
-                Timetable_Time_Keeper endTime = new Timetable_Time_Keeper();
-                JsonObject obj5 = (JsonObject)obj3.get("endTime");
-                endTime.setHour(obj5.get("hour").getAsInt());
-                endTime.setMinute(obj5.get("minute").getAsInt());
-                schedule.setStartTime(startTime);
-                schedule.setEndTime(endTime);
-                icon1.addIcon(schedule);
+        JsonObject event = (JsonObject)parser.parse(json);
+        JsonArray eventIDDetails = event.getAsJsonArray("icon");
+        for(int i = 0 ; i < eventIDDetails.size(); i++){
+            TimetableIcons icon1 = new TimetableIcons();
+            JsonObject eventIndex = (JsonObject)eventIDDetails.get(i);
+            int idx = eventIndex.get("idx").getAsInt();
+            JsonArray eventDetails = (JsonArray)eventIndex.get("schedule");
+            for(int k = 0 ; k < eventDetails.size(); k++){
+                TimetableEvent event1 = new TimetableEvent();
+                JsonObject eventDetails1 = (JsonObject)eventDetails.get(k);
+                event1.setEventName(eventDetails1.get("eventName").getAsString());
+                event1.setEventLocation(eventDetails1.get("eventLocation").getAsString());
+                event1.setSpeakerName(eventDetails1.get("speakerName").getAsString());
+                event1.setDay(eventDetails1.get("day").getAsInt());
+                TimetableTimeKeeper startTime = new TimetableTimeKeeper();
+                JsonObject eventStart = (JsonObject)eventDetails1.get("startTime");
+                startTime.setHour(eventStart.get("hour").getAsInt());
+                startTime.setMinute(eventStart.get("minute").getAsInt());
+                TimetableTimeKeeper endTime = new TimetableTimeKeeper();
+                JsonObject eventEnd = (JsonObject)eventDetails1.get("endTime");
+                endTime.setHour(eventEnd.get("hour").getAsInt());
+                endTime.setMinute(eventEnd.get("minute").getAsInt());
+                event1.setStartTime(startTime);
+                event1.setEndTime(endTime);
+                icon1.addIcon(event1);
             }
             icon.put(idx,icon1);
         }
@@ -182,7 +178,7 @@ public class Timetable_Save_Events {
     }
 
 
-    static private int[] getSortedKeySet(HashMap<Integer, Timetable_icons> icon){
+    static private int[] getSortedKeySet(HashMap<Integer, TimetableIcons> icon){
         int[] orders = new int[icon.size()];
         int i = 0;
         for(int key : icon.keySet()){
