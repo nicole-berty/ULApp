@@ -87,6 +87,7 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
         String email = "";
         if (user != null) {
             email = user.getEmail();
+<<<<<<< HEAD
         }
         DocumentReference docIdRef = db.collection("timetable").document(email);
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -105,6 +106,26 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
                         int startMin = -1;
                         int endHour = -1;
                         int endMin = -1;
+=======
+            DocumentReference docIdRef = db.collection("timetable").document(email);
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            String doc = document.toString();
+                            int index = -1;
+
+                            String eventName = "";
+                            String eventLocation = "";
+                            String speakerName = "";
+                            int day = -1;
+                            int startHour = -1;
+                            int startMin = -1;
+                            int endHour = -1;
+                            int endMin = -1;
+>>>>>>> c7aa8dd7a5cf25ce00e08ad26e0da1814f67e57b
                             String[] parts = doc.split("fields");
                             for(int i = 1; i < parts.length; i++) {
                                 String[] values = parts[i].split("string_value:");
@@ -179,12 +200,13 @@ public class   TimetableActivity extends ActionBar implements View.OnClickListen
                                 obj1.add("icon", arr1);
                                 timetable.load(obj1.toString());
                             }
-                    } else {
-                        System.out.println("Doc does not exist");
+                        } else {
+                            System.out.println("Doc does not exist");
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**

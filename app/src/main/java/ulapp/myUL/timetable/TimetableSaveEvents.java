@@ -41,10 +41,9 @@ public class TimetableSaveEvents {
         String email = "";
         if (user != null) {
             email = user.getEmail();
-        }
-        DocumentReference docIdRef = db.collection("timetable").document(email);
-        final String finalEmail = email;
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            DocumentReference docIdRef = db.collection("timetable").document(email);
+            final String finalEmail = email;
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     final int[] event_index = getSortedKeySet(event_icon);
@@ -95,6 +94,7 @@ public class TimetableSaveEvents {
                     }
                 }
             });
+        }
     }
 
     /**
@@ -114,10 +114,8 @@ public class TimetableSaveEvents {
         String email = "";
         if (user != null) {
             email = user.getEmail();
-        }
-        Log.d("TAG", "your field exist");
-        final DocumentReference docIdRef = db.collection("timetable").document(email);
-        docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            final DocumentReference docIdRef = db.collection("timetable").document(email);
+            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
@@ -158,8 +156,9 @@ public class TimetableSaveEvents {
                             }
                         }
                     }
-            }
-        });
+                }
+            });
+        }
     }
 
     /**

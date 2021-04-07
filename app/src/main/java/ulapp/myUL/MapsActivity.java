@@ -22,7 +22,6 @@ public class MapsActivity extends ActionBar
         implements OnMapReadyCallback ,GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener
 {
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private GoogleMap mMap;
 
     @Override
@@ -52,7 +51,6 @@ public class MapsActivity extends ActionBar
         mMap.setMinZoomPreference(15);
         mMap.setMaxZoomPreference(19);
         enableMyLocation();
-        //mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
         setupMap();

@@ -74,30 +74,29 @@ public class UserType extends AppCompatActivity {
         String email = "";
         if (user != null) {
             email = user.getEmail();
+            //Create a HashMap with the user's email and their type as chosen from the spinner
+            Map<String, Object> userType = new HashMap<>();
+            userType.put(email, type);
+
+            //In the userTypes collection on the database, on the document with the user's email, set the HashMap as the field
+            db.collection("userTypes").document(email)
+                    .set(userType).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error writing document", e);
+                        }
+                    });
+
+            //Go to the home activity and call finish() so the user can't go back to this page - only users without user type should be here
+            Intent intent = new Intent(UserType.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
-
-        //Create a HashMap with the user's email and their type as chosen from the spinner
-        Map<String, Object> userType = new HashMap<>();
-        userType.put(email, type);
-
-        //In the userTypes collection on the database, on the document with the user's email, set the HashMap as the field
-        db.collection("userTypes").document(email)
-                .set(userType).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully written!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-
-        //Go to the home activity and call finish() so the user can't go back to this page - only users without user type should be here
-        Intent intent = new Intent(UserType.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
