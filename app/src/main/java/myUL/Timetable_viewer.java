@@ -134,23 +134,16 @@ public class Timetable_viewer extends LinearLayout {
         IconSelectedListener = listener;
     }
 
-    public void add(ArrayList<Timetable_Event> schedules, boolean editing) {
-        add(schedules, -1, editing);
+    public void add(ArrayList<Timetable_Event> schedules ) {
+        add(schedules, -1);
     }
 
-    private void add(final ArrayList<Timetable_Event> schedules, int specIdx, boolean editing) {
+    private void add(final ArrayList<Timetable_Event> schedules, int specIdx) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
         Timetable_icons icon1 = new Timetable_icons();
 
         for (Timetable_Event schedule : schedules) {
             TextView tv = new TextView(context);
-
-            if(editing) {
-                System.out.println("data in add editing: " + schedule.getEventName());
-            //    icon1.removeIcon(schedule);
-                //SET EDITED DATA
-
-            }
 
             RelativeLayout.LayoutParams param = createIconParam(schedule);
             tv.setLayoutParams(param);
@@ -171,84 +164,21 @@ public class Timetable_viewer extends LinearLayout {
 
             icon1.addTextView(tv);
             icon1.addIcon(schedule);
-            System.out.println("Count from add: " + count);
             event_icons.put(count, icon1);
             iconBox.addView(tv);
         }
         setIconColor();
-      //  final int count = specIdx < 0 ? ++iconCount : specIdx;
-//
-//            final FirebaseFirestore db = FirebaseFirestore.getInstance();
-//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            String email = "";
-//            if (user != null) {
-//                email = user.getEmail();
-//            }
-//            DocumentReference docIdRef = db.collection("timetable").document("18245137");
-//            docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                    if (task.isSuccessful()) {
-//                        int index = 0;
-//                        final DocumentSnapshot document = task.getResult();
-//                        Timetable_icons icon1 = new Timetable_icons();
-//                        for (Timetable_Event schedule : schedules) {
-//                            TextView tv = new TextView(context);
-//                        if (document.exists()) {
-//                            if (document.get("index") != null) {
-//                                index = Integer.parseInt(document.get("index").toString());
-//                            } else {
-//                                index  = 1;
-//                            }
-//                        } else {
-//                            index = 1;
-//
-//                        }
-//
-//            RelativeLayout.LayoutParams param = createIconParam(schedule);
-//            tv.setLayoutParams(param);
-//            tv.setPadding(10, 0, 10, 0);
-//            String iconText = schedule.getEventName() + "\n" + schedule.getEventLocation() + "\n" + schedule.getSpeakerName();
-//            tv.setText(iconText);
-//            tv.setTextColor(Color.parseColor("#FFFFFF"));
-//            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_Icon_FONT_SIZE_DP);
-//            tv.setTypeface(null, Typeface.BOLD);
-//
-//                            final int finalIndex = index;
-//                            System.out.println("final Ind " + finalIndex + " non final " + index);
-//                            tv.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (IconSelectedListener != null)
-//                        System.out.println("am here? finalIndex " + finalIndex);
-//                        IconSelectedListener.OnIconSelected(finalIndex, schedules);
-//                }
-//            });
-//
-//            icon1.addTextView(tv);
-//            icon1.addIcon(schedule);
-//            System.out.println("Count from add: " + index);
-//            event_icons.put(index, icon1);
-//            iconBox.addView(tv);
-//        }
-//        setIconColor();
-//                    }
-//                }
-//            });
-
     }
 
     public void load(String data) {
         event_icons = Timetable_Save_Events.loadIcon(data);
         int maxKey = 0;
         for (int key : event_icons.keySet()) {
-            System.out.println("Key from load " + key);
             ArrayList<Timetable_Event> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
-            add(schedules, key, false);
+            add(schedules, key);
             if (maxKey < key) maxKey = key;
         }
         iconCount = maxKey;// + 1;
-        System.out.println("maxkey: " + maxKey);
         setIconColor();
     }
 
@@ -272,7 +202,7 @@ public class Timetable_viewer extends LinearLayout {
         if (user != null) {
             email = user.getEmail();
         }
-        db.collection("timetable").document("18245137")
+        db.collection("timetable").document(email)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -290,30 +220,26 @@ public class Timetable_viewer extends LinearLayout {
 
     }
 
-    public void edit(int idx, ArrayList<Timetable_Event> schedules) {
-        System.out.println("I am IDX IN EDIT: " + idx);
-     //   remove(idx);
-      //  add(schedules, idx);
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        String email = "";
-//        if (user != null) {
-//            email = user.getEmail();
-//        }
-//
-//        String index = "{\"idx\":"+ idx + "}";
-//        //db.collection("timetable").document("18245137").update();
-
-    }
-
     public void remove(int idx) {
+
+        //still crashes here sometimes - seems sporadic. If you create events, close the app, open it again and then try delete them
+        //it seems to definitely crash once or twice but works perfectly other times?
+        //Also, when it does work, the very next event created has -1 for all fields?? After that it's fine again
+        Timetable_icons Icon = event_icons.get(idx);
+//        assert Icon != null;
+        for (TextView tv : Icon.getView()) {
+            iconBox.removeView(tv);
+        }
+        event_icons.remove(idx);
+        setIconColor();
+        //if you put the below code first, it will execute and remove the event from the DB even with the crash
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String email = "";
         if (user != null) {
             email = user.getEmail();
         }
-        DocumentReference docRef = db.collection("timetable").document("18245137");
+        DocumentReference docRef = db.collection("timetable").document(email);
         String index = "{\"idx\":"+ idx + "}";
         Map<String,Object> delete_event = new HashMap<>();
         delete_event.put(index, FieldValue.delete());
@@ -324,14 +250,6 @@ public class Timetable_viewer extends LinearLayout {
                 System.out.println("Successfully Deleted");
             }
         });
-
-        Timetable_icons Icon = event_icons.get(idx);
-        assert Icon != null;
-        for (TextView tv : Icon.getView()) {
-            iconBox.removeView(tv);
-        }
-        event_icons.remove(idx);
-        setIconColor();
     }
 
     public void setHeaderHighlight(int idx) {
@@ -454,14 +372,12 @@ public class Timetable_viewer extends LinearLayout {
     private int calIconHeightPx(Timetable_Event schedule) {
         int startTopPx = calIconTopPxByTime(schedule.getStartTime());
         int endTopPx = calIconTopPxByTime(schedule.getEndTime());
-        int d = endTopPx - startTopPx;
 
-        return d;
+        return endTopPx - startTopPx;
     }
 
     private int calIconTopPxByTime(Timetable_Time_Keeper time) {
-        int topPx = (time.getHour() - startTime) * cellHeight + (int) ((time.getMinute() / 60.0f) * cellHeight);
-        return topPx;
+        return (time.getHour() - startTime) * cellHeight + (int) ((time.getMinute() / 60.0f) * cellHeight);
     }
 
     private TableLayout.LayoutParams createTableLayoutParam() {

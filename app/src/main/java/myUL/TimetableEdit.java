@@ -3,6 +3,7 @@ package myUL;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,17 +12,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static myUL.TimetableActivity.timetable;
 
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
     public static final int RESULT_OK_ADD = 1;
-    public static final int RESULT_OK_EDIT = 2;
-    public static final int RESULT_OK_DELETE = 3;
 
     private Context context;
 
@@ -31,8 +35,8 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
     private EditText eventLocation;
     private EditText eventSpeaker;
     private Spinner daySpinner;
-    private TextView startTv;
-    private TextView endTv;
+    private TextView startTime;
+    private TextView endTime;
 
     //request mode
     private int mode;
@@ -59,13 +63,13 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         eventLocation = findViewById(R.id.event_location);
         eventSpeaker = findViewById(R.id.event_speaker);
         daySpinner = findViewById(R.id.day_spinner);
-        startTv = findViewById(R.id.start_time);
-        endTv = findViewById(R.id.end_time);
+        startTime = findViewById(R.id.start_time);
+        endTime = findViewById(R.id.end_time);
 
         //set the default time
         event = new Timetable_Event();
         event.setStartTime(new Timetable_Time_Keeper(10,0));
-        event.setEndTime(new Timetable_Time_Keeper(13,30));
+        event.setEndTime(new Timetable_Time_Keeper(12,0));
 
         checkMode();
         initView();
@@ -96,33 +100,44 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
 
             }
         });
-        startTv.setOnClickListener(new View.OnClickListener() {
+        startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog dialog = new TimePickerDialog(context,listener,event.getStartTime().getHour(), event.getStartTime().getMinute(), false);
+                TimePickerDialog dialog = new TimePickerDialog(context,listener,event.getStartTime().getHour(), event.getStartTime().getMinute(), true);
                 dialog.show();
             }
 
             private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    startTv.setText(hourOfDay + ":" + minute);
+                    String hrstr = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
+                            '0' + String.valueOf(hourOfDay) : String.valueOf(hourOfDay);
+                    String minstr = minute < 10 ? //If minute is lower than 10, add a zero on the left
+                            '0' + String.valueOf(minute) : String.valueOf(minute);
+                    startTime.setText(hrstr + ":" + minstr);
                     event.getStartTime().setHour(hourOfDay);
                     event.getStartTime().setMinute(minute);
+
+
                 }
             };
         });
-        endTv.setOnClickListener(new View.OnClickListener() {
+        endTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog dialog = new TimePickerDialog(context,listener,event.getEndTime().getHour(), event.getEndTime().getMinute(), false);
+                TimePickerDialog dialog = new TimePickerDialog(context,listener,event.getEndTime().getHour(), event.getEndTime().getMinute(), true);
                 dialog.show();
             }
 
             private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    endTv.setText(hourOfDay + ":" + minute);
+                    String hrstr = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
+                            '0' + String.valueOf(hourOfDay) : String.valueOf(hourOfDay);
+                    String minstr = minute < 10 ? //If minute is lower than 10, add a zero on the left
+                            '0' + String.valueOf(minute) : String.valueOf(minute);
+                    endTime.setText(hrstr + ":" + minstr);
                     event.getEndTime().setHour(hourOfDay);
                     event.getEndTime().setMinute(minute);
                 }
@@ -135,58 +150,86 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         ArrayList<Timetable_Event> events = new ArrayList<Timetable_Event>();
         switch (v.getId()){
             case R.id.submit_btn:
+                SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
                 if(mode == TimetableActivity.REQUEST_ADD){
-                    inputDataProcessing();
-                    Intent i = new Intent(this, Success.class);
-                    // add more calendars
-                    events.add(event);
-                    i.putExtra("schedules",events);
-                    setResult(RESULT_OK_ADD,i);
-                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
-                    timetable.add(item, false);
-                    // call to save the icon
-                    System.out.println("in submit btn");
-                    //Gonna pass an index to saveIcon to represent add new event or edit current event. -1 = add new, index = edit current
-                    Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, true, -1);
-                    i.putExtra("ACTION", "ADD");
-                    startActivity(i);
-                    finish();
+                    Date start = null;
+                    try {
+                        start = parser.parse( event.getStartTime().getHour() + ":" + event.getStartTime().getMinute());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Date end = null;
+                    try {
+                        end = parser.parse( event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(start.after(end)) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "The end time must be after the start time, try again!";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    } else {
+                        inputDataProcessing();
+                        Intent i = new Intent(this, Success.class);
+                        // add more calendars
+                        events.add(event);
+                        i.putExtra("schedules", events);
+                        setResult(RESULT_OK_ADD, i);
+                        ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) i.getSerializableExtra("schedules");
+                        timetable.add(item);
+                        Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, true, -1);
+                        i.putExtra("ACTION", "ADD");
+                        startActivity(i);
+                        finish();
+                    }
                 }
                 else if(mode == TimetableActivity.REQUEST_EDIT){
-                    inputDataProcessing();
-                    Intent i = new Intent(this, Success.class);
-                 //   events.add(event);
-                    i.putExtra("idx",editIdx);
-                    events.add(event);
-                    System.out.println("events length " + events.size());
-                    i.putExtra("schedules",events);
-                    ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
-                    for(Timetable_Event it : item) {
-                        System.out.println("data in edit: " + it.getEventName());
+                    Date start = null;
+                    try {
+                        start = parser.parse( event.getStartTime().getHour() + ":" + event.getStartTime().getMinute());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    timetable.add(item, true);
-                    //     ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>)i.getSerializableExtra("schedules");
-               //     timetable.remove(editIdx);
+                    Date end = null;
+                    try {
+                        end = parser.parse( event.getEndTime().getHour() + ":" + event.getEndTime().getMinute());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(start.after(end)) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "The end time must be after the start time, try again!";
+                        int duration = Toast.LENGTH_SHORT;
 
-                    // call to save the icon
-                    System.out.println("in edit btn");
-
-                    //Gonna pass an index to saveIcon to represent add new event or edit current event. -1 = add new, index = edit current
-                    Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, false, editIdx);
-
-//everything works, YOU`RE WELCOME
-
-                //    setResult(RESULT_OK_EDIT,i);
-                    i.putExtra("ACTION", "EDIT");
-                    startActivity(i);
-               //     finish();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    } else {
+                        inputDataProcessing();
+                        Intent i = new Intent(this, Success.class);
+                        i.putExtra("idx", editIdx);
+                        events.add(event);
+                        System.out.println("events length " + events.size());
+                        i.putExtra("schedules", events);
+                        ArrayList<Timetable_Event> item = (ArrayList<Timetable_Event>) i.getSerializableExtra("schedules");
+                        for (Timetable_Event it : item) {
+                            System.out.println("data in edit: " + it.getEventName());
+                        }
+                        timetable.add(item);
+                        Timetable_Save_Events.saveicon(Timetable_viewer.event_icons, false, editIdx);
+                        i.putExtra("ACTION", "EDIT");
+                        startActivity(i);
+                        //     finish();
+                    }
                 }
                 break;
             case R.id.delete_btn:
                 Intent i = new Intent(this, Success.class);
                 i.putExtra("idx",editIdx);
+                System.out.print("***************************IDX**********************  " + editIdx);
                 timetable.remove(editIdx);
-            //     setResult(RESULT_OK_DELETE, i);
                 i.putExtra("ACTION", "DELETE");
                 startActivity(i);
                 finish();
@@ -203,13 +246,24 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
         eventLocation.setText(event.getEventLocation());
         eventSpeaker.setText(event.getSpeakerName());
         daySpinner.setSelection(event.getDay());
+
+        String startHr = event.getStartTime().getHour() < 10 ? //If hour is lower than 10, add a zero on the left
+                '0' + String.valueOf(event.getStartTime().getHour()) : String.valueOf(event.getStartTime().getHour());
+        String startMin =  event.getStartTime().getMinute() < 10 ? //If minute is lower than 10, add a zero on the left
+                '0' + String.valueOf( event.getStartTime().getMinute()) : String.valueOf( event.getStartTime().getMinute());
+
+        startTime.setText(startHr + ":" + startMin);
+
+        String endHr = event.getEndTime().getHour() < 10 ? //If hour is lower than 10, add a zero on the left
+                '0' + String.valueOf(event.getEndTime().getHour()) : String.valueOf(event.getEndTime().getHour());
+        String endMin =  event.getEndTime().getMinute() < 10 ? //If minute is lower than 10, add a zero on the left
+                '0' + String.valueOf( event.getEndTime().getMinute()) : String.valueOf( event.getEndTime().getMinute());
+        endTime.setText(endHr + ":" + endMin);
     }
 
     private void inputDataProcessing(){
         event.setEventName(eventName.getText().toString());
         event.setEventLocation(eventLocation.getText().toString());
         event.setSpeakerName(eventSpeaker.getText().toString());
-        System.out.println("name " + eventName.getText().toString());
-        System.out.println("event name " + event.getEventName());
     }
 }

@@ -10,7 +10,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +34,8 @@ public class Timetable_Save_Events {
         if (user != null) {
             email = user.getEmail();
         }
-        DocumentReference docIdRef = db.collection("timetable").document("18245137");
+        DocumentReference docIdRef = db.collection("timetable").document(email);
+        final String finalEmail = email;
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -44,13 +44,12 @@ public class Timetable_Save_Events {
                         final DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             if (document.get("index") != null) {
-                                System.out.println("I am in first if - add " + add + " editIDX " + editIdx);
                                 addToDatabase(event_icon, event_index, add, editIdx);
 
                             } else {
                                 Map<String, Object> calendar_index = new HashMap<>();
                                 calendar_index.put("index", 0);
-                                db.collection("timetable").document("18245137")
+                                db.collection("timetable").document(finalEmail)
                                         .set(calendar_index).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
@@ -63,20 +62,17 @@ public class Timetable_Save_Events {
                                                 Log.w("TAG", "Error writing document", e);
                                             }
                                         });
-                                System.out.println("I am in first else");
                                 addToDatabase(event_icon, event_index, add, -1);
 
                             }
                         } else {
-                            System.out.println("I am in second if");
                             Map<String, Object> calendar_index = new HashMap<>();
                             calendar_index.put("index", 0);
-                            db.collection("timetable").document("18245137")
+                            db.collection("timetable").document(finalEmail)
                                     .set(calendar_index).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.d("TAG", "DocumentSnapshot successfully written!");
-
                                     addToDatabase(event_icon, event_index, add, -1);
                                 }
                             })
@@ -100,9 +96,8 @@ public class Timetable_Save_Events {
         if (user != null) {
             email = user.getEmail();
         }
-        final CollectionReference db2 = db.collection("timetable");
         Log.d("TAG", "your field exist");
-        final DocumentReference docIdRef = db.collection("timetable").document("18245137");
+        final DocumentReference docIdRef = db.collection("timetable").document(email);
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -111,10 +106,8 @@ public class Timetable_Save_Events {
                             JsonObject obj2 = new JsonObject();
                             JsonArray arr2 = new JsonArray();//5
                             ArrayList<Timetable_Event> calendars = Objects.requireNonNull(final_event_icon.get(i)).getCalendars();
-                            int index = -1;
+                            int index;
                             DocumentSnapshot document = task.getResult();
-
-
 
                             if(add) {
                                 index = Integer.parseInt(document.get("index").toString()) + 1;
@@ -125,10 +118,6 @@ public class Timetable_Save_Events {
                                 index = editIdx;
                             }
                             obj2.addProperty("idx", index);
-
-                            System.out.println("index from db: " + index);
-
-
                             JsonObject obj6 = new JsonObject();
                             obj6.addProperty("idx", index);
 
@@ -147,11 +136,6 @@ public class Timetable_Save_Events {
                                 obj5.addProperty("minute", calendar.getEndTime().getMinute());
                                 obj3.add("endTime", obj5);
                                 arr2.add(obj3);
-
-//
-                               System.out.println("Obj3: " + obj3.toString());
-                               System.out.println("Obj2: " + obj2.toString());
-                                System.out.println("Obj5: " + obj5.toString());
 
                                 Map<String, Object> calendar_activity = new HashMap<>();
                                 calendar_activity.put(obj6.toString(), obj3.toString());

@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 //dummy class which allows DB to update behind it
-public class Success extends AppCompatActivity {
+public class Success extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +22,7 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class   TimetableActivity extends AppCompatActivity implements View.OnClickListener {
+public class   TimetableActivity extends MenuActivity implements View.OnClickListener {
     private Context context;
     public static final int REQUEST_ADD = 1;
     public static final int REQUEST_EDIT = 2;
@@ -62,7 +61,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                 i.putExtra("mode",REQUEST_EDIT);
                 i.putExtra("idx", idx);
                 i.putExtra("schedules", calendars);
-                System.out.println("idx on icon selected: " + idx);
                 startActivityForResult(i,REQUEST_EDIT);
             }
         });
@@ -79,8 +77,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
         if (user != null) {
             email = user.getEmail();
         }
-        final int[] numEvents = new int[1];
-        DocumentReference docIdRef = db.collection("timetable").document("18245137");
+        DocumentReference docIdRef = db.collection("timetable").document(email);
         docIdRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -89,7 +86,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                     if (document.exists()) {
                         String doc = document.toString();
                         int index = -1;
-                        int count = 0;
 
                         String eventName = "";
                         String eventLocation = "";
@@ -105,13 +101,13 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                 for (int j = 0; j < values.length; j++) {
                                     if(j == 0) {
                                         String[] splitValues = values[j].split("value");
-                                        for (int k = 0; k < splitValues.length; k++) {
-                                            String temp = splitValues[k].replace("\\", "");
+                                        for (String splitValue : splitValues) {
+                                            String temp = splitValue.replace("\\", "");
                                             String[] valSplit = temp.split(":");
                                             for (int l = 0; l < valSplit.length; l++) {
                                                 String temp2 = valSplit[l].replaceAll("\"", "");
                                                 String temp3 = temp2.replace("}", "");
-                                                if(l == 2) {
+                                                if (l == 2) {
                                                     index = Integer.parseInt(temp3.trim());
                                                 }
                                             }
@@ -175,7 +171,7 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
                                 timetable.load(obj1.toString());
                             }
                     } else {
-                        System.out.println("Doc doesn`t exist");
+                        System.out.println("Doc does not exist");
                     }
                 }
             }
@@ -192,7 +188,6 @@ public class   TimetableActivity extends AppCompatActivity implements View.OnCli
             case R.id.add_btn:
                 Intent i = new Intent(this,TimetableEdit.class);
                 i.putExtra("mode",REQUEST_ADD);
-
                 startActivityForResult(i,REQUEST_ADD);
               //  finish();
                 break;
