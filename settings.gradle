@@ -1,3 +1,3 @@
 include ':1'
 include ':app'
-rootProject.name = "RestuarantMenus"
+rootProject.name = "MyUL"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listOfRestuarants"
-        android:name="myUL.restaurant_menus.ListOfRestuarants"
+        android:name="ulapp.myUL.restaurant_menus.ListOfRestuarants"
         android:label="fragment_list_of_restuarants"
         tools:layout="@layout/fragment_list_of_restuarants" >
         <action
@@ -28,27 +28,27 @@
     </fragment>
     <fragment
         android:id="@+id/stablesClubMenu"
-        android:name="myUL.restaurant_menus.StablesClubMenu"
+        android:name="ulapp.myUL.restaurant_menus.StablesClubMenu"
         android:label="fragment_stables_club_menu"
         tools:layout="@layout/fragment_stables_club_menu" />
     <fragment
         android:id="@+id/scholarsMenu"
-        android:name="myUL.restaurant_menus.ScholarsMenu"
+        android:name="ulapp.myUL.restaurant_menus.ScholarsMenu"
         android:label="fragment_scholars_menu"
         tools:layout="@layout/fragment_scholars_menu" />
     <fragment
         android:id="@+id/paddocksMenu"
-        android:name="myUL.restaurant_menus.PaddocksMenu"
+        android:name="ulapp.myUL.restaurant_menus.PaddocksMenu"
         android:label="fragment_paddocks_menu"
         tools:layout="@layout/fragment_paddocks_menu" />
     <fragment
         android:id="@+id/pavilionsMenu"
-        android:name="myUL.restaurant_menus.PavilionsMenu"
+        android:name="ulapp.myUL.restaurant_menus.PavilionsMenu"
         android:label="fragment_pavilions_menu"
         tools:layout="@layout/fragment_pavilions_menu" />
     <fragment
         android:id="@+id/sportsBarMenu"
-        android:name="myUL.restaurant_menus.SportsBarMenu"
+        android:name="ulapp.myUL.restaurant_menus.SportsBarMenu"
         android:label="fragment_sports_bar_menu"
         tools:layout="@layout/fragment_sports_bar_menu" />
 </navigation>
