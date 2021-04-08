@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#CFEDAC"
     tools:context=".guides.FeesInfo">
 
-    <!-- TODO: Update blank fragment layout -->
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="411dp"
-        android:layout_height="122dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/feesH"
         android:textSize="35sp"
         android:gravity="center"
@@ -34,8 +35,9 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="371dp"
-        android:layout_height="377dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text=""
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,3 +48,4 @@
         app:layout_constraintVertical_bias="0.384" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
