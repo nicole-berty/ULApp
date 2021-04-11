@@ -160,7 +160,7 @@ public class MapsActivity extends ActionBar
         mMap.addMarker(new MarkerOptions().position(PESS).title("PESS").icon(BitmapDescriptorFactory.fromResource(R.drawable.exercise)));
 
         mMap.addMarker(new MarkerOptions().position(MSSI).title("MSSI").icon(BitmapDescriptorFactory.fromResource(R.drawable.building)));
-        mMap.addMarker(new MarkerOptions().position(ParamedicBuilding).title("Schumann").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulance)));
+        mMap.addMarker(new MarkerOptions().position(ParamedicBuilding).title("Paramedic").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulance)));
         mMap.addMarker(new MarkerOptions().position(Pavilion).title("The Pavilion").icon(BitmapDescriptorFactory.fromResource(R.drawable.beer)));
         mMap.addMarker(new MarkerOptions().position(NorthCampusPitches).title("North Campus pitches").icon(BitmapDescriptorFactory.fromResource(R.drawable.football)));
         mMap.addMarker(new MarkerOptions().position(MaguirePitches).title("Maguire Pitches").icon(BitmapDescriptorFactory.fromResource(R.drawable.football)));
