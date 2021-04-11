@@ -61,12 +61,13 @@
         android:layout_width="224dp"
         android:layout_height="0dp"
         android:layout_marginBottom="29dp"
-        android:text="Other Help"
+        android:text="Other Student Assistance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        />
 
     <TextView
         android:id="@+id/textView13"
