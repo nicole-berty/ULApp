@@ -150,9 +150,6 @@ public class LoginActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 System.out.println("Sign in successful!\n" + "name = " + user.getEmail() + "\nid=" + user.getUid());
-                Intent intent = new Intent(LoginActivity.this, UserType.class);
-                startActivity(intent);
-                finish();
             } else {
                 if (response == null) {
                     System.out.println("Sign in cancelled");
