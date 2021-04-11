@@ -63,11 +63,11 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
     private List<String> getNameList() {
         List<String> names = new ArrayList<>();
         names.add("Info");
-        names.add("Clubs and Societies");
         names.add("Menus");
         names.add("Map");
         //If the user is registered on the database, add extra pages to the list
         if(!user.isAnonymous()) {
+            names.add("Clubs and Societies");
             names.add("Timetable");
         }
         return names;
