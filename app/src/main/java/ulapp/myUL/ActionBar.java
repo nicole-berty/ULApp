@@ -37,6 +37,10 @@ public class ActionBar extends AppCompatActivity {
                     .signOut(this)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         public void onComplete(@NonNull Task<Void> task) {
+                            //Create broadcast intent to indicate log out has occurred. All logged in activities will have broadcast receiver to check for log out and will redirect user to log in page if found.
+                            Intent broadcastIntent = new Intent();
+                            broadcastIntent.setAction("com.package.ACTION_LOGOUT");
+                            sendBroadcast(broadcastIntent);
                             Intent intent = new Intent(ActionBar.this, LoginActivity.class);
                             startActivity(intent);
                             finish();

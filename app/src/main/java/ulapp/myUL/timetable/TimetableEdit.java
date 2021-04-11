@@ -1,10 +1,13 @@
 package ulapp.myUL.timetable;
 
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ulapp.myUL.LoginActivity;
 import ulapp.myUL.R;
 import ulapp.myUL.Success;
 
@@ -50,6 +54,20 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Check for Broadcast receiver which is created on logging out. This will prevent a user from going back to a page that should be only seen by logged in users.
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGOUT");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive","Logout in progress");
+                //At this point you should start the login activity and finish this one
+                Intent intent2 = new Intent(TimetableEdit.this, LoginActivity.class);
+                startActivity(intent2);
+                finish();
+            }
+        }, intentFilter);
         setContentView(R.layout.timetable_edit_event);
         init();
     }
