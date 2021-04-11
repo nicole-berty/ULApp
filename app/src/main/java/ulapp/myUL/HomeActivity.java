@@ -82,15 +82,15 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
                 startActivity(intent);
                 break;
             case 1:
-                intent = new Intent(HomeActivity.this, ClubsSocs.class);
+                intent = new Intent(HomeActivity.this, RestaurantsActivity.class);
                 startActivity(intent);
                 break;
             case 2:
-               intent = new Intent(HomeActivity.this, RestaurantsActivity.class);
+                intent = new Intent(HomeActivity.this, MapsActivity.class);
                 startActivity(intent);
                 break;
             case 3:
-                intent = new Intent(HomeActivity.this, MapsActivity.class);
+                intent = new Intent(HomeActivity.this, ClubsSocs.class);
                 startActivity(intent);
                 break;
             case 4:
