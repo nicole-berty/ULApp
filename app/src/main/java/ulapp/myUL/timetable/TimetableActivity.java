@@ -29,7 +29,7 @@ import ulapp.myUL.Success;
  * Main Activity class for timetable
  */
 
-public class   TimetableActivity extends ActionBar implements View.OnClickListener {
+public class TimetableActivity extends ActionBar implements View.OnClickListener {
     private Context context;
     public static final int REQUEST_ADD = 1;
     public static final int REQUEST_EDIT = 2;
