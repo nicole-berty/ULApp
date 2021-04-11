@@ -71,7 +71,11 @@ public class LoginActivity extends AppCompatActivity {
             String email = email_text.getText().toString();
             EditText pass_text = findViewById(R.id.password);
             String password = pass_text.getText().toString();
-            signIn(email, password);
+            if(email.equals(null) || password.equals(null) || email.equals("") || password.equals("")) {
+                Toast.makeText(LoginActivity.this, "Please fill in all fields to log in!", Toast.LENGTH_LONG).show();
+            } else {
+                signIn(email, password);
+            }
         //If register button clicked, register new user with FirebaseAuth methods
         } else if (i == R.id.register) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
