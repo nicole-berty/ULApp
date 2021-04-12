@@ -71,7 +71,13 @@ public class LoginActivity extends AppCompatActivity {
             String email = email_text.getText().toString();
             EditText pass_text = findViewById(R.id.password);
             String password = pass_text.getText().toString();
-            signIn(email, password);
+
+            //Check if the email and password fields have actually been filled in. If they haven't show toast to the user, otherwise call signIn method
+            if(email.equals(null) || password.equals(null) || email.equals("") || password.equals("")) {
+                Toast.makeText(LoginActivity.this, "Please fill in all fields to log in!", Toast.LENGTH_LONG).show();
+            } else {
+                signIn(email, password);
+            }
         //If register button clicked, register new user with FirebaseAuth methods
         } else if (i == R.id.register) {
             List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -140,15 +146,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //User has successfully registered
         if(requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
-
             if(resultCode == RESULT_OK) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 System.out.println("Sign in successful!\n" + "name = " + user.getEmail() + "\nid=" + user.getUid());
-                Intent intent = new Intent(LoginActivity.this, UserType.class);
-                startActivity(intent);
-                finish();
             } else {
                 if (response == null) {
                     System.out.println("Sign in cancelled");

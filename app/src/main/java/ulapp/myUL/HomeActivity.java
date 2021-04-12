@@ -1,9 +1,13 @@
 package ulapp.myUL;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +32,20 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGOUT");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive","Logout in progress");
+                //Logout has occurred, start login activity and finish this one
+                Intent intent2 = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent2);
+                finish();
+            }
+        }, intentFilter);
+
         setContentView(R.layout.activity_home);
 
         ImageView ulLogo = findViewById(R.id.ulLogo);
@@ -63,11 +81,11 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
     private List<String> getNameList() {
         List<String> names = new ArrayList<>();
         names.add("Info");
-        names.add("Clubs and Societies");
         names.add("Menus");
         names.add("Map");
         //If the user is registered on the database, add extra pages to the list
         if(!user.isAnonymous()) {
+            names.add("Clubs and Societies");
             names.add("Timetable");
         }
         return names;
@@ -82,15 +100,15 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
                 startActivity(intent);
                 break;
             case 1:
-                intent = new Intent(HomeActivity.this, ClubsSocs.class);
+                intent = new Intent(HomeActivity.this, RestaurantsActivity.class);
                 startActivity(intent);
                 break;
             case 2:
-               intent = new Intent(HomeActivity.this, RestaurantsActivity.class);
+                intent = new Intent(HomeActivity.this, MapsActivity.class);
                 startActivity(intent);
                 break;
             case 3:
-                intent = new Intent(HomeActivity.this, MapsActivity.class);
+                intent = new Intent(HomeActivity.this, ClubsSocs.class);
                 startActivity(intent);
                 break;
             case 4:

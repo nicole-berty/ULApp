@@ -191,7 +191,5 @@
     <string name="otherH">Other Information</string>
     <string name="WifiInfo"> "ulwireless : DWANMPDJW \nULSECURE: JWDJAPDJ \n \n  While wifi is available to students on campus, due to the abuse of free wifi, both aforementioned options have been retired.    Their replacement, eduroam, is simple to access for students:.\n   STEP 1) Select eduroam from the list of available networks.\n\n STEP 2) Enter your regular network username and password."</string>
     <string name="EmailInfo"> Setting Up an email in UL is simple.\n STEP 1) Use a web browser to access the student portal at this URL: https://portal.office.com. \n\n STEP 2) Login using your student email. Your email address is (student number)@studentmail.ul.ie. \n\n STEP 3) Enter your email password and login.\n\n STEP 4) Use your desired application.\n\n\n FAQ and other information can be found at https://ulsites.ul.ie/itd/access-your-student-email-account\n</string>
-    <string name="guidesH">GUIDES</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="guidesH">STUDENT GUIDES</string>
 </resources>
