@@ -1,5 +1,6 @@
 <resources>
     <string-array name="default_header_title">
+        <item></item>
         <item>Mon</item>
         <item>Tue</item>
         <item>Wed</item>
