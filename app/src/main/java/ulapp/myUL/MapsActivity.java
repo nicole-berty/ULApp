@@ -19,11 +19,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends ActionBar
-        implements OnMapReadyCallback ,GoogleMap.OnMyLocationButtonClickListener,
-        GoogleMap.OnMyLocationClickListener
+        implements OnMapReadyCallback
 {
     private GoogleMap mMap;
 
+
+    /**
+     * This method generates the map fragment.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,7 @@ public class MapsActivity extends ActionBar
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 
@@ -43,49 +48,19 @@ public class MapsActivity extends ActionBar
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         mMap.setMinZoomPreference(15);
         mMap.setMaxZoomPreference(19);
-        enableMyLocation();
-        mMap.setOnMyLocationButtonClickListener(this);
-        mMap.setOnMyLocationClickListener(this);
         setupMap();
     }
 
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)
-                .show();
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)
-                .show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        return false;
-    }
-
-
-    private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            if (mMap != null) {
-                mMap.setMyLocationEnabled(true);
-            }
-        } else {
-            // Permission to access the location is missing. Show rationale and request permission
-            //PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-            //      Manifest.permission.ACCESS_FINE_LOCATION, true);
-        }
-    }
-
-
+    /**
+     * This method declares the co-ordinates for the buildings on UL campus
+     * and then sets a marker with a custom image on the co-ordinates
+    */
     private void setupMap() {
         LatLng SportsArena = new LatLng(52.673462,-8.565409);
         LatLng FoundationBuilding = new LatLng(52.674402,-8.573531);
