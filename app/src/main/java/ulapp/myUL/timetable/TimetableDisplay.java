@@ -101,25 +101,28 @@ public class TimetableDisplay extends LinearLayout {
      * @param attrs Attributes for the timetable
      */
     private void getAttrs(AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Timetable_viewer);
-        rowCount = a.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) + 12;
-        columnCount = a.getInt(R.styleable.Timetable_viewer_column_count, DEFAULT_COLUMN_COUNT) + 2;
-        cellHeight = a.getDimensionPixelSize(R.styleable.Timetable_viewer_cell_height, dp2Px(DEFAULT_CELL_HEIGHT_DP));
-        sideCellWidth = a.getDimensionPixelSize(R.styleable.Timetable_viewer_side_cell_width, dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP + 3));
-        int titlesId = a.getResourceId(R.styleable.Timetable_viewer_header_title, R.array.default_header_title);
-        headerTitle = a.getResources().getStringArray(titlesId);
-        int colorsId = a.getResourceId(R.styleable.Timetable_viewer_Icon_colors, R.array.default_Icon_color);
-        iconColor = a.getResources().getStringArray(colorsId);
-        startTime = a.getInt(R.styleable.Timetable_viewer_start_time, DEFAULT_START_TIME) - 9;
-        headerHighlightColor = a.getColor(R.styleable.Timetable_viewer_header_highlight_color, getResources().getColor(R.color.default_header_highlight_color));
-        int highlightTypeValue = a.getInteger(R.styleable.Timetable_viewer_header_highlight_type,0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Timetable_viewer);
+        rowCount = typedArray.getInt(R.styleable.Timetable_viewer_row_count, DEFAULT_ROW_COUNT) + 12;
+        columnCount = typedArray.getInt(R.styleable.Timetable_viewer_column_count, DEFAULT_COLUMN_COUNT) + 2;
+        cellHeight = typedArray.getDimensionPixelSize(R.styleable.Timetable_viewer_cell_height, dp2Px(DEFAULT_CELL_HEIGHT_DP));
+        sideCellWidth = typedArray.getDimensionPixelSize(R.styleable.Timetable_viewer_side_cell_width, dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP + 3));
+        int titlesId = typedArray.getResourceId(R.styleable.Timetable_viewer_header_title, R.array.default_header_title);
+        headerTitle = typedArray.getResources().getStringArray(titlesId);
+        int colorsId = typedArray.getResourceId(R.styleable.Timetable_viewer_Icon_colors, R.array.default_Icon_color);
+        iconColor = typedArray.getResources().getStringArray(colorsId);
+        startTime = typedArray.getInt(R.styleable.Timetable_viewer_start_time, DEFAULT_START_TIME) - 9;
+        headerHighlightColor = typedArray.getColor(R.styleable.Timetable_viewer_header_highlight_color, getResources().getColor(R.color.default_header_highlight_color));
+        int highlightTypeValue = typedArray.getInteger(R.styleable.Timetable_viewer_header_highlight_type,0);
         if(highlightTypeValue == 0) highlightMode = TimetableHighlightIcon.COLOR;
         else if(highlightTypeValue == 1) highlightMode = TimetableHighlightIcon.IMAGE;
-        headerHighlightImageSize = a.getDimensionPixelSize(R.styleable.Timetable_viewer_header_highlight_image_size, dp2Px(24));
-        headerHighlightImage = a.getDrawable(R.styleable.Timetable_viewer_header_highlight_image);
-        a.recycle();
+        headerHighlightImageSize = typedArray.getDimensionPixelSize(R.styleable.Timetable_viewer_header_highlight_image_size, dp2Px(24));
+        headerHighlightImage = typedArray.getDrawable(R.styleable.Timetable_viewer_header_highlight_image);
+        typedArray.recycle();
     }
 
+    /**
+     * Initialize to display timetable view
+     */
     private void init() {
         LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.timetable, this, false);
@@ -136,10 +139,16 @@ public class TimetableDisplay extends LinearLayout {
         IconSelectedListener = listener;
     }
 
+
     public void add(ArrayList<TimetableEvent> schedules ) {
         add(schedules, -1);
     }
 
+    /**
+     * Add new event to timetable view
+     * @param schedules
+     * @param specIdx
+     */
     private void add(final ArrayList<TimetableEvent> schedules, int specIdx) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
         TimetableIcons icon1 = new TimetableIcons();
@@ -172,6 +181,10 @@ public class TimetableDisplay extends LinearLayout {
         setIconColor();
     }
 
+    /**
+     * Load events onto the timetable view
+     * @param data
+     */
     public void load(String data) {
         event_icons = TimetableSaveEvents.loadEvent(data);
         int maxKey = 0;
@@ -221,6 +234,10 @@ public class TimetableDisplay extends LinearLayout {
         }
     }
 
+    /**
+     * Removes a specific event from database and timetable view
+     * @param idx
+     */
     public void remove(int idx) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -241,6 +258,10 @@ public class TimetableDisplay extends LinearLayout {
         }
     }
 
+    /**
+     * Highlights the day of week in the header on timetable
+     * @param idx
+     */
     public void setHeaderHighlight(int idx) {
         if(idx < 0)return;
         TableRow row = (TableRow) tableHeader.getChildAt(0);
@@ -268,10 +289,12 @@ public class TimetableDisplay extends LinearLayout {
             if(headerHighlightImage != null) {
                 iv.setImageDrawable(headerHighlightImage);
             }
-
         }
     }
 
+    /**
+     * Sets the icon color
+     */
     private void setIconColor() {
         int size = event_icons.size();
         int[] orders = new int[size];
@@ -291,6 +314,9 @@ public class TimetableDisplay extends LinearLayout {
 
     }
 
+    /**
+     * Creates timetable view
+     */
     private void createTable() {
         createTableHeader();
         for (int i = 0; i < rowCount; i++) {
@@ -318,6 +344,9 @@ public class TimetableDisplay extends LinearLayout {
         }
     }
 
+    /**
+     * Creates header for timetable
+     */
     private void createTableHeader() {
         TableRow tableRow = new TableRow(context);
         tableRow.setLayoutParams(createTableLayoutParam());
@@ -339,6 +368,11 @@ public class TimetableDisplay extends LinearLayout {
         tableHeader.addView(tableRow);
     }
 
+    /**
+     * Sets parameters for each icon event
+     * @param event
+     * @return
+     */
     private RelativeLayout.LayoutParams createIconParam(TimetableEvent event) {
         int cell_w = calCellWidth();
 
@@ -350,6 +384,10 @@ public class TimetableDisplay extends LinearLayout {
         return param;
     }
 
+    /**
+     * Calculates the width of the event on the timetable
+     * @return Event Cell Width
+     */
     private int calCellWidth(){
         Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -358,6 +396,11 @@ public class TimetableDisplay extends LinearLayout {
         return cell_w;
     }
 
+    /**
+     * Calculates the height of the event on the timetable
+     * @param schedule
+     * @return Event Cell Height
+     */
     private int calIconHeightPx(TimetableEvent schedule) {
         int startTopPx = calIconTopPxByTime(schedule.getStartTime());
         int endTopPx = calIconTopPxByTime(schedule.getEndTime());
@@ -365,6 +408,11 @@ public class TimetableDisplay extends LinearLayout {
         return endTopPx - startTopPx;
     }
 
+    /**
+     * Calculates the start and end pixel for events
+     * @param time
+     * @return Event Cell Start and End pixel
+     */
     private int calIconTopPxByTime(TimetableTimeKeeper time) {
         return (time.getHour() - startTime) * cellHeight + (int) ((time.getMinute() / 60.0f) * cellHeight);
     }
@@ -390,91 +438,8 @@ public class TimetableDisplay extends LinearLayout {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
-    private void onCreateByBuilder(Builder builder) {
-        this.rowCount = builder.rowCount;
-        this.columnCount = builder.columnCount;
-        this.cellHeight = builder.cellHeight;
-        this.sideCellWidth = builder.sideCellWidth;
-        this.headerTitle = builder.headerTitle;
-        this.iconColor = builder.IconColors;
-        this.startTime = builder.startTime;
-        this.headerHighlightColor = builder.headerHighlightColor;
-
-        init();
-    }
-
-
     public interface OnIconSelectedListener {
         void OnIconSelected(int idx, ArrayList<TimetableEvent> calendars);
     }
 
-    static class Builder {
-        private Context context;
-        private int rowCount;
-        private int columnCount;
-        private int cellHeight;
-        private int sideCellWidth;
-        private String[] headerTitle;
-        private String[] IconColors;
-        private int startTime;
-        private int headerHighlightColor;
-
-        public Builder(Context context) {
-            this.context = context;
-            rowCount = DEFAULT_ROW_COUNT;
-            columnCount = DEFAULT_COLUMN_COUNT;
-            cellHeight = dp2Px(DEFAULT_CELL_HEIGHT_DP);
-            sideCellWidth = dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP);
-            headerTitle = context.getResources().getStringArray(R.array.default_header_title);
-            IconColors = context.getResources().getStringArray(R.array.default_Icon_color);
-            startTime = DEFAULT_START_TIME;
-            headerHighlightColor = context.getResources().getColor(R.color.default_header_highlight_color);
-        }
-
-        public Builder setRowCount(int n) {
-            this.rowCount = n;
-            return this;
-        }
-
-        public Builder setColumnCount(int n) {
-            this.columnCount = n;
-            return this;
-        }
-
-        public Builder setCellHeight(int dp) {
-            this.cellHeight = dp2Px(dp);
-            return this;
-        }
-
-        public Builder setSideCellWidth(int dp) {
-            this.sideCellWidth = dp2Px(dp);
-            return this;
-        }
-
-        public Builder setHeaderTitle(String[] titles) {
-            this.headerTitle = titles;
-            return this;
-        }
-
-        public Builder setIconColors(String[] colors) {
-            this.IconColors = colors;
-            return this;
-        }
-
-        public Builder setStartTime(int t) {
-            this.startTime = t;
-            return this;
-        }
-
-        public Builder setHeaderHighlightColor(int c) {
-            this.headerHighlightColor = c;
-            return this;
-        }
-
-        public TimetableDisplay build() {
-            TimetableDisplay timetableViewer = new TimetableDisplay(context);
-            timetableViewer.onCreateByBuilder(this);
-            return timetableViewer;
-        }
-    }
 }
