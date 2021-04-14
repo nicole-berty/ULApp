@@ -54,7 +54,7 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
     }
 
     /**
-     * setups the imageview with the current image
+     * initialises the imageview with the correct image
      */
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
