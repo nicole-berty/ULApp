@@ -27,6 +27,7 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //Variables for login class
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
 
@@ -41,13 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         //If the user is not null, i.e. is logged in
         if(user != null) {
+            //If it's a guest user who chose guest mode previously, take them straight to the Home activity
             if (user.isAnonymous()) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
         } else {
-            System.out.println("user is null");
+            System.out.println("User is null");
         }
     }
 
@@ -174,7 +176,6 @@ public class LoginActivity extends AppCompatActivity {
         //User is logged in
         if (currentUser != null) {
             email = currentUser.getEmail();
-            System.out.println("Email: " + email);
 
             //Connect to Firebase FireStore
             FirebaseFirestore db = FirebaseFirestore.getInstance();
