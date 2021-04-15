@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             String password = pass_text.getText().toString();
 
             //Check if the email and password fields have actually been filled in. If they haven't show toast to the user, otherwise call signIn method
-            if(email.equals(null) || password.equals(null) || email.equals("") || password.equals("")) {
+            if(email.equals("") || password.equals("")) {
                 Toast.makeText(LoginActivity.this, "Please fill in all fields to log in!", Toast.LENGTH_LONG).show();
             } else {
                 signIn(email, password);
