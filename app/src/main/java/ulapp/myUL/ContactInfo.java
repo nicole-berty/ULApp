@@ -23,6 +23,7 @@ import java.io.IOException;
  */
 public class ContactInfo extends ActionBar {
 
+    //Initialise class variables
     final String url = "https://www.ul.ie/contact-information";
     Document doc = null;
     TextView textView = null;
