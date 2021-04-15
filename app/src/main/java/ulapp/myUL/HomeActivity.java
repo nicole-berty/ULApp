@@ -26,6 +26,7 @@ import ulapp.myUL.timetable.TimetableActivity;
 
 public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.ItemClickListener {
 
+    //Create class variables
     MyRecyclerViewAdapter adapter;
     FirebaseUser user;
 
@@ -33,6 +34,10 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /**
+         * Check for Broadcast receiver which is created on logging out.
+         * This will prevent a user from going back to a page that should be only seen by logged in users.
+         */
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.package.ACTION_LOGOUT");
         registerReceiver(new BroadcastReceiver() {
@@ -51,24 +56,30 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
         ImageView ulLogo = findViewById(R.id.ulLogo);
         ulLogo.setImageResource(R.drawable.ul_logo);
 
+        //Get the current user from FirebaseAuth
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        //Set the welcome text and its colour
         TextView welcome = findViewById(R.id.textView4);
         welcome.setText("Welcome to the official UL App! Here you'll find all the info you need to navigate the campus and student life.");
         welcome.setTextColor(Color.rgb(4,84,52));
 
+        //Get the list of features in the app - varies based on type of user
+        List<String> features = getFeaturesList();
         //Create and display RecyclerView
-        List<String> names = getNameList();
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyRecyclerViewAdapter(this, names);
+        //Use custom RecyclerViewAdapter class for the adapter and the features list to it
+        adapter = new MyRecyclerViewAdapter(this, features);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        //Display website resources beneath the Recyclerview
+        //Display website resources beneath the Recyclerview in a text view
         TextView link = findViewById(R.id.textView2);
         String linkText = "Visit the <a href='https://www.ul.ie/'>University of Limerick</a> web page.\nCheck out the <a href='https://www.ul.ie/library/'>Library</a> to reserve books and access online services!";
+
+        //Make the link in the TextView clickable
         link.setText(HtmlCompat.fromHtml(linkText, HtmlCompat.FROM_HTML_MODE_LEGACY));
         link.setTextColor(Color.rgb(4,84,52));
         link.setMovementMethod(LinkMovementMethod.getInstance());
@@ -78,22 +89,24 @@ public class HomeActivity extends ActionBar implements MyRecyclerViewAdapter.Ite
      * Creates an ArrayList of activity/page names for the RecyclerView. ArrayList values varies depending on whether use is signed in or not
      * @return String ArrayList with page names
      */
-    private List<String> getNameList() {
-        List<String> names = new ArrayList<>();
-        names.add("Info");
-        names.add("Menus");
-        names.add("Map");
-        //If the user is registered on the database, add extra pages to the list
+    private List<String> getFeaturesList() {
+        List<String> features = new ArrayList<>();
+        //Add features for all users
+        features.add("Info");
+        features.add("Menus");
+        features.add("Map");
+        //If the user is not a guest user, add extra pages to the list
         if(!user.isAnonymous()) {
-            names.add("Clubs and Societies");
-            names.add("Timetable");
+            features.add("Clubs and Societies");
+            features.add("Timetable");
         }
-        return names;
+        return features;
     }
 
     @Override
     public void onItemClick(View view, int position) {
         Intent intent;
+        //Take the user to the correct page based on what they clicked in the RecyclerView
         switch (position) {
             case 0:
                 intent = new Intent(HomeActivity.this, InfoActivity.class);
