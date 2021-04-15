@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserType extends AppCompatActivity {
+
+    //Initialise class variables
     private static final String TAG = "DocSnippets";
     String type = "";
 
