@@ -17,19 +17,22 @@
             android:id="@+id/event_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Event Name" />
+            android:hint="Event Name"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/event_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:hint="Event Location" />
 
         <EditText
             android:id="@+id/event_speaker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Event Speaker" />
+            android:hint="Event Speaker"
+            android:inputType="text" />
 
         <include layout="@layout/timetable_icontime"/>
 

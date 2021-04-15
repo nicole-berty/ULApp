@@ -46,9 +46,9 @@ public class TimetableActivity extends ActionBar implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /**
-         * Check for Broadcast receiver which is created on logging out.
-         * This will prevent a user from going back to a page that should be only seen by logged in users.
+        /*
+          Check for Broadcast receiver which is created on logging out.
+          This will prevent a user from going back to a page that should be only seen by logged in users.
          */
 
         IntentFilter intentFilter = new IntentFilter();

@@ -11,8 +11,8 @@ public class TimetableIcons implements Serializable {
     private ArrayList<TimetableEvent> calendars;
 
     public TimetableIcons() {
-        this.view = new ArrayList<TextView>();
-        this.calendars = new ArrayList<TimetableEvent>();
+        this.view = new ArrayList<>();
+        this.calendars = new ArrayList<>();
     }
 
     /**

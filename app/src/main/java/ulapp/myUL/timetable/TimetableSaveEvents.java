@@ -32,9 +32,9 @@ public class TimetableSaveEvents {
      * @param editIdx
      */
     public static void saveEvent(final HashMap<Integer, TimetableIcons> event_icon, final boolean add, final int editIdx){
-        /**
-         * Connect to database
-         * Finds the current user
+        /*
+          Connect to database
+          Finds the current user
          */
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -105,9 +105,9 @@ public class TimetableSaveEvents {
      * @param editIdx
      */
     public static void addToDatabase(final HashMap<Integer, TimetableIcons> final_event_icon, final int[] icon_index, final boolean add, final int editIdx ) {
-        /**
-         * Connect to database
-         * Finds the current user
+        /*
+          Connect to database
+          Finds the current user
          */
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

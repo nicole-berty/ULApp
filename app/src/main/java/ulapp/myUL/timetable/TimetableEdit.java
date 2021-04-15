@@ -245,8 +245,8 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                     }
                 }
                 break;
-            /**
-             * Delete Button for deleting one event
+            /*
+              Delete Button for deleting one event
              */
             case R.id.delete_btn:
                 Intent i = new Intent(this, Success.class);

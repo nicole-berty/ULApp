@@ -31,7 +31,7 @@ public class Success extends ActionBar {
             }
         }, intentFilter);
         setContentView(R.layout.activity_success);
-        //Use intents to pass the activity name to this activity and then update textview accordingly
+        //Use intents to pass the activity name to this activity and then update TextView accordingly
         TextView successText = findViewById(R.id.success);
 
         String action = getIntent().getStringExtra("ACTION");

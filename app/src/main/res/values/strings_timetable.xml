@@ -1,4 +1,5 @@
 <resources>
+    <!--suppress CheckTagEmptyBody -->
     <string-array name="default_header_title">
         <item></item>
         <item>Sun</item>
