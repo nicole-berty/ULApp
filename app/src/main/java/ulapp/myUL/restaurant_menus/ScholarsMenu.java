@@ -59,6 +59,9 @@ public class ScholarsMenu extends Fragment {
         }
     }
 
+    /**
+     * initialises the image view and sets the image
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

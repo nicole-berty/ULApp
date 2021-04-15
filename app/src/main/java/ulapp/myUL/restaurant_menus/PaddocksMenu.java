@@ -59,6 +59,9 @@ public class PaddocksMenu extends Fragment {
         }
     }
 
+    /**
+     * initialises image views and sets the image
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -44,12 +44,18 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
     private List<Integer> images;
     private List<Integer> actions;
 
+    /**
+     * initialises the variables
+     */
     public ListOfRestaurantsAdapter(Context context, List<Integer> images, List<Integer> actions) {
         this.myInflater = LayoutInflater.from(context);
         this.images = images;
         this.actions = actions;
     }
 
+    /**
+     * initialises the imageview with the correct image
+     */
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 

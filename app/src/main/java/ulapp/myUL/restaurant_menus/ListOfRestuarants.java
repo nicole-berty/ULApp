@@ -71,6 +71,9 @@ public class ListOfRestuarants extends Fragment {
         return inflater.inflate(R.layout.fragment_list_of_restuarants, container, false);
     }
 
+    /**
+     * initialises recyclerview and sets adapter
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view,savedInstanceState);
@@ -81,6 +84,9 @@ public class ListOfRestuarants extends Fragment {
 
     }
 
+    /**
+     * returns list of restaurant icons
+     */
     private List<Integer> getImageList() {
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.stablesclub);
@@ -91,6 +97,9 @@ public class ListOfRestuarants extends Fragment {
         return images;
     }
 
+    /**
+     * returns list of actions to restaurant fragments
+     */
     private List<Integer> getActionList() {
         List<Integer> actions = new ArrayList<>();
         actions.add(R.id.action_listOfRestuarants_to_stablesClubMenu);

@@ -61,6 +61,9 @@ public class PavilionsMenu extends Fragment {
         }
     }
 
+    /**
+     * initialises the imageviews, sets the image and adjusts the size of the image.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

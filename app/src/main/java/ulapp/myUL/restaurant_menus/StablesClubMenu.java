@@ -70,6 +70,9 @@ public class StablesClubMenu extends Fragment {
         }
     }
 
+    /**
+     * initialises the web view, adjusts the settings accordingly and loads the webpage
+     */
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
