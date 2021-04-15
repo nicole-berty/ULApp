@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     public void OnClick (View View) {
         //get id of UI element that was clicked
         int i = View.getId();
-        //If sign in button was clicked, get email and password from EditText inputs and call signIn()
+        //If sign in button was clicked, get email and password from EditText inputs, convert them to Strings, and call signIn()
         if (i == R.id.sign_in) {
             EditText email_text = findViewById(R.id.email);
             String email = email_text.getText().toString();
