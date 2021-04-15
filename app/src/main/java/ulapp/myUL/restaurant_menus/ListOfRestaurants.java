@@ -18,10 +18,10 @@ import ulapp.myUL.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListOfRestuarants#newInstance} factory method to
+ * Use the {@link ListOfRestaurants#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListOfRestuarants extends Fragment {
+public class ListOfRestaurants extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +31,7 @@ public class ListOfRestuarants extends Fragment {
     private String mParam2;
     private RecyclerView recyclerView;
 
-    public ListOfRestuarants() {
+    public ListOfRestaurants() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,11 @@ public class ListOfRestuarants extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListOfRestuarants.
+     * @return A new instance of fragment ListOfRestaurants.
      */
 
-    public static ListOfRestuarants newInstance(String param1, String param2) {
-        ListOfRestuarants fragment = new ListOfRestuarants();
+    public static ListOfRestaurants newInstance(String param1, String param2) {
+        ListOfRestaurants fragment = new ListOfRestaurants();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,7 +66,7 @@ public class ListOfRestuarants extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_of_restuarants, container, false);
+        return inflater.inflate(R.layout.fragment_list_of_restaurants, container, false);
     }
 
     /**
@@ -100,11 +100,11 @@ public class ListOfRestuarants extends Fragment {
      */
     private List<Integer> getActionList() {
         List<Integer> actions = new ArrayList<>();
-        actions.add(R.id.action_listOfRestuarants_to_stablesClubMenu);
-        actions.add(R.id.action_listOfRestuarants_to_scholarsMenu);
-        actions.add(R.id.action_listOfRestuarants_to_paddocksMenu);
-        actions.add(R.id.action_listOfRestuarants_to_pavilionsMenu);
-        actions.add(R.id.action_listOfRestuarants_to_sportsBarMenu);
+        actions.add(R.id.action_listOfRestaurants_to_stablesClubMenu);
+        actions.add(R.id.action_listOfRestaurants_to_scholarsMenu);
+        actions.add(R.id.action_listOfRestaurants_to_paddocksMenu);
+        actions.add(R.id.action_listOfRestaurants_to_pavilionsMenu);
+        actions.add(R.id.action_listOfRestaurants_to_sportsBarMenu);
         return actions;
     }
 }

@@ -20,7 +20,7 @@ public class ListOfRestaurantsAdapter extends RecyclerView.Adapter<ListOfRestaur
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = myInflater.inflate(R.layout.recyclerview_row_restuarants, parent, false);
+        View view = myInflater.inflate(R.layout.recyclerview_row_restaurants, parent, false);
         return new RecyclerViewHolder(view);
     }
 
