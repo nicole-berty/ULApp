@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment;
 
 import ulapp.myUL.R;
 
+/** corresponds to the guide fragment for fees information*/
 public class FeesInfo extends Fragment {
-    /** corresponds to the guide fragment for fees information
-     */
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

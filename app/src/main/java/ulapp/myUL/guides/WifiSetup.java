@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import ulapp.myUL.R;
-/** corresponds to the guide fragment for wifi setup
- */
-
+/** corresponds to the guide fragment for wifi setup*/
 public class WifiSetup extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

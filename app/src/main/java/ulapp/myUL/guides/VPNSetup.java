@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import ulapp.myUL.R;
 
-
+/** corresponds to the guide fragment for guides:VPNsetup page */
 public class VPNSetup extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

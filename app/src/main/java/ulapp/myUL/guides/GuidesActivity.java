@@ -10,8 +10,8 @@ import android.util.Log;
 import ulapp.myUL.ActionBar;
 import ulapp.myUL.LoginActivity;
 import ulapp.myUL.R;
-/** corresponds to the guide activity that contains the main guides fragment for email setup
- */
+
+/**Contains the guides activity fragment which leads to each individual guides page*/
 public class GuidesActivity extends ActionBar {
 
     @Override
@@ -31,6 +31,7 @@ public class GuidesActivity extends ActionBar {
                 finish();
             }
         }, intentFilter);
+
         setContentView(R.layout.activity_guides);
     }
 }
