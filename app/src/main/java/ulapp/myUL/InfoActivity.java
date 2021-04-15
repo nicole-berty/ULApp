@@ -70,7 +70,7 @@ public class InfoActivity extends ActionBar {
             }
         });
 
-        //Call function to check if user is a student or not
+        //Call function to check if user is a student or not, as some pages are only displayed for students
         checkIfStudent();
     }
 
