@@ -13,14 +13,11 @@ import androidx.navigation.Navigation;
 
 import ulapp.myUL.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GuidesFragment#newInstance} factory method to
- * create an instance of this fragment.
+/** corresponds to the guide fragment, from this stems the other 5 guide fragments
  */
 public class GuidesFragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -28,17 +25,10 @@ public class GuidesFragment extends Fragment {
     private String mParam2;
 
     public GuidesFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GuidesFragment.
-     */
+
     public static GuidesFragment newInstance(String param1, String param2) {
         GuidesFragment fragment = new GuidesFragment();
         Bundle args = new Bundle();
