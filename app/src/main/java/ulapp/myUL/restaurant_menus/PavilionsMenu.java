@@ -59,7 +59,7 @@ public class PavilionsMenu extends Fragment {
     }
 
     /**
-     * initialises the imageviews, sets the image and adjusts the size of the image.
+     * Displays the images for each day of the week
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +70,8 @@ public class PavilionsMenu extends Fragment {
         int dpHeightInPx = (int) (500 * scale);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dpWidthInPx, dpHeightInPx);
         View rootView = inflater.inflate(R.layout.fragment_pavilions_menu, container, false);
+
+        //Initialises the ImageViews
         mondayImage = rootView.findViewById(R.id.MondayImage);
         tuesdayImage = rootView.findViewById(R.id.TuesdayImage);
         wednesdayImage = rootView.findViewById(R.id.WednesdayImage);
@@ -77,6 +79,8 @@ public class PavilionsMenu extends Fragment {
         fridayImage = rootView.findViewById(R.id.FridayImage);
         saturdayImage = rootView.findViewById(R.id.SaturdayImage);
         sundayImage = rootView.findViewById(R.id.SundayImage);
+
+        //Sets the image
         mondayImage.setImageResource(R.drawable.pavilionmenumonday);
         tuesdayImage.setImageResource(R.drawable.pavilionmenutuesday);
         wednesdayImage.setImageResource(R.drawable.pavilionmenuwednesday);
@@ -84,6 +88,8 @@ public class PavilionsMenu extends Fragment {
         fridayImage.setImageResource(R.drawable.pavilionmenufriday);
         saturdayImage.setImageResource(R.drawable.pavilionmenusaturday);
         sundayImage.setImageResource(R.drawable.pavilionmenusunday);
+
+        //Adjusts the size of the image
         mondayImage.setLayoutParams(layoutParams);
         tuesdayImage.setLayoutParams(layoutParams);
         wednesdayImage.setLayoutParams(layoutParams);

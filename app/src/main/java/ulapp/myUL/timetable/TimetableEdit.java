@@ -32,6 +32,8 @@ import ulapp.myUL.Success;
 import static ulapp.myUL.timetable.TimetableActivity.timetable;
 
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
+
+    //Create class variables
     public static final int RESULT_OK_ADD = 1;
 
     private Context context;

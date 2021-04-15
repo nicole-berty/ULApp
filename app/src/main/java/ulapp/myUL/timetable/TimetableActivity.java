@@ -102,7 +102,7 @@ public class TimetableActivity extends ActionBar implements View.OnClickListener
     }
 
     /**
-     * Loads events from the database to display them.
+     * Loads events from the database from the user's document in the timetable collection to display them on the app.
      */
     public static void loadFromDatabase() {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -128,6 +128,8 @@ public class TimetableActivity extends ActionBar implements View.OnClickListener
                             int startMin = -1;
                             int endHour = -1;
                             int endMin = -1;
+
+                            //doc returns all the user's events. Need to split these up and parse the information in the correct format
                             String[] parts = doc.split("fields");
                             for(int i = 1; i < parts.length; i++) {
                                 String[] values = parts[i].split("string_value:");
@@ -177,30 +179,30 @@ public class TimetableActivity extends ActionBar implements View.OnClickListener
                                         }
                                     }
                                 }
-                                JsonObject obj1 = new JsonObject();
-                                JsonObject obj2 = new JsonObject();
-                                JsonObject obj3 = new JsonObject();
-                                obj2.addProperty("idx", index);
+                                JsonObject completeEventJSON = new JsonObject();
+                                JsonObject eventIndex = new JsonObject();
+                                JsonObject eventDetails = new JsonObject();
+                                eventIndex.addProperty("idx", index);
                                 JsonArray arr1 = new JsonArray();
                                 JsonArray arr2 = new JsonArray();
 
-                                obj3.addProperty("eventName", eventName);
-                                obj3.addProperty("eventLocation", eventLocation);
-                                obj3.addProperty("speakerName", speakerName);
-                                obj3.addProperty("day", day);
+                                eventDetails.addProperty("eventName", eventName);
+                                eventDetails.addProperty("eventLocation", eventLocation);
+                                eventDetails.addProperty("speakerName", speakerName);
+                                eventDetails.addProperty("day", day);
                                 JsonObject startTime = new JsonObject();//startTime
                                 startTime.addProperty("hour", startHour);
                                 startTime.addProperty("minute", startMin);
-                                obj3.add("startTime", startTime);
+                                eventDetails.add("startTime", startTime);
                                 JsonObject endTime = new JsonObject();//endTime
                                 endTime.addProperty("hour", endHour);
                                 endTime.addProperty("minute", endMin);
-                                obj3.add("endTime", endTime);
-                                arr2.add(obj3);
-                                obj2.add("schedule", arr2);
-                                arr1.add(obj2);
-                                obj1.add("icon", arr1);
-                                timetable.load(obj1.toString());
+                                eventDetails.add("endTime", endTime);
+                                arr2.add(eventDetails);
+                                eventIndex.add("schedule", arr2);
+                                arr1.add(eventIndex);
+                                completeEventJSON.add("icon", arr1);
+                                timetable.load(completeEventJSON.toString());
                             }
                         } else {
                             System.out.println("Doc does not exist");

@@ -44,6 +44,8 @@ import java.util.Objects;
 import ulapp.myUL.R;
 
 public class TimetableDisplay extends LinearLayout {
+
+    //Create variables for the class
     private static final int DEFAULT_ROW_COUNT = 12;
     private static final int DEFAULT_COLUMN_COUNT = 6;
     private static final int DEFAULT_CELL_HEIGHT_DP = 50;
