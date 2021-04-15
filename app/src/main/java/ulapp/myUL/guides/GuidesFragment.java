@@ -57,40 +57,40 @@ public class GuidesFragment extends Fragment {
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){
         super.onViewCreated(view, SavedInstanceState);
 
-        Button button1 = view.findViewById(R.id.button);
-        button1.setOnClickListener(new View.OnClickListener(){
+        Button feesInfo = view.findViewById(R.id.button);
+        feesInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_fees_info));
             }
         });
 
-        Button button2 = view.findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener(){
+        Button emailInfo = view.findViewById(R.id.button2);
+        emailInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_fragment_Email));
             }
         });
 
-        Button button3 = view.findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener(){
+        Button vpnSetup = view.findViewById(R.id.button3);
+        vpnSetup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_frag_VPNsetup));
             }
         });
 
-        Button button4 = view.findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener(){
+        Button wifiSetup = view.findViewById(R.id.button4);
+        wifiSetup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_wifi_Setup));
             }
         });
 
-        Button button5 = view.findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener(){
+        Button otherInfo = view.findViewById(R.id.button5);
+        otherInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_other));

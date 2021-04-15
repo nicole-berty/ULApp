@@ -51,9 +51,9 @@ public class GuidesOther extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_guides_other, container, false);
 
-        TextView t2 = (TextView) rootView.findViewById(R.id.textView9);
-        t2.setMovementMethod(LinkMovementMethod.getInstance());
-        t2.setText(Html.fromHtml("More Information and Guidance for life at UL can be found on the <a href=\"https://ulsites.ul.ie/access/student-support-services\">Student Support Services page.</a><br>For additional assistance, use the contact information below:<br>"));
+        TextView otherInfo = (TextView) rootView.findViewById(R.id.textView9);
+        otherInfo.setMovementMethod(LinkMovementMethod.getInstance());
+        otherInfo.setText(Html.fromHtml("More Information and Guidance for life at UL can be found on the <a href=\"https://ulsites.ul.ie/access/student-support-services\">Student Support Services page.</a><br>For additional assistance, use the contact information below:<br>"));
         return rootView;
     }
 }

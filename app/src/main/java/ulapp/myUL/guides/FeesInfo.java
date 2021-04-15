@@ -50,9 +50,9 @@ public class FeesInfo extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_fees_info, container, false);
 
-        TextView t2 = (TextView) rootView.findViewById(R.id.textView12);
-        t2.setMovementMethod(LinkMovementMethod.getInstance());
-        t2.setText(Html.fromHtml("UL students are required to pay €3000 annually as a registration fee in UL in addition to a small fee for the Student Centre. These can be payed through your Student Portal SI page found <a href=\"https://www.si.ul.ie/urd/sits.urd/run/siw_lgn\">here</a>. There is also an automated telephone payment system " +
+        TextView feesInfo = (TextView) rootView.findViewById(R.id.textView12);
+        feesInfo.setMovementMethod(LinkMovementMethod.getInstance());
+        feesInfo.setText(Html.fromHtml("UL students are required to pay €3000 annually as a registration fee in UL in addition to a small fee for the Student Centre. These can be payed through your Student Portal SI page found <a href=\"https://www.si.ul.ie/urd/sits.urd/run/siw_lgn\">here</a>. There is also an automated telephone payment system " +
                 "available for Student Fees on 0035361-529097. <br><br>All new entrants must complete the Online Finance Task on the student portal which will " +
                 "determine your fee liability for the year. This must be completed even if you will not be paying any fees. <br><br> Fees are payed bi-annually, due at the beginning of each semester.<br>"));
         return rootView;
