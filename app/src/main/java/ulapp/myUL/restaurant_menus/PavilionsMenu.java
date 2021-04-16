@@ -18,12 +18,10 @@ import ulapp.myUL.R;
  */
 public class PavilionsMenu extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -42,7 +40,6 @@ public class PavilionsMenu extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment PavilionsMenu.
      */
-    // TODO: Rename and change types and number of parameters
     public static PavilionsMenu newInstance(String param1, String param2) {
         PavilionsMenu fragment = new PavilionsMenu();
         Bundle args = new Bundle();
@@ -61,6 +58,9 @@ public class PavilionsMenu extends Fragment {
         }
     }
 
+    /**
+     * Displays the images for each day of the week
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,6 +70,8 @@ public class PavilionsMenu extends Fragment {
         int dpHeightInPx = (int) (500 * scale);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dpWidthInPx, dpHeightInPx);
         View rootView = inflater.inflate(R.layout.fragment_pavilions_menu, container, false);
+
+        //Initialises the ImageViews
         mondayImage = rootView.findViewById(R.id.MondayImage);
         tuesdayImage = rootView.findViewById(R.id.TuesdayImage);
         wednesdayImage = rootView.findViewById(R.id.WednesdayImage);
@@ -77,6 +79,8 @@ public class PavilionsMenu extends Fragment {
         fridayImage = rootView.findViewById(R.id.FridayImage);
         saturdayImage = rootView.findViewById(R.id.SaturdayImage);
         sundayImage = rootView.findViewById(R.id.SundayImage);
+
+        //Sets the image
         mondayImage.setImageResource(R.drawable.pavilionmenumonday);
         tuesdayImage.setImageResource(R.drawable.pavilionmenutuesday);
         wednesdayImage.setImageResource(R.drawable.pavilionmenuwednesday);
@@ -84,6 +88,8 @@ public class PavilionsMenu extends Fragment {
         fridayImage.setImageResource(R.drawable.pavilionmenufriday);
         saturdayImage.setImageResource(R.drawable.pavilionmenusaturday);
         sundayImage.setImageResource(R.drawable.pavilionmenusunday);
+
+        //Adjusts the size of the image
         mondayImage.setLayoutParams(layoutParams);
         tuesdayImage.setLayoutParams(layoutParams);
         wednesdayImage.setLayoutParams(layoutParams);

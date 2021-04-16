@@ -3,27 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listOfRestuarants">
+    app:startDestination="@id/listOfRestaurants">
 
     <fragment
-        android:id="@+id/listOfRestuarants"
-        android:name="ulapp.myUL.restaurant_menus.ListOfRestuarants"
-        android:label="fragment_list_of_restuarants"
-        tools:layout="@layout/fragment_list_of_restuarants" >
+        android:id="@+id/listOfRestaurants"
+        android:name="ulapp.myUL.restaurant_menus.ListOfRestaurants"
+        android:label="fragment_list_of_restaurants"
+        tools:layout="@layout/fragment_list_of_restaurants" >
         <action
-            android:id="@+id/action_listOfRestuarants_to_stablesClubMenu"
+            android:id="@+id/action_listOfRestaurants_to_stablesClubMenu"
             app:destination="@id/stablesClubMenu" />
         <action
-            android:id="@+id/action_listOfRestuarants_to_scholarsMenu"
+            android:id="@+id/action_listOfRestaurants_to_scholarsMenu"
             app:destination="@id/scholarsMenu" />
         <action
-            android:id="@+id/action_listOfRestuarants_to_paddocksMenu"
+            android:id="@+id/action_listOfRestaurants_to_paddocksMenu"
             app:destination="@id/paddocksMenu" />
         <action
-            android:id="@+id/action_listOfRestuarants_to_pavilionsMenu"
+            android:id="@+id/action_listOfRestaurants_to_pavilionsMenu"
             app:destination="@id/pavilionsMenu" />
         <action
-            android:id="@+id/action_listOfRestuarants_to_sportsBarMenu"
+            android:id="@+id/action_listOfRestaurants_to_sportsBarMenu"
             app:destination="@id/sportsBarMenu" />
     </fragment>
     <fragment

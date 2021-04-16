@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+/**
+ * simple start point fragment with a scroll view of buttons that lead to the club/soc fragments
+ */
     //this is the initial fragment with a list view
 public class StartPointClubSocs extends Fragment {
 

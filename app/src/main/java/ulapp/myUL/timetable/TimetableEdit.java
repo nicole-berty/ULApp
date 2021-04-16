@@ -32,6 +32,8 @@ import ulapp.myUL.Success;
 import static ulapp.myUL.timetable.TimetableActivity.timetable;
 
 public class TimetableEdit extends AppCompatActivity implements View.OnClickListener {
+
+    //Create class variables
     public static final int RESULT_OK_ADD = 1;
 
     private Context context;
@@ -109,7 +111,6 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
     private void initView(){
         submitBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
-
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -132,11 +133,11 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    String hrstr = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
+                    String hour_string = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
                             '0' + String.valueOf(hourOfDay) : String.valueOf(hourOfDay);
-                    String minstr = minute < 10 ? //If minute is lower than 10, add a zero on the left
+                    String minute_string = minute < 10 ? //If minute is lower than 10, add a zero on the left
                             '0' + String.valueOf(minute) : String.valueOf(minute);
-                    startTime.setText(hrstr + ":" + minstr);
+                    startTime.setText(hour_string + ":" + minute_string);
                     event.getStartTime().setHour(hourOfDay);
                     event.getStartTime().setMinute(minute);
 
@@ -154,11 +155,11 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
             private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    String hrstr = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
+                    String hour_string = hourOfDay < 10 ? //If hour is lower than 10, add a zero on the left
                             '0' + String.valueOf(hourOfDay) : String.valueOf(hourOfDay);
-                    String minstr = minute < 10 ? //If minute is lower than 10, add a zero on the left
+                    String minute_string = minute < 10 ? //If minute is lower than 10, add a zero on the left
                             '0' + String.valueOf(minute) : String.valueOf(minute);
-                    endTime.setText(hrstr + ":" + minstr);
+                    endTime.setText(hour_string + ":" + minute_string);
                     event.getEndTime().setHour(hourOfDay);
                     event.getEndTime().setMinute(minute);
                 }
@@ -202,8 +203,8 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         events.add(event);
                         i.putExtra("schedules", events);
                         setResult(RESULT_OK_ADD, i);
-                        ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
-                        timetable.add(item);
+                        ArrayList<TimetableEvent> event = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
+                        timetable.add(event);
                         TimetableSaveEvents.saveEvent(TimetableDisplay.event_icons, true, -1);
                         i.putExtra("ACTION", "ADD");
                         startActivity(i);
@@ -235,21 +236,17 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                         Intent i = new Intent(this, Success.class);
                         i.putExtra("idx", editIdx);
                         events.add(event);
-                        //System.out.println("events length " + events.size());
                         i.putExtra("schedules", events);
-                        ArrayList<TimetableEvent> item = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
-                        for (TimetableEvent it : item) {
-                            System.out.println("data in edit: " + it.getEventName());
-                        }
-                        timetable.add(item);
+                        ArrayList<TimetableEvent> event = (ArrayList<TimetableEvent>) i.getSerializableExtra("schedules");
+                        timetable.add(event);
                         TimetableSaveEvents.saveEvent(TimetableDisplay.event_icons, false, editIdx);
                         i.putExtra("ACTION", "EDIT");
                         startActivity(i);
                     }
                 }
                 break;
-            /**
-             * Delete Button for deleting one event
+            /*
+              Delete Button for deleting one event
              */
             case R.id.delete_btn:
                 Intent i = new Intent(this, Success.class);
@@ -261,7 +258,6 @@ public class TimetableEdit extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
 
     /**
      * Loading events from the database.

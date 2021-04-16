@@ -7,6 +7,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * activity in which the start point club/soc fragment is located
+ */
 public class ClubsSocs extends ActionBar {
 
     @Override

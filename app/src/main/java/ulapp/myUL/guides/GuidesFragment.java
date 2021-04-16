@@ -13,14 +13,10 @@ import androidx.navigation.Navigation;
 
 import ulapp.myUL.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GuidesFragment#newInstance} factory method to
- * create an instance of this fragment.
+/** corresponds to the guide fragment, from this stems the other 5 guide fragments
  */
 public class GuidesFragment extends Fragment {
 
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -28,17 +24,10 @@ public class GuidesFragment extends Fragment {
     private String mParam2;
 
     public GuidesFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GuidesFragment.
-     */
+
     public static GuidesFragment newInstance(String param1, String param2) {
         GuidesFragment fragment = new GuidesFragment();
         Bundle args = new Bundle();
@@ -68,40 +57,40 @@ public class GuidesFragment extends Fragment {
     public void onViewCreated (@NonNull View view, @Nullable Bundle SavedInstanceState){
         super.onViewCreated(view, SavedInstanceState);
 
-        Button button1 = view.findViewById(R.id.button);
-        button1.setOnClickListener(new View.OnClickListener(){
+        Button feesInfo = view.findViewById(R.id.button);
+        feesInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_fees_info));
             }
         });
 
-        Button button2 = view.findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener(){
+        Button emailInfo = view.findViewById(R.id.button2);
+        emailInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_fragment_Email));
             }
         });
 
-        Button button3 = view.findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener(){
+        Button vpnSetup = view.findViewById(R.id.button3);
+        vpnSetup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_frag_VPNsetup));
             }
         });
 
-        Button button4 = view.findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener(){
+        Button wifiSetup = view.findViewById(R.id.button4);
+        wifiSetup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_wifi_Setup));
             }
         });
 
-        Button button5 = view.findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener(){
+        Button otherInfo = view.findViewById(R.id.button5);
+        otherInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Navigation.findNavController(v).navigate((R.id.action_blank_Start_to_other));

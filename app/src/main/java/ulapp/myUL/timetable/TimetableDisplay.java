@@ -44,6 +44,8 @@ import java.util.Objects;
 import ulapp.myUL.R;
 
 public class TimetableDisplay extends LinearLayout {
+
+    //Create variables for the class
     private static final int DEFAULT_ROW_COUNT = 12;
     private static final int DEFAULT_COLUMN_COUNT = 6;
     private static final int DEFAULT_CELL_HEIGHT_DP = 50;
@@ -140,26 +142,26 @@ public class TimetableDisplay extends LinearLayout {
     }
 
 
-    public void add(ArrayList<TimetableEvent> schedules ) {
-        add(schedules, -1);
+    public void add(ArrayList<TimetableEvent> events ) {
+        add(events, -1);
     }
 
     /**
      * Add new event to timetable view
-     * @param schedules
+     * @param events
      * @param specIdx
      */
-    private void add(final ArrayList<TimetableEvent> schedules, int specIdx) {
+    private void add(final ArrayList<TimetableEvent> events, int specIdx) {
         final int count = specIdx < 0 ? ++iconCount : specIdx;
         TimetableIcons icon1 = new TimetableIcons();
 
-        for (TimetableEvent schedule : schedules) {
+        for (TimetableEvent event : events) {
             TextView tv = new TextView(context);
 
-            RelativeLayout.LayoutParams param = createIconParam(schedule);
+            RelativeLayout.LayoutParams param = createIconParam(event);
             tv.setLayoutParams(param);
             tv.setPadding(10, 0, 10, 0);
-            String iconText = schedule.getEventName() + "\n" + schedule.getEventLocation() + "\n" + schedule.getSpeakerName();
+            String iconText = event.getEventName() + "\n" + event.getEventLocation() + "\n" + event.getSpeakerName();
             tv.setText(iconText);
             tv.setTextColor(Color.parseColor("#FFFFFF"));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_Icon_FONT_SIZE_DP);
@@ -169,12 +171,12 @@ public class TimetableDisplay extends LinearLayout {
                 @Override
                 public void onClick(View v) {
                     if (IconSelectedListener != null)
-                        IconSelectedListener.OnIconSelected(count, schedules);
+                        IconSelectedListener.OnIconSelected(count, events);
                 }
             });
 
             icon1.addTextView(tv);
-            icon1.addIcon(schedule);
+            icon1.addIcon(event);
             event_icons.put(count, icon1);
             iconBox.addView(tv);
         }
@@ -189,8 +191,8 @@ public class TimetableDisplay extends LinearLayout {
         event_icons = TimetableSaveEvents.loadEvent(data);
         int maxKey = 0;
         for (int key : event_icons.keySet()) {
-            ArrayList<TimetableEvent> schedules = Objects.requireNonNull(event_icons.get(key)).getCalendars();
-            add(schedules, key);
+            ArrayList<TimetableEvent> events = Objects.requireNonNull(event_icons.get(key)).getCalendars();
+            add(events, key);
             if (maxKey < key) maxKey = key;
         }
         iconCount = maxKey;// + 1;
@@ -303,9 +305,7 @@ public class TimetableDisplay extends LinearLayout {
             orders[i++] = key;
         }
         Arrays.sort(orders);
-
         int colorSize = iconColor.length;
-
         for (i = 0; i < size; i++) {
             for (TextView v : event_icons.get(orders[i]).getView()) {
                 v.setBackgroundColor(Color.parseColor(iconColor[i % (colorSize)]));
@@ -375,12 +375,10 @@ public class TimetableDisplay extends LinearLayout {
      */
     private RelativeLayout.LayoutParams createIconParam(TimetableEvent event) {
         int cell_w = calCellWidth();
-
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(cell_w, calIconHeightPx(event));
         param.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         param.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         param.setMargins(sideCellWidth + cell_w * event.getDay(), calIconTopPxByTime(event.getStartTime()), 0, 0);
-
         return param;
     }
 
@@ -392,20 +390,20 @@ public class TimetableDisplay extends LinearLayout {
         Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int cell_w = (size.x-getPaddingLeft() - getPaddingRight()- sideCellWidth) / (columnCount - 1);
-        return cell_w;
+        int cell_width = (size.x-getPaddingLeft() - getPaddingRight()- sideCellWidth) / (columnCount - 1);
+        return cell_width;
     }
 
     /**
      * Calculates the height of the event on the timetable
-     * @param schedule
+     * @param event
      * @return Event Cell Height
      */
-    private int calIconHeightPx(TimetableEvent schedule) {
-        int startTopPx = calIconTopPxByTime(schedule.getStartTime());
-        int endTopPx = calIconTopPxByTime(schedule.getEndTime());
+    private int calIconHeightPx(TimetableEvent event) {
+        int startPX = calIconTopPxByTime(event.getStartTime());
+        int endPX = calIconTopPxByTime(event.getEndTime());
 
-        return endTopPx - startTopPx;
+        return endPX - startPX;
     }
 
     /**

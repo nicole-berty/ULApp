@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment;
 
 import ulapp.myUL.R;
 
-
+/**
+ * one of many classes that correspond to club/soc fragments
+ */
 public class africa extends Fragment {
 
 

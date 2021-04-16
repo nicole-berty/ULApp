@@ -11,6 +11,7 @@ import ulapp.myUL.ActionBar;
 import ulapp.myUL.LoginActivity;
 import ulapp.myUL.R;
 
+/**Contains the guides activity fragment which leads to each individual guides page*/
 public class GuidesActivity extends ActionBar {
 
     @Override
@@ -30,6 +31,7 @@ public class GuidesActivity extends ActionBar {
                 finish();
             }
         }, intentFilter);
+
         setContentView(R.layout.activity_guides);
     }
 }

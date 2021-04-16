@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_hostguide"
-    app:startDestination="@id/blank_Start">
+    app:startDestination="@id/guides_start">
 
     <fragment
         android:id="@+id/fees_info"
@@ -16,7 +16,7 @@
         android:label="fragment__email"
         tools:layout="@layout/fragment__email" />
     <fragment
-        android:id="@+id/blank_Start"
+        android:id="@+id/guides_start"
         android:name="ulapp.myUL.guides.GuidesFragment"
         android:label="fragment_blank__start"
         tools:layout="@layout/fragment_guides" >
